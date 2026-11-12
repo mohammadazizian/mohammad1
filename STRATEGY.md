@@ -91,3 +91,17 @@ python build_data.py
 python strategy.py
 ```
 `research/` holds the discarded iterations (liquidity sweeps, Donchian/EMA trend, RSI/Bollinger reversion, capitulation rebound, volume-delta, funding, session breakouts, time-of-day).
+
+# Rejected candidates for a fourth strategy
+
+Searched ~1,400 further configurations over all four years (`research/c10.py`, `c11.py`, `c12.py`). None met 80 % profitable months on both coins in both periods:
+
+| Candidate | Result |
+|---|---|
+| Volatility-shock long (buy after any extreme move) | Loses in 2024-26 (BTC and ETH) |
+| Daily trend follow (5-day move checked at 16:00 UTC) | Net positive in all four cells, but only 16-18 of 25 months; negative when the entry hour moves to 14:00 |
+| Trend-aligned shock breakout (`research/rejected_trend_aligned_shock.py`) | Net positive, 16-19 of 25 months, and BTC has a month with no trade |
+| US-session momentum (12:00-16:00 UTC move, hold 12 h) | BTC loses in 2024-26 |
+| Opening-range breakout, VWAP distance, wick rejection, consecutive candles, squeeze breakout, trend pullback, BTC/ETH relative strength, funding level, weekend breakouts | Negative after costs in at least one coin/period |
+
+The only effects that survive both periods on both coins are shock/flow momentum (Strategy 2) and large-trade momentum (Strategy 3).
