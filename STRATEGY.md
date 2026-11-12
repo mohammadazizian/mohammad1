@@ -1,4 +1,4 @@
-# Two 15m strategies for BTC & ETH perpetuals
+# Three 15m strategies for BTC & ETH perpetuals
 
 | | Strategy 1 - session fades (`strategy.py`) | Strategy 2 - shock & flow momentum (`strategy2.py`) |
 |---|---|---|
@@ -8,6 +8,21 @@
 | Holdout, net PnL | BTC -62.9 %, ETH +14.2 % | BTC +53.1 %, ETH +64.5 % |
 
 **Strategy 1 fails on the earlier two years; Strategy 2 holds up on them.** Prefer Strategy 2.
+
+# Strategy 3 - Large-Trade ("Whale") Momentum + Monthly Governor (`strategy3.py`)
+
+| | BTCUSDT | ETHUSDT |
+|---|---|---|
+| Required window 2024-11 -> 2026-11: profitable months / net PnL | 21/25, +35.1 % | 20/25, +35.2 % |
+| Holdout 2022-11 -> 2024-11: profitable months / net PnL | 20/25, +27.2 % | 20/25, +8.0 % |
+
+* Average trade size = quote volume / number of trades, summed over the last 4 bars (1 h). z-score it against its own 7-day mean/std.
+* When z > 2 (first bar it becomes true or the direction flips): go LONG if close > close 4 bars ago, SHORT if lower. Entry at next bar open.
+* Exit 96 bars (24 h) after entry, or at a stop 4 x ATR(96, Wilder) from entry (stop has priority inside a bar).
+* Size = equity x min(1.0, 2 % / daily sigma). One position at a time.
+* Monthly governor at +1 % of equity. Same costs as the other strategies.
+
+Caveats: the monthly count is stable across neighbours, the profit is not. On BTC, z thresholds of 2.25/2.5 or look-backs of 3/8 bars turn net PnL negative in one or both periods (`results/s3_sensitivity.txt`). Without the governor: 13-18 of 25 months, still net positive in all four cells. ETH holdout profit (+8 %) is thin. Treat this as the weakest of the two validated strategies.
 
 # Strategy 2 - Shock & Flow Momentum + Monthly Governor
 
