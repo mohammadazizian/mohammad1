@@ -64,9 +64,9 @@ def run(o,h,l,c,atr,fund,sig,sl,tp,trail,maxhold,exit_on_opp,cost,start_i):
             take=ep+pos*tp*a
     return E[:k],X[:k],D[:k],R[:k]
 
-def bt(d,sig,sl=0.,tp=0.,trail=0.,maxhold=0,opp=False,atr_n=96,cost=2*(FEE+SLIP)):
+def bt(d,sig,sl=0.,tp=0.,trail=0.,maxhold=0,opp=False,atr_n=96,cost=2*(FEE+SLIP),start=None):
     a=atr(d,atr_n).values
-    si=int(np.searchsorted(d.index.values,np.datetime64(START.tz_localize(None))))
+    si=int(np.searchsorted(d.index.values,np.datetime64((start or START).tz_localize(None))))
     s=np.asarray(sig,dtype=np.int64).copy(); s[:si]=0
     E,X,D,R=run(d.open.values,d.high.values,d.low.values,d.close.values,a,d.funding.values,s,sl,tp,trail,maxhold,opp,cost,si)
     return pd.DataFrame({"entry":d.index[E],"exit":d.index[X],"dir":D,"ret":R})
