@@ -109,3 +109,7 @@ The only effects that survive both periods on both coins are shock/flow momentum
 # Previous-day high / low (PDH/PDL) test
 
 Tested the two published forms on 15m bars over all four years (`research/pd_lib.py`, `research/pd1.py`): breakout (first close beyond yesterday's high/low, follow) and sweep-reversal (pierce the level, close back inside, fade), with ATR / sweep-extreme stops, mid-range / opposite-level / R-multiple targets, end-of-day or timed exits, 1-2 trades per day, and day boundaries at 00:00, 08:00, 13:00 and 21:00 UTC. 0 of 252 variants were net profitable on both coins in both periods. Before costs the average variant makes roughly +12 % to +48 % per two years; the 0.10 % round-trip cost on ~480 trades removes it.
+
+## PDH/PDL with limit orders on 5m bars
+
+`research/pd_limit.py`: resting limit at the level (fade) or at the level after a breakout close (retest), maker fee 0.02 % on limit fills, taker 0.04 % + 0.01 % slippage on stops and time exits, fills only when price trades through the limit. 456 variants over two day boundaries (00:00 and 13:00 UTC): 0 net profitable on both coins in both periods; average result per coin and two-year period between -26 % and -51 %.
