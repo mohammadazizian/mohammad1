@@ -38,16 +38,17 @@ def data(sym):
 HOLD = {"S": 48, "F": 48, "W": 96, "Sx": 48, "Fx": 48, "Wx": 96}
 
 @njit(cache=True)
-def engine(o, h, l, fund, sig, hold, coin, slp, tpp, rm, month, i0, i1, risk, lev_cap, month_loss, compound, cost):
+def engine(o, h, l, fund, sig, hold, coin, slp, tpp, rm, month, week, i0, i1, risk, lev_cap, month_loss, week_loss, compound, cost):
     S = sig.shape[1]; n = o.shape[0]
     pos = np.zeros(S, np.int64); ep = np.zeros(S); sp = np.zeros(S); tp = np.zeros(S); ei = np.zeros(S, np.int64)
     nt = np.zeros(S); fd = np.zeros(S)
     mx = (i1 - i0) * S // 2 + 10
     TE = np.empty(mx, np.int64); TX = np.empty(mx, np.int64); TS = np.empty(mx, np.int64); TD = np.empty(mx, np.int64)
     TP = np.empty(mx); TR = np.empty(mx); TK = np.empty(mx, np.int64); k = 0
-    eq = 1.0; mstart = 1.0; cur = -1; eqc = np.ones(n)
+    eq = 1.0; mstart = 1.0; cur = -1; wstart = 1.0; curw = -1; eqc = np.ones(n)
     for i in range(i0, i1):
         if month[i] != cur: cur = month[i]; mstart = eq
+        if week[i] != curw: curw = week[i]; wstart = eq
         for s in range(S):
             if pos[s] != 0:
                 c = coin[s]; xp = 0.0; kind = 0
@@ -67,7 +68,7 @@ def engine(o, h, l, fund, sig, hold, coin, slp, tpp, rm, month, i0, i1, risk, le
                     pnl = nt[s] * r; eq += pnl
                     TE[k] = ei[s]; TX[k] = i; TS[k] = s; TD[k] = pos[s]; TP[k] = pnl; TR[k] = r; TK[k] = kind; k += 1
                     pos[s] = 0; nt[s] = 0.0
-        locked = month_loss > 0 and (eq / mstart - 1.0) <= -month_loss
+        locked = (month_loss > 0 and (eq / mstart - 1.0) <= -month_loss) or (week_loss > 0 and (eq / wstart - 1.0) <= -week_loss)
         if not locked and i < i1 - 1 and i > 0:
             base = eq if compound else 1.0
             for s in range(S):
@@ -93,7 +94,7 @@ def engine(o, h, l, fund, sig, hold, coin, slp, tpp, rm, month, i0, i1, risk, le
         eqc[i] = eq
     return TE[:k], TX[:k], TS[:k], TD[:k], TP[:k], TR[:k], TK[:k], eqc
 
-def run(streams, sl, tp, hold=None, start=START, end=END, risk=0.01, lev_cap=1e9, month_loss=0.0, compound=False, rmult=None, cost=None, vol_max=None, trend_sleeves=(), lock_period="month"):
+def run(streams, sl, tp, hold=None, start=START, end=END, risk=0.01, lev_cap=1e9, month_loss=0.0, compound=False, rmult=None, cost=None, vol_max=None, trend_sleeves=(), lock_period="month", week_loss=0.0):
     """streams: list of (coin, sleeve).  sl / tp: a number, {coin: v} or {(coin, sleeve): v}; tp 0 = none.  rmult: {sleeve: risk multiplier}."""
     coins = sorted({c for c, _ in streams}); ci = {c: j for j, c in enumerate(coins)}
     idx = data(coins[0])["d"].index
@@ -119,7 +120,8 @@ def run(streams, sl, tp, hold=None, start=START, end=END, risk=0.01, lev_cap=1e9
     if lock_period == "week":                               # loss lock measured per ISO week (Monday 00:00 UTC) instead of per month
         month = np.asarray((idx.normalize() - pd.Timestamp("1970-01-05", tz="UTC")).days // 7, dtype=np.int64)   # 1970-01-05 was a Monday
     i0 = idx.searchsorted(start); i1 = idx.searchsorted(end)
-    TE, TX, TS, TD, TP, TR, TK, eqc = engine(o, h, l, f, sig, hd, co, slp, tpp, rm, month, i0, i1, risk, lev_cap, month_loss, compound, 2 * (B.FEE + B.SLIP) if cost is None else cost)
+    week = np.asarray((idx.normalize() - pd.Timestamp("1970-01-05", tz="UTC")).days // 7, dtype=np.int64)   # weeks start Monday 00:00 UTC
+    TE, TX, TS, TD, TP, TR, TK, eqc = engine(o, h, l, f, sig, hd, co, slp, tpp, rm, month, week, i0, i1, risk, lev_cap, month_loss, week_loss, compound, 2 * (B.FEE + B.SLIP) if cost is None else cost)
     tr = pd.DataFrame({"entry": idx[TE], "exit": idx[TX], "stream": [f"{streams[s][0][:-4]}-{streams[s][1]}" for s in TS], "dir": TD,
                        "pnl": TP, "ret": TR, "kind": pd.Series(TK).map({1: "tp", 2: "sl", 3: "time"}).values})
     return tr, pd.Series(eqc[i0:i1], index=idx[i0:i1])
