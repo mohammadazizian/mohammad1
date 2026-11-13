@@ -62,7 +62,7 @@ Results for Nov 2024 – Oct 2026 with the 2% profit lock:
 |---|---|---|
 | 24 months / 6 months | 15/24, +13.8% | 20/24, +19.8% |
 | 18 months / 6 months | 16/24, +14.7% | 20/24, +14.5% |
-| 12 months / 3 months | 14/24, −7.8% | 17/24, −13.4% |
+| 12 months / 3 months | 14/24, −6.4% | 17/24, −13.4% |
 
 Full tables: `results/walkforward_*.txt`. The fixed-parameter backtest above (+38.6% / +38.5%,
 21/24 and 22/24) is therefore optimistic: with honest re-selection roughly a third to a half of the
