@@ -87,3 +87,60 @@ profit survives when training windows are 18–24 months, BTC falls below the 70
   5m data was not available in the research environment and was not tested.
 * Prices are Binance **spot** candles; shorting needs perpetual futures, and funding payments are
   not modelled.
+
+---
+
+# Volume-Delta Burst (volume-only trigger, fixed SL/TP) — `volume_strategy.py`
+
+`python volume_strategy.py --out results_volume`
+
+## Rules (1H candles, identical for BTC and ETH)
+
+* **Trigger:** `delta` = taker-buy volume − taker-sell volume per bar. `burst` = sum of `delta`
+  over the last 2 bars, z-scored against its own last 336 bars. Long when z crosses above **+2.5**,
+  short when it crosses below **−2.5**. Entry is a market order at the next bar's open.
+* **Fixed exits, set at entry and never moved:** stop loss **6.0 × ATR(24)**, take profit
+  **4.0 × ATR(24)**. No other exit exists. One position per asset.
+* **Monthly entry lock:** once mark-to-market month-to-date PnL reaches **+1.0%**, no new trade is
+  opened until the next calendar month. Open trades still end only at their SL or TP.
+* **Costs:** taker 0.04% + 0.02% slippage on entries and stops; maker 0.01% on take-profits (filled
+  only if price trades 1 bp through). If SL and TP fall inside one bar the SL is assumed first.
+
+## Result: Nov 2024 – Oct 2026 (24 calendar months, net of costs)
+
+| | BTC | ETH |
+|---|---|---|
+| Profitable months | **20 / 24 (83.3%)** | **22 / 24 (91.7%)** |
+| Months with ≥ 1 trade | 24 / 24 | 24 / 24 |
+| Total net PnL (1x notional) | +30.6% | +69.4% |
+| Worst month / max drawdown | −7.0% / −22.5% | −10.0% / −18.6% |
+| Trades (TP / SL) | 42 (32 / 10) | 36 (29 / 7) |
+| Avg SL / TP distance | 4.0% / 2.7% | 6.1% / 4.0% |
+
+Full tables: `results_volume/backtest_output.txt`, `results_volume/*_monthly.csv`,
+`results_volume/*_trades.csv` (every trade with its entry, SL, TP and exit type).
+
+## Read this before trading it
+
+* **Tiny sample.** Because the first winning trade usually triggers the lock, most months contain
+  exactly one trade: 42 and 36 trades in two years. Twenty winning months is roughly twenty winning
+  trades; a few different outcomes would change the headline.
+* **BTC sits exactly on the 80% line** (20/24). With months counted from the 13th
+  (`--anchor-day 13`) the result is BTC 21/24 and ETH 19/24, i.e. ETH falls just under 80%.
+* **The lock produces the consistency.** Without it (`--no-lock`) the same entries made BTC +42.1%
+  and ETH +79.5% but with 14/24 and 15/24 profitable months and drawdowns of −39% and −47%.
+* **Mar 2022 – Oct 2024:** BTC 25/32 (78%), +30.5%; ETH 27/32 (84%), +24.2%. This period was used
+  when choosing the signal family, so it is a consistency check, not a clean out-of-sample test.
+* **Walk-forward of the family** (delta window, threshold, SL and TP re-selected from the previous
+  12–24 months only, 1% lock): BTC 16–19 of 24 profitable months (−12% to +26% total), ETH 17–18 of
+  24 (+20% to +34%). Under honest re-selection the strategy does not reach 80%.
+* **Neighbouring parameters** with the lock give BTC 18–23 and ETH 19–23 profitable months, so the
+  80% line is met by some neighbours and missed by others.
+* **Risk shape:** the stop is 1.5× the target, so one stop-out erases about one and a half winners;
+  the worst months are single stop-outs.
+* **What did not work:** volume-spike reversal, stopping-volume wicks, absorption, CVD divergence
+  and volume-confirmed VWAP crosses all lost money after costs with fixed ATR stops (about 2,000
+  configurations on 1H). Only following abnormal volume delta with wide stops was positive in every
+  sub-period. On 30m the same rule had no edge without the lock.
+* Prices and taker-buy volume are Binance **spot**; shorts need perpetual futures and funding is not
+  modelled.
