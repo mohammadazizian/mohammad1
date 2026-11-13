@@ -21,9 +21,21 @@ def data(sym):
         lc = np.log(d.close); sg = lc.diff().rolling(672).std()
         volrank = (sg * np.sqrt(96)).rolling(96 * 180).rank(pct=True)          # today's volatility vs the last 180 days
         tr30 = np.sign(lc - lc.shift(2880))                                    # direction of the last 30 days
-        _cache[sym] = dict(d=d, S=s2[0], F=s2[1], W=s3[0], volrank=volrank.values, tr30=tr30.fillna(0).values.astype(np.int64))
+        # strict variants: Sx / Fx need shock and flow to agree, Wx needs a real price move and heavy volume
+        z = (lc - lc.shift(4)) / (sg * 2.0)
+        flow = (2 * d.taker_buy_base - d.volume).rolling(16).sum()
+        fz = (flow - flow.rolling(672).mean()) / flow.rolling(672).std()
+        Sx = pd.Series(s2[0], index=d.index).where((np.sign(fz) * s2[0] > 0) & (fz.abs() > 1), 0)
+        Fx = pd.Series(s2[1], index=d.index).where((np.sign(z) * s2[1] > 0) & (z.abs() > 1), 0)
+        ats = d.quote_volume.rolling(4).sum() / d.trades.rolling(4).sum()
+        az = (ats - ats.rolling(672).mean()) / ats.rolling(672).std()
+        vs = d.volume.rolling(4).sum() / (d.volume.rolling(672).mean() * 4)
+        Wx = ((az > 2) * np.sign(d.close - d.close.shift(4))).fillna(0).astype(int)
+        Wx = Wx.where((z.abs() > 1) & (vs > 2.5), 0); Wx = Wx.where(Wx != Wx.shift(1), 0)
+        _cache[sym] = dict(d=d, S=s2[0], F=s2[1], W=s3[0], volrank=volrank.values, tr30=tr30.fillna(0).values.astype(np.int64),
+                           Sx=Sx.fillna(0).astype(np.int64).values, Fx=Fx.fillna(0).astype(np.int64).values, Wx=Wx.astype(np.int64).values)
     return _cache[sym]
-HOLD = {"S": 48, "F": 48, "W": 96}
+HOLD = {"S": 48, "F": 48, "W": 96, "Sx": 48, "Fx": 48, "Wx": 96}
 
 @njit(cache=True)
 def engine(o, h, l, fund, sig, hold, coin, slp, tpp, rm, month, i0, i1, risk, lev_cap, month_loss, compound, cost):
@@ -117,7 +129,15 @@ SL = {("BTCUSDT", "S"): 0.010, ("BTCUSDT", "F"): 0.010, ("ETHUSDT", "S"): 0.015,
       ("BTCUSDT", "W"): 0.0075, ("ETHUSDT", "W"): 0.010, ("SOLUSDT", "W"): 0.015}
 TP = {("BTCUSDT", "S"): 0.040, ("BTCUSDT", "F"): 0.040, ("ETHUSDT", "S"): 0.060, ("ETHUSDT", "F"): 0.060,
       ("BTCUSDT", "W"): 0.045, ("ETHUSDT", "W"): 0.060, ("SOLUSDT", "W"): 0.090}
-RMULT = {"S": 1.0, "F": 1.0, "W": 0.33}                      # Strategy 3 trades risk one third of a Strategy 2 trade
+RMULT = {"S": 1.0, "F": 1.0, "W": 0.33, "Sx": 1.0, "Fx": 1.0, "Wx": 0.33}
+# strict version: same stops/targets, stricter entries (see data()), plus vol_max=0.8 and trend_sleeves=("Sx", "Fx") in run()
+S2X_STREAMS = [(c, s + "x") for c, s in [("BTCUSDT", "S"), ("BTCUSDT", "F"), ("ETHUSDT", "S"), ("ETHUSDT", "F")]]
+S3X_STREAMS = [("BTCUSDT", "Wx"), ("ETHUSDT", "Wx"), ("SOLUSDT", "Wx")]                      # Strategy 3 trades risk one third of a Strategy 2 trade
+
+SL.update({(c, s + "x"): v for (c, s), v in list(SL.items())}); TP.update({(c, s + "x"): v for (c, s), v in list(TP.items())})
+# high-win-rate exits for strict Strategy 2: stop 1.5x wider, target equal to the stop
+SL_HW = {("BTCUSDT", "Sx"): 0.015, ("BTCUSDT", "Fx"): 0.015, ("ETHUSDT", "Sx"): 0.0225, ("ETHUSDT", "Fx"): 0.0225}
+TP_HW = dict(SL_HW)
 
 def account_stats(tr, eq, start=START, end=END):
     me = eq.resample("ME").last(); mr = me.pct_change(); mr.iloc[0] = me.iloc[0] / 1.0 - 1

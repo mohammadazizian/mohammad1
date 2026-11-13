@@ -137,3 +137,10 @@ Strategies 2 (BTC, ETH) and 3 (BTC, ETH, SOL) on one compounding account, fixed 
 Sizing: notional = risk x equity / stop %, risk 0.5 % of equity per Strategy 2 trade and 0.165 % per Strategy 3 trade, total open notional capped at 3 x equity. No monthly profit lock.
 Result 2022-11-12 -> 2026-11-11 after costs: equity x7.41 (CAGR 65 %), max drawdown 24.2 % (realised), worst month -10.7 %, 32 of 49 months positive.
 Stops and targets were chosen on this same data (grid in `research/mm1.py`), and the result is very cost-sensitive: at 0.14 % round-trip cost CAGR is 43.6 %, at 0.20 % it is 16.6 % with a 39.8 % drawdown. Risk grid and loss-lock comparison: `results/mm_report.txt`.
+
+# Strict-entry version with monthly loss lock (`mm.py`: `S2X_STREAMS`, `S3X_STREAMS`)
+
+Extra entry conditions on top of the fixed stops/targets: no new trades when volatility is in the top 20 % of the last 180 days; Strategy 2 only in the direction of the 30-day trend and only when shock and flow agree; Strategy 3 only when the 1 h move exceeds 1 sigma and 1 h volume is 2.5x its 7-day average.
+Risk 0.5 % per Strategy 2 trade (0.165 % Strategy 3), leverage cap 3x, monthly loss lock -7 %: equity x8.95 (CAGR 73 %), max drawdown 10.1 %, 36 of 45 active months positive, trade win rate 39.5 %.
+High-win-rate variant (Strategy 2 only, stop 1.5 %/2.25 %, target equal to stop): win rate 58.5 %, CAGR 26 %, drawdown 6.1 %, 33 of 45 months.
+All filters were selected on this same four-year sample. Tables: `results/strict_report.txt`.
