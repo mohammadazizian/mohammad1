@@ -121,3 +121,19 @@ run with and without a monthly loss lock at -5 %. Full tables in `results/bot6_r
 BTC, ETH and SOL; Strategy 2 loses on BNB, XRP and DOGE; Strategy 3 loses on BNB and is flat on DOGE. No coin reaches 80 % profitable
 months once the stop is added to Strategy 2 except ETH (40/49). The loss lock caps the worst month near -6 to -7 % and cuts drawdown.
 Data for the four extra coins is not committed; run `python fetch_data.py` then `python build_data.py SOLUSDT BNBUSDT XRPUSDT DOGEUSDT`.
+
+# Fixed stop / take-profit and money management (`mm.py`)
+
+Strategies 2 (BTC, ETH) and 3 (BTC, ETH, SOL) on one compounding account, fixed % stops and targets, risk-based sizing.
+
+| Stream | Stop | Target | Time exit |
+|---|---|---|---|
+| S2 BTC (shock, flow) | 1.0 % | 4.0 % | 12 h |
+| S2 ETH (shock, flow) | 1.5 % | 6.0 % | 12 h |
+| S3 BTC | 0.75 % | 4.5 % | 24 h |
+| S3 ETH | 1.0 % | 6.0 % | 24 h |
+| S3 SOL | 1.5 % | 9.0 % | 24 h |
+
+Sizing: notional = risk x equity / stop %, risk 0.5 % of equity per Strategy 2 trade and 0.165 % per Strategy 3 trade, total open notional capped at 3 x equity. No monthly profit lock.
+Result 2022-11-12 -> 2026-11-11 after costs: equity x7.41 (CAGR 65 %), max drawdown 24.2 % (realised), worst month -10.7 %, 32 of 49 months positive.
+Stops and targets were chosen on this same data (grid in `research/mm1.py`), and the result is very cost-sensitive: at 0.14 % round-trip cost CAGR is 43.6 %, at 0.20 % it is 16.6 % with a 39.8 % drawdown. Risk grid and loss-lock comparison: `results/mm_report.txt`.
