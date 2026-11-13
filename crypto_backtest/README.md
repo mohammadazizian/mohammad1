@@ -144,3 +144,38 @@ Full tables: `results_volume/backtest_output.txt`, `results_volume/*_monthly.csv
   sub-period. On 30m the same rule had no edge without the lock.
 * Prices and taker-buy volume are Binance **spot**; shorts need perpetual futures and funding is not
   modelled.
+
+---
+
+# Weekend-gap fade + daily US-session fade — `session_fade.py`
+
+Implemented exactly as specified (no rule or parameter changed) on Binance USDT-M perpetual 15m
+candles with historical funding, from `data.binance.vision`.
+`python session_fade.py --out results_session_fade`
+
+| 2024-11-12 → 2026-11-11, costs + governor | BTC | ETH | Reference BTC / ETH |
+|---|---|---|---|
+| Trades | 257 | 245 | 257 / 245 |
+| Profitable months (of 25) | 22 | 21 | 22 / 21 |
+| Total net PnL | +76.9% | +94.8% | +76.9% / +94.9% |
+| Worst month | −7.0% | −10.5% | −7.0% / −10.5% |
+| Max drawdown | 24.2% | 16.7% | 24.2% / 16.7% |
+| Profit factor | 1.40 | 1.49 | 1.40 / 1.49 |
+
+The reference results are reproduced. Zero-cost and governor-off summaries and the monthly tables
+are in `results_session_fade/backtest_output.txt`. Funding for November 2026 was not yet published
+in the archive and is taken as zero (8 trades per symbol).
+
+Same rules on the preceding two years (`--start 2022-11-12 --end 2024-11-11`,
+`results_session_fade/earlier_window_2022-11_2024-11.txt`):
+
+| 2022-11-12 → 2024-11-11, costs + governor | BTC | ETH |
+|---|---|---|
+| Profitable months (of 25) | 16 | 17 |
+| Total net PnL | −63.2% | +14.2% |
+| Worst month | −31.0% | −20.9% |
+| Max drawdown | 71.5% | 50.4% |
+| Profit factor | 0.79 | 1.05 |
+
+The strategy fades moves, and it lost heavily in 2022–24 when BTC trended; its 2024–26 result
+depends on that period's mean-reverting behaviour.
