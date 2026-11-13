@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>استراتژی S/F/W با تریلینگ استاپ ATR و گزارش بک‌تست</title>
+<style>
+body{font-family:Vazirmatn,Tahoma,"Segoe UI",sans-serif;line-height:1.9;max-width:900px;margin:0 auto;padding:24px;color:#1c1c1c;background:#fff}
+h1{font-size:1.6em;border-bottom:2px solid #333;padding-bottom:8px} h2{margin-top:2em;border-bottom:1px solid #ccc;padding-bottom:4px} h3{margin-top:1.4em}
+table{border-collapse:collapse;width:100%;margin:12px 0;font-size:.92em} th,td{border:1px solid #ccc;padding:5px 10px;text-align:center} th{background:#f0f0f0}
+td,th{font-variant-numeric:tabular-nums} td{unicode-bidi:plaintext} .neg{color:#b3261e} .pos{color:#1b6e35}
+code,pre{direction:ltr;unicode-bidi:embed;font-family:Consolas,Menlo,monospace;background:#f5f5f5;border-radius:4px} code{padding:1px 5px}
+pre{padding:14px;overflow-x:auto;text-align:left;font-size:.8em;line-height:1.5}
+.kpi{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:16px 0} .kpi div{border:1px solid #ccc;border-radius:6px;padding:10px;text-align:center} .kpi b{display:block;font-size:1.35em}
+.note{background:#fff8e1;border-right:4px solid #e0a800;padding:10px 14px;margin:12px 0}
+@media(max-width:560px){.kpi{grid-template-columns:repeat(2,1fr)}}
+@media(prefers-color-scheme:dark){body{background:#161616;color:#e6e6e6} th{background:#2a2a2a} th,td,.kpi div{border-color:#444} code,pre{background:#222} .note{background:#332b12} .neg{color:#ff8a80} .pos{color:#7bd88f} h1{border-color:#ddd} h2{border-color:#444}}
+</style></head><body>
+<h1>استراتژی S / F / W با تریلینگ استاپ ATR و گزارش بک‌تست</h1>
+<p>فیوچرز دائمی USDT-M بایننس، کندل ۱۵ دقیقه، بازهٔ <span dir="ltr">2022-11-13</span> تا <span dir="ltr">2026-11-12</span> (۴٫۰۰۰ سال). همهٔ اعداد از اجرای واقعی کد روی دادهٔ <span dir="ltr">data.binance.vision</span> به دست آمده‌اند.</p>
+<div class="kpi"><div>سرمایهٔ نهایی<b dir="ltr">264.13 $</b></div><div>CAGR<b dir="ltr">27.48%</b></div><div>حداکثر افت<b dir="ltr">−23.45%</b></div><div>وین ریت<b dir="ltr">45.82%</b></div><div>R:R واقعی<b dir="ltr">1.47 : 1</b></div><div>ضریب سود<b dir="ltr">1.203</b></div></div>
+
+<h2>بخش اول: استراتژی</h2>
+<h3>۱. داده</h3>
+<ul><li>نمادها: BTCUSDT، ETHUSDT، SOLUSDT، XRPUSDT؛ کندل ۱۵ دقیقه، UTC.</li>
+<li>هر کندل: open، high، low، close، حجم پایه، حجم کوت، تعداد معاملات، حجم خرید تیکر؛ به‌علاوهٔ نرخ فاندینگ تاریخی.</li>
+<li>بارگذاری از <span dir="ltr">2022-09-01</span> برای گرم‌شدن اندیکاتورها؛ کندل‌های گم‌شده forward-fill می‌شوند.</li></ul>
+<h3>۲. اندیکاتورها (همه روی بسته‌شدن کندل)</h3>
+<ul>
+<li><code>r</code> = بازده لگاریتمی ۱۵ دقیقه‌ای؛ <code>sigma</code> = انحراف معیار نمونه‌ای <code>r</code> در ۶۷۲ کندل.</li>
+<li><code>d_vol = sigma × √96</code> (نوسان روزانه).</li>
+<li><code>ATR(14)</code> = میانگین True Range در ۱۴ کندل.</li>
+<li><code>z = ln(close / close[-4]) / (2 × sigma)</code></li>
+<li><code>net = 2 × taker_buy − volume</code>؛ <code>flow</code> = مجموع <code>net</code> در ۱۶ کندل؛ <code>fz</code> = z-score آن در ۶۷۲ کندل.</li>
+<li><code>ats</code> = (مجموع حجم کوت ۴ کندل) ÷ (مجموع تعداد معاملات ۴ کندل)؛ <code>az</code> = z-score آن در ۶۷۲ کندل.</li>
+<li><code>vs</code> = (مجموع حجم ۴ کندل) ÷ (۴ × میانگین حجم ۶۷۲ کندل).</li>
+<li><code>trend30 = +1</code> اگر <code>VWMA(672) &gt; VWMA(2880)</code>، وگرنه <code>trend30 = −1</code>.</li>
+<li><code>volrank</code> = رتبهٔ صدکی <code>d_vol</code> در ۱۷٬۲۸۰ کندل اخیر (۱۸۰ روز).</li></ul>
+<h3>۳. سیگنال ورود</h3>
+<p>ورود با سفارش لیمیت قابل‌اجرا (IOC) شبیه‌سازی می‌شود. هر استریم (یک نوع سیگنال روی یک کوین) حداکثر یک پوزیشن دارد.</p>
+<table><tr><th>استریم</th><th>کوین‌ها</th><th>خرید</th><th>فروش</th></tr>
+<tr><td>S (شوک)</td><td>BTC، ETH</td><td dir="ltr">z &gt; 4, fz &gt; 1, trend30 = +1</td><td dir="ltr">z &lt; −4, fz &lt; −1, trend30 = −1</td></tr>
+<tr><td>F (جریان)</td><td>BTC، ETH</td><td dir="ltr">fz &gt; 3, z &gt; 1, trend30 = +1</td><td dir="ltr">fz &lt; −3, z &lt; −1, trend30 = −1</td></tr>
+<tr><td>W (معاملات بزرگ)</td><td>هر چهار کوین</td><td dir="ltr">az &gt; 2, close &gt; close[-4]</td><td dir="ltr">az &gt; 2, close &lt; close[-4]</td></tr></table>
+<ul><li>S و F سطح‌محورند: تا وقتی شرط برقرار و استریم آزاد است، وارد می‌شوند.</li>
+<li>W لبه‌محور است: علاوه بر شرط بالا باید <code>|z| &gt; 1</code> و <code>vs &gt; 2.5</code> باشد، و فقط در کندلی فعال می‌شود که مقدار سیگنال غیرصفر و متفاوت از کندل قبل باشد.</li>
+<li>فیلتر نوسان: اگر <code>volrank &gt; 0.85</code> باشد ورود ممنوع است.</li></ul>
+<h3>۴. خروج: حد ضرر اولیه و تریلینگ استاپ ATR</h3>
+<p>خروج زمانی و حد سود ثابت وجود ندارد.</p>
+<table><tr><th></th><th>BTC</th><th>ETH</th><th>SOL</th><th>XRP</th></tr><tr><td>حد ضرر پایه</td><td>0.50%</td><td>0.75%</td><td>1.00%</td><td>1.00%</td></tr></table>
+<ul><li><code>SL_pct اولیه = حد ضرر پایه + d_vol</code></li>
+<li>قیمت حد ضرر سخت = قیمت ورود × <code>(1 ∓ SL_pct)</code>.</li>
+<li>تریلینگ فقط وقتی فعال می‌شود که سود پوزیشن از <code>1.5 × SL_pct</code> بیشتر شود.</li>
+<li>پس از فعال‌شدن، برای خرید: <code>بالاترین high از زمان ورود − 2.5 × ATR(14)</code>؛ برای فروش: <code>پایین‌ترین low از زمان ورود + 2.5 × ATR(14)</code>.</li>
+<li>استاپ فقط در جهت معامله حرکت می‌کند (تنگ‌تر می‌شود، هرگز گشادتر نمی‌شود).</li>
+<li>اگر کندل آن‌طرف استاپ باز شود، خروج در همان open؛ وگرنه دقیقاً در قیمت استاپ.</li></ul>
+<h3>۵. مدیریت سرمایه</h3>
+<ul><li>سرمایهٔ اولیه ۱۰۰ دلار؛ ریسک هر معامله دقیقاً ۰٫۵٪ سرمایهٔ تحقق‌یافته بر اساس <code>SL_pct</code> اولیه.</li>
+<li><code>حجم اسمی = (0.005 × سرمایه) ÷ SL_pct</code></li>
+<li>سقف مجموع حجم باز: ۳ برابر سرمایه؛ اولویت پر شدن: SOL، XRP، ETH، BTC.</li>
+<li>قفل ضرر ماهانه: اگر سرمایه نسبت به اول ماه تقویمی ۱۵٪ افت کند، ورود جدید متوقف می‌شود.</li></ul>
+<h3>۶. هزینه‌ها و اصطکاک اجرا</h3>
+<ul><li>کارمزد تیکر: ۰٫۰۴٪ در هر طرف.</li>
+<li>لغزش پویا در هر طرف: <code>0.01% + 0.02% × (|z| / 4)</code>؛ اگر <code>|z| &lt; 4</code> باشد، ۰٫۰۱۵٪ ثابت.</li>
+<li>هزینهٔ رفت‌وبرگشت = ۰٫۰۸٪ + لغزش ورود + لغزش خروج.</li>
+<li>فاندینگ: جمع تجمعی برداری؛ خرید می‌پردازد، فروش می‌گیرد.</li>
+<li dir="ltr" style="text-align:left"><code>PnL = notional × (dir × (exit/entry − 1) − round_trip_cost − dir × net_funding)</code></li></ul>
+
+<h2>بخش دوم: گزارش بک‌تست</h2>
+<h3>تصمیم‌های پیاده‌سازی در نقاط مبهم مشخصات</h3>
+<div class="note"><ul>
+<li><b>ورود در open کندلِ بعد از سیگنال است.</b> سیگنال با بسته‌شدن کندل ساخته می‌شود، پس ورود در open همان کندل نگاه به آینده می‌شد.</li>
+<li><b><code>d_vol</code> حد ضرر اولیه از بسته‌شدن کندل سیگنال گرفته شده است.</b></li>
+<li><b>استاپِ هر کندل فقط از دادهٔ کندل‌های قبلی ساخته می‌شود.</b> فعال‌شدن و به‌روزرسانی تریلینگ در پایان هر کندل انجام و از کندل بعد اعمال می‌شود، چون ترتیب high و low درون یک کندل معلوم نیست.</li>
+<li><b>ATR(14) میانگین سادهٔ True Range است،</b> نه هموارسازی Wilder.</li>
+<li><b>لغزش با <code>|z|</code> آخرین کندل بسته‌شده قبل از ورود و قبل از خروج حساب شده است.</b></li>
+<li><b>اولویت درون هر کوین:</b> W، سپس S، سپس F.</li>
+<li><b>استریم در همان کندلی که با گپ خارج شده دوباره وارد نمی‌شود.</b></li></ul></div>
+<h3>محدودیت‌های داده</h3>
+<div class="note"><ul>
+<li><b>داده تا <span dir="ltr">2026-11-12 23:45 UTC</span> است.</b> ۵ معاملهٔ باز با آخرین قیمت بسته شدند.</li>
+<li><b>فاندینگ نوامبر ۲۰۲۶ صفر حساب شده است</b> (آرشیو در <span dir="ltr">2026-10-31</span> تمام می‌شود)؛ روی ۲۰ معامله اثر دارد.</li>
+<li><b>فیلتر نوسان تا <span dir="ltr">2023-03-06</span> غیرفعال است،</b> چون رتبه‌بندی ۱۸۰ روزه سابقهٔ کافی ندارد؛ ۱۱۱ معامله در این دوره باز شده است.</li>
+<li>هیچ کندلی گم نشده بود و چیزی پر نشد.</li></ul></div>
+<h3>اعداد اصلی</h3>
+<table><tr><th>شاخص</th><th>مقدار</th></tr>
+<tr><td>سرمایهٔ نهایی</td><td dir="ltr">264.13 USD</td></tr><tr><td>بازده کل</td><td dir="ltr">+164.13%</td></tr><tr><td>CAGR</td><td dir="ltr">27.48%</td></tr>
+<tr><td>حداکثر افت سرمایه (لحظه‌ای، هر ۱۵ دقیقه)</td><td dir="ltr">−23.45% (2023-08-10)</td></tr>
+<tr><td>بدترین ماه</td><td dir="ltr">2026-09 : −7.16%</td></tr><tr><td>بهترین ماه</td><td dir="ltr">2023-08 : +19.18%</td></tr><tr><td>ماه‌های مثبت</td><td>۲۹ از ۴۹</td></tr></table>
+<p>سرمایه از اوج ۳۰۳٫۶۹ در پایان نوامبر ۲۰۲۵ حدود ۱۳٪ پایین آمده و یک سال اخیر منفی بوده است.</p>
+<h3>معاملات</h3>
+<table><tr><th>شاخص</th><th>مقدار</th></tr>
+<tr><td>تعداد معاملات</td><td>۱٬۵۸۰ (774 خرید، 806 فروش)</td></tr><tr><td>وین ریت</td><td dir="ltr">45.82%</td></tr>
+<tr><td>میانگین برد</td><td dir="ltr">+1.524 R</td></tr><tr><td>میانگین باخت</td><td dir="ltr">-1.039 R</td></tr><tr><td>بزرگ‌ترین برد</td><td dir="ltr">+6.97 R</td></tr>
+<tr><td>R:R واقعی</td><td dir="ltr">1.47 : 1</td></tr>
+<tr><td>امید ریاضی</td><td dir="ltr">+0.136 R</td></tr><tr><td>ضریب سود</td><td dir="ltr">1.203</td></tr><tr><td>ریسک هر معامله</td><td dir="ltr">0.5000%</td></tr>
+<tr><td>میانگین فاصلهٔ حد ضرر اولیه</td><td dir="ltr">3.40%</td></tr>
+<tr><td>مدت نگهداری</td><td>میانگین 2.2 روز، حداکثر 21.3 روز</td></tr>
+<tr><td>سیگنال‌های نادیده‌گرفته (استریم مشغول)</td><td>۳٬۴۹۲</td></tr></table>
+<p>سقف ۳ برابری و قفل ضرر ماهانه هیچ‌وقت فعال نشدند؛ حداکثر حجم باز ۱٫۸۸ برابر سرمایه بود.</p>
+<h3>تحلیل خروج</h3>
+<table><tr><th>نوع خروج</th><th>معاملات</th><th>وین ریت</th><th>میانگین R</th><th>سود/زیان (دلار)</th></tr><tr><td>حد ضرر اولیه</td><td>856</td><td>0%</td><td>-1.039</td><td>-809.59</td></tr><tr><td>تریلینگ استاپ ATR</td><td>719</td><td>100%</td><td>+1.529</td><td>+968.00</td></tr>
+<tr><td>پایان داده</td><td>5</td><td>–</td><td>–</td><td>+5.71</td></tr></table>
+<ul><li>تریلینگ روی 721 معامله فعال شد.</li>
+<li>همهٔ خروج‌های تریلینگ سودده‌اند، چون فاصلهٔ <code>2.5 × ATR</code> خیلی کوچک‌تر از آستانهٔ فعال‌سازی است.</li>
+<li>132 خروج تریلینگ در open کندل بعد انجام شد، چون استاپِ به‌روزشده آن‌طرف قیمت بسته‌شدن قرار گرفته بود.</li>
+<li>چون خروج زمانی وجود ندارد، هر معامله‌ای که به آستانه نرسد دیر یا زود با <span dir="ltr">−1 R</span> کامل بسته می‌شود.</li></ul>
+<h3>عملکرد هر استریم</h3>
+<table><tr><th>استریم</th><th>معاملات</th><th>برد ٪</th><th>میانگین R</th><th>سود (دلار)</th></tr><tr><td>BTC F</td><td>151</td><td>45.0</td><td>+0.124</td><td>7.89</td></tr><tr><td>BTC S</td><td>146</td><td>47.3</td><td>+0.187</td><td>21.66</td></tr><tr><td>BTC W</td><td>286</td><td>46.9</td><td>+0.162</td><td>18.10</td></tr><tr><td>ETH F</td><td>150</td><td>44.0</td><td>+0.085</td><td>9.48</td></tr><tr><td>ETH S</td><td>133</td><td>51.1</td><td>+0.298</td><td>35.35</td></tr><tr><td>ETH W</td><td>290</td><td>44.1</td><td>+0.083</td><td>26.37</td></tr><tr><td>SOL W</td><td>216</td><td>44.4</td><td>+0.104</td><td>17.34</td></tr><tr><td>XRP W</td><td>208</td><td>45.7</td><td>+0.111</td><td>27.94</td></tr></table>
+<h3>هزینه‌ها</h3>
+<table><tr><th>قلم</th><th>دلار</th></tr><tr><td>کارمزد و لغزش</td><td>56.92</td></tr><tr><td>فاندینگ خالص پرداختی</td><td>1.75</td></tr><tr><td>سود ناخالص قبل از هزینه</td><td>222.80</td></tr><tr><td>سود خالص</td><td>164.13</td></tr></table>
+<p>میانگین هزینهٔ رفت‌وبرگشت 0.124٪ حجم بود و هزینه‌ها حدود ۲۶٪ سود ناخالص را مصرف کرده‌اند.</p>
+<h3>مقایسه با نسخهٔ قبلی (خروج زمانی و حد سود ثابت)</h3>
+<table><tr><th>شاخص</th><th>نسخهٔ قبلی</th><th>این نسخه</th></tr>
+<tr><td>سرمایهٔ نهایی</td><td dir="ltr">308.18</td><td dir="ltr">264.13</td></tr><tr><td>CAGR</td><td dir="ltr">32.50%</td><td dir="ltr">27.48%</td></tr>
+<tr><td>حداکثر افت</td><td dir="ltr">−15.27%</td><td dir="ltr">−23.45%</td></tr><tr><td>تعداد معاملات</td><td>2046</td><td>1580</td></tr>
+<tr><td>وین ریت</td><td dir="ltr">49.80%</td><td dir="ltr">45.82%</td></tr><tr><td>ضریب سود</td><td>1.316</td><td>1.203</td></tr></table>
+<p>دو نسخه مدل هزینهٔ متفاوتی دارند (۰٫۱۰٪ ثابت در برابر لغزش پویا)، پس تفاوت فقط ناشی از روش خروج نیست.</p>
+<h3>جدول ماه‌به‌ماه (سرمایهٔ تحقق‌یافته)</h3>
+<table><tr><th>ماه</th><th>معاملات بازشده</th><th>بازده ٪</th><th>سرمایهٔ پایان ماه</th></tr><tr><td>2022-11</td><td>16</td><td class='neg'>-0.40</td><td>99.60</td></tr><tr><td>2022-12</td><td>29</td><td class='pos'>+2.69</td><td>102.29</td></tr><tr><td>2023-01</td><td>36</td><td class='pos'>+12.26</td><td>114.83</td></tr><tr><td>2023-02</td><td>21</td><td class='pos'>+3.20</td><td>118.51</td></tr><tr><td>2023-03</td><td>37</td><td class='pos'>+6.21</td><td>125.88</td></tr><tr><td>2023-04</td><td>46</td><td class='neg'>-2.18</td><td>123.13</td></tr><tr><td>2023-05</td><td>42</td><td class='neg'>-4.03</td><td>118.17</td></tr><tr><td>2023-06</td><td>37</td><td class='neg'>-6.33</td><td>110.69</td></tr><tr><td>2023-07</td><td>27</td><td class='neg'>-3.52</td><td>106.79</td></tr><tr><td>2023-08</td><td>35</td><td class='pos'>+19.18</td><td>127.28</td></tr><tr><td>2023-09</td><td>28</td><td class='neg'>-2.83</td><td>123.67</td></tr><tr><td>2023-10</td><td>26</td><td class='pos'>+4.06</td><td>128.70</td></tr><tr><td>2023-11</td><td>27</td><td class='pos'>+4.49</td><td>134.47</td></tr><tr><td>2023-12</td><td>30</td><td class='pos'>+5.94</td><td>142.46</td></tr><tr><td>2024-01</td><td>25</td><td class='neg'>-0.68</td><td>141.49</td></tr><tr><td>2024-02</td><td>48</td><td class='pos'>+3.73</td><td>146.77</td></tr><tr><td>2024-03</td><td>9</td><td class='neg'>-1.50</td><td>144.57</td></tr><tr><td>2024-04</td><td>38</td><td class='pos'>+2.75</td><td>148.55</td></tr><tr><td>2024-05</td><td>33</td><td class='neg'>-3.94</td><td>142.69</td></tr><tr><td>2024-06</td><td>38</td><td class='neg'>-5.12</td><td>135.38</td></tr><tr><td>2024-07</td><td>45</td><td class='pos'>+2.47</td><td>138.72</td></tr><tr><td>2024-08</td><td>25</td><td class='pos'>+6.44</td><td>147.66</td></tr><tr><td>2024-09</td><td>38</td><td class='pos'>+2.24</td><td>150.97</td></tr><tr><td>2024-10</td><td>36</td><td class='neg'>-2.30</td><td>147.50</td></tr><tr><td>2024-11</td><td>23</td><td class='pos'>+7.32</td><td>158.30</td></tr><tr><td>2024-12</td><td>33</td><td class='neg'>-4.74</td><td>150.80</td></tr><tr><td>2025-01</td><td>44</td><td class='pos'>+2.70</td><td>154.88</td></tr><tr><td>2025-02</td><td>40</td><td class='pos'>+4.40</td><td>161.69</td></tr><tr><td>2025-03</td><td>18</td><td class='pos'>+5.83</td><td>171.12</td></tr><tr><td>2025-04</td><td>36</td><td class='neg'>-0.38</td><td>170.48</td></tr><tr><td>2025-05</td><td>44</td><td class='pos'>+7.84</td><td>183.84</td></tr><tr><td>2025-06</td><td>37</td><td class='pos'>+5.03</td><td>193.09</td></tr><tr><td>2025-07</td><td>36</td><td class='pos'>+6.52</td><td>205.68</td></tr><tr><td>2025-08</td><td>36</td><td class='pos'>+10.25</td><td>226.75</td></tr><tr><td>2025-09</td><td>28</td><td class='pos'>+5.30</td><td>238.78</td></tr><tr><td>2025-10</td><td>25</td><td class='pos'>+15.53</td><td>275.86</td></tr><tr><td>2025-11</td><td>15</td><td class='pos'>+10.09</td><td>303.69</td></tr><tr><td>2025-12</td><td>39</td><td class='neg'>-5.48</td><td>287.05</td></tr><tr><td>2026-01</td><td>38</td><td class='pos'>+0.87</td><td>289.54</td></tr><tr><td>2026-02</td><td>24</td><td class='neg'>-5.43</td><td>273.83</td></tr><tr><td>2026-03</td><td>31</td><td class='pos'>+2.29</td><td>280.10</td></tr><tr><td>2026-04</td><td>27</td><td class='neg'>-2.94</td><td>271.88</td></tr><tr><td>2026-05</td><td>43</td><td class='neg'>-0.69</td><td>269.99</td></tr><tr><td>2026-06</td><td>40</td><td class='pos'>+6.32</td><td>287.06</td></tr><tr><td>2026-07</td><td>33</td><td class='neg'>-7.08</td><td>266.74</td></tr><tr><td>2026-08</td><td>30</td><td class='pos'>+8.72</td><td>290.00</td></tr><tr><td>2026-09</td><td>31</td><td class='neg'>-7.16</td><td>269.22</td></tr><tr><td>2026-10</td><td>43</td><td class='neg'>-6.76</td><td>251.03</td></tr><tr><td>2026-11</td><td>14</td><td class='pos'>+5.22</td><td>264.13</td></tr></table>
+
+<h2>بخش سوم: کد پایتون</h2>
+<p>اول <code>python download_data.py</code> و بعد <code>python backtest_trail.py</code>. به <code>pandas</code>، <code>numpy</code> و <code>requests</code> نیاز دارد.</p>
+<h3 dir="ltr" style="text-align:left">download_data.py</h3><pre>&quot;&quot;&quot;Download Binance USDT-M 15m klines + funding rates from data.binance.vision.
+
+Monthly archives are used where they exist; the current (unfinished) month is
+filled from daily kline archives.  Output: data/&lt;SYMBOL&gt;_15m.pkl and
+data/&lt;SYMBOL&gt;_funding.pkl (raw, un-aligned).
+&quot;&quot;&quot;
+import io
+import os
+import sys
+import zipfile
+from concurrent.futures import ThreadPoolExecutor
+
+import pandas as pd
+import requests
+
+BASE = &quot;https://data.binance.vision/data/futures/um&quot;
+SYMBOLS = [&quot;BTCUSDT&quot;, &quot;ETHUSDT&quot;, &quot;SOLUSDT&quot;, &quot;XRPUSDT&quot;]
+START = pd.Timestamp(&quot;2022-09-01&quot;)
+END = pd.Timestamp(&quot;2026-11-13&quot;)
+OUT = os.path.join(os.path.dirname(os.path.abspath(__file__)), &quot;data&quot;)
+KCOLS = [&quot;open_time&quot;, &quot;open&quot;, &quot;high&quot;, &quot;low&quot;, &quot;close&quot;, &quot;volume&quot;, &quot;close_time&quot;,
+         &quot;quote_volume&quot;, &quot;count&quot;, &quot;taker_buy_volume&quot;, &quot;taker_buy_quote_volume&quot;, &quot;ignore&quot;]
+
+
+def fetch(url):
+    &quot;&quot;&quot;Return list of CSV rows (as DataFrame) or None when the archive does not exist.&quot;&quot;&quot;
+    for attempt in range(5):
+        try:
+            r = requests.get(url, timeout=60)
+            if r.status_code == 404:
+                return None
+            r.raise_for_status()
+            z = zipfile.ZipFile(io.BytesIO(r.content))
+            return pd.read_csv(z.open(z.namelist()[0]), header=None, low_memory=False)
+        except Exception as e:  # network hiccup -&gt; retry
+            err = e
+    raise RuntimeError(f&quot;failed {url}: {err}&quot;)
+
+
+def strip_header(df):
+    if isinstance(df.iloc[0, 0], str) and not df.iloc[0, 0].lstrip(&quot;-&quot;).isdigit():
+        df = df.iloc[1:]
+    return df.reset_index(drop=True)
+
+
+def klines(sym):
+    months = pd.period_range(START, END, freq=&quot;M&quot;)
+    urls = {m: f&quot;{BASE}/monthly/klines/{sym}/15m/{sym}-15m-{m}.zip&quot; for m in months}
+    with ThreadPoolExecutor(8) as ex:
+        res = dict(zip(urls, ex.map(fetch, urls.values())))
+    parts, missing = [], [m for m, d in res.items() if d is None]
+    parts += [strip_header(d) for d in res.values() if d is not None]
+    for m in missing:  # month not published yet -&gt; daily archives
+        days = pd.date_range(max(m.start_time, START), min(m.end_time, END), freq=&quot;D&quot;)
+        durls = [f&quot;{BASE}/daily/klines/{sym}/15m/{sym}-15m-{d:%Y-%m-%d}.zip&quot; for d in days]
+        with ThreadPoolExecutor(8) as ex:
+            dres = list(ex.map(fetch, durls))
+        got = [strip_header(d) for d in dres if d is not None]
+        print(f&quot;  {sym} {m}: monthly missing, {len(got)}/{len(days)} daily files found&quot;)
+        parts += got
+    df = pd.concat(parts, ignore_index=True).iloc[:, :12]
+    df.columns = KCOLS
+    df = df.astype({c: &quot;float64&quot; for c in KCOLS if c not in (&quot;open_time&quot;, &quot;close_time&quot;, &quot;count&quot;, &quot;ignore&quot;)})
+    df[&quot;open_time&quot;] = df[&quot;open_time&quot;].astype(&quot;int64&quot;)
+    df.loc[df.open_time &gt; 10**14, &quot;open_time&quot;] //= 1000  # guard: microsecond stamps
+    df[&quot;count&quot;] = df[&quot;count&quot;].astype(&quot;int64&quot;)
+    df[&quot;ts&quot;] = pd.to_datetime(df.open_time, unit=&quot;ms&quot;, utc=True)
+    df = df.drop_duplicates(&quot;ts&quot;).sort_values(&quot;ts&quot;).set_index(&quot;ts&quot;)
+    return df[[&quot;open&quot;, &quot;high&quot;, &quot;low&quot;, &quot;close&quot;, &quot;volume&quot;, &quot;quote_volume&quot;, &quot;count&quot;, &quot;taker_buy_volume&quot;]]
+
+
+def funding(sym):
+    months = pd.period_range(START, END, freq=&quot;M&quot;)
+    urls = [f&quot;{BASE}/monthly/fundingRate/{sym}/{sym}-fundingRate-{m}.zip&quot; for m in months]
+    with ThreadPoolExecutor(8) as ex:
+        res = list(ex.map(fetch, urls))
+    miss = [str(m) for m, d in zip(months, res) if d is None]
+    if miss:
+        print(f&quot;  {sym} funding: no archive for {miss}&quot;)
+    df = pd.concat([strip_header(d) for d in res if d is not None], ignore_index=True).iloc[:, :3]
+    df.columns = [&quot;calc_time&quot;, &quot;interval_hours&quot;, &quot;rate&quot;]
+    df[&quot;calc_time&quot;] = df[&quot;calc_time&quot;].astype(&quot;int64&quot;)
+    df[&quot;rate&quot;] = df[&quot;rate&quot;].astype(&quot;float64&quot;)
+    df[&quot;ts&quot;] = pd.to_datetime(df.calc_time, unit=&quot;ms&quot;, utc=True)
+    return df.drop_duplicates(&quot;calc_time&quot;).sort_values(&quot;ts&quot;)[[&quot;ts&quot;, &quot;rate&quot;]].reset_index(drop=True)
+
+
+if __name__ == &quot;__main__&quot;:
+    os.makedirs(OUT, exist_ok=True)
+    for s in SYMBOLS:
+        k = klines(s)
+        f = funding(s)
+        k.to_pickle(f&quot;{OUT}/{s}_15m.pkl&quot;)
+        f.to_pickle(f&quot;{OUT}/{s}_funding.pkl&quot;)
+        print(s, &quot;klines&quot;, len(k), k.index[0], &quot;-&gt;&quot;, k.index[-1],
+              &quot;| funding&quot;, len(f), f.ts.iloc[0], &quot;-&gt;&quot;, f.ts.iloc[-1])
+    sys.exit(0)
+</pre>
+<h3 dir="ltr" style="text-align:left">backtest_trail.py</h3><pre>&quot;&quot;&quot;S / F / W streams with ATR trailing stop and dynamic slippage (Binance USDT-M, 15m).
+
+Run `python download_data.py` first, then `python backtest_trail.py`.
+Indicators, signals, ATR and funding (per-bar cumsum) are vectorised on a
+pre-aligned 15m grid.  Only the portfolio pass is sequential, because
+compounding equity, the shared notional cap, the monthly lock and the
+path-dependent trailing stop cannot be expressed without state.
+
+Timing (no look-ahead): signal on the close of bar i-1 -&gt; fill at the open of
+bar i.  The stop used during bar j is built only from bars up to j-1.
+&quot;&quot;&quot;
+import os
+
+import numpy as np
+import pandas as pd
+
+HERE = os.path.dirname(os.path.abspath(__file__))
+DATA, OUT = os.path.join(HERE, &quot;data&quot;), os.path.join(HERE, &quot;results_trail&quot;)
+
+LOAD_START = pd.Timestamp(&quot;2022-09-01&quot;, tz=&quot;UTC&quot;)
+BT_START = pd.Timestamp(&quot;2022-11-13 00:00&quot;, tz=&quot;UTC&quot;)
+BT_END = pd.Timestamp(&quot;2026-11-13 23:45&quot;, tz=&quot;UTC&quot;)
+
+W_WEEK, W_TREND, W_RANK, ATR_N = 672, 2880, 17280, 14
+BASE_SL = {&quot;BTCUSDT&quot;: 0.0050, &quot;ETHUSDT&quot;: 0.0075, &quot;SOLUSDT&quot;: 0.0100, &quot;XRPUSDT&quot;: 0.0100}
+# beta priority by coin: SOL, XRP, ETH, BTC
+STREAMS = [(&quot;SOLUSDT&quot;, &quot;W&quot;), (&quot;XRPUSDT&quot;, &quot;W&quot;),
+           (&quot;ETHUSDT&quot;, &quot;W&quot;), (&quot;ETHUSDT&quot;, &quot;S&quot;), (&quot;ETHUSDT&quot;, &quot;F&quot;),
+           (&quot;BTCUSDT&quot;, &quot;W&quot;), (&quot;BTCUSDT&quot;, &quot;S&quot;), (&quot;BTCUSDT&quot;, &quot;F&quot;)]
+SYMBOLS = list(BASE_SL)
+EQUITY0, RISK, LEV_CAP, MONTH_LOCK, VOL_CAP = 100.0, 0.005, 3.0, -0.15, 0.85
+ACTIVATE_MULT, ATR_MULT = 1.5, 2.5
+FEE_SIDE, SLIP_BASE, SLIP_Z, SLIP_FIXED = 0.0004, 0.0001, 0.0002, 0.00015
+
+
+# ----------------------------------------------------------------------------- data
+def load(sym, grid):
+    k = pd.read_pickle(f&quot;{DATA}/{sym}_15m.pkl&quot;).reindex(grid)
+    n_missing = int(k.close.isna().sum())
+    k[&quot;close&quot;] = k.close.ffill()                       # missing candle -&gt; flat bar at last close
+    for c in (&quot;open&quot;, &quot;high&quot;, &quot;low&quot;):
+        k[c] = k[c].fillna(k.close)
+    vols = [&quot;volume&quot;, &quot;quote_volume&quot;, &quot;count&quot;, &quot;taker_buy_volume&quot;]
+    k[vols] = k[vols].fillna(0.0)
+    f = pd.read_pickle(f&quot;{DATA}/{sym}_funding.pkl&quot;)
+    fbar = f.groupby(f.ts.dt.floor(&quot;15min&quot;)).rate.sum().reindex(grid).fillna(0.0)
+    k[&quot;cumf&quot;] = fbar.cumsum()                          # vectorised funding
+    return k, n_missing, f.ts.max()
+
+
+def indicators(k):
+    c, v = k.close, k.volume
+    r = np.log(c / c.shift(1))
+    sigma = r.rolling(W_WEEK).std(ddof=1)
+    d = pd.DataFrame(index=k.index)
+    d[&quot;d_vol&quot;] = sigma * np.sqrt(96)
+    pc = c.shift(1)
+    tr = np.maximum(k.high - k.low, np.maximum((k.high - pc).abs(), (k.low - pc).abs()))
+    d[&quot;atr&quot;] = tr.rolling(ATR_N).mean()                # ATR(14): mean true range over 14 bars
+    d[&quot;z&quot;] = np.log(c / c.shift(4)) / (sigma * 2)
+    flow = (2 * k.taker_buy_volume - v).rolling(16).sum()
+    d[&quot;fz&quot;] = (flow - flow.rolling(W_WEEK).mean()) / flow.rolling(W_WEEK).std(ddof=1)
+    ats = k.quote_volume.rolling(4).sum() / k[&quot;count&quot;].rolling(4).sum()
+    d[&quot;az&quot;] = (ats - ats.rolling(W_WEEK).mean()) / ats.rolling(W_WEEK).std(ddof=1)
+    d[&quot;vs&quot;] = v.rolling(4).sum() / (4 * v.rolling(W_WEEK).mean())
+    vw = lambda n: (v * c).rolling(n).sum() / v.rolling(n).sum()
+    d[&quot;trend30&quot;] = np.where(vw(W_WEEK) &gt; vw(W_TREND), 1, -1)
+    d[&quot;volrank&quot;] = d.d_vol.rolling(W_RANK).rank(pct=True)
+    d[&quot;up4&quot;] = np.sign(c - c.shift(4))
+    # per-side slippage implied by the bar&#x27;s |z|: 0.01% + 0.02% * |z|/4 when |z| &gt;= 4, else 0.015%
+    az_ = d.z.abs().fillna(0.0)
+    d[&quot;slip&quot;] = np.where(az_ &gt;= 4, SLIP_BASE + SLIP_Z * az_ / 4, SLIP_FIXED)
+    return d
+
+
+def signals(d):
+    &quot;&quot;&quot;Signal per bar close (+1 long / -1 short / 0) for each stream type.&quot;&quot;&quot;
+    z, fz, t = d.z, d.fz, d.trend30
+    s = np.where((z &gt; 4) &amp; (fz &gt; 1) &amp; (t == 1), 1, np.where((z &lt; -4) &amp; (fz &lt; -1) &amp; (t == -1), -1, 0))
+    f = np.where((fz &gt; 3) &amp; (z &gt; 1) &amp; (t == 1), 1, np.where((fz &lt; -3) &amp; (z &lt; -1) &amp; (t == -1), -1, 0))
+    raw = np.where(d.az &gt; 2, d.up4.fillna(0), 0)
+    raw = np.where((z.abs() &gt; 1) &amp; (d.vs &gt; 2.5), raw, 0).astype(int)
+    prev = np.r_[0, raw[:-1]]
+    w = np.where((raw != 0) &amp; (raw != prev), raw, 0)
+    ok = ~(d.volrank &gt; VOL_CAP).values                 # volatility filter (NaN rank does not block)
+    return {&quot;S&quot;: s * ok, &quot;F&quot;: f * ok, &quot;W&quot;: w * ok}
+
+
+# ----------------------------------------------------------------------------- portfolio pass
+def run():
+    os.makedirs(OUT, exist_ok=True)
+    last = min(pd.read_pickle(f&quot;{DATA}/{s}_15m.pkl&quot;).index.max() for s in SYMBOLS)
+    grid = pd.date_range(LOAD_START, min(BT_END, last), freq=&quot;15min&quot;)
+    M, info = {}, {}
+    for sym in SYMBOLS:
+        k, miss, flast = load(sym, grid)
+        d = indicators(k)
+        M[sym] = dict(o=k.open.values, h=k.high.values, l=k.low.values, c=k.close.values,
+                      cumf=k.cumf.values, dvol=d.d_vol.values, atr=d.atr.values,
+                      slip=d.slip.values, sig=signals(d), volrank=d.volrank.values)
+        info[sym] = (miss, flast)
+    n, i0 = len(grid), grid.get_loc(BT_START)
+    month = (grid.year * 12 + grid.month).values
+
+    equity, open_notional = EQUITY0, 0.0
+    month_start, locked = EQUITY0, False
+    pos, trades = {}, []
+    last_exit = {s: -1 for s in STREAMS}
+    mtm, realised, gross_lev = np.full(n, np.nan), np.full(n, np.nan), np.zeros(n)
+    skipped = {&quot;lock&quot;: 0, &quot;cap_full&quot;: 0, &quot;cap_reduced&quot;: 0, &quot;busy&quot;: 0}
+
+    def close(st, i, px, gap):
+        nonlocal equity, open_notional
+        p = pos.pop(st)
+        m = M[st[0]]
+        slip_out = m[&quot;slip&quot;][i - 1] if not gap == &quot;eod&quot; else m[&quot;slip&quot;][i]
+        cost = 2 * FEE_SIDE + p[&quot;slip_in&quot;] + slip_out
+        fund = p[&quot;dir&quot;] * (m[&quot;cumf&quot;][i] - m[&quot;cumf&quot;][p[&quot;i&quot;]])
+        pnl = p[&quot;notional&quot;] * (p[&quot;dir&quot;] * (px / p[&quot;entry&quot;] - 1) - cost - fund)
+        equity += pnl
+        open_notional -= p[&quot;notional&quot;]
+        last_exit[st] = i
+        why = &quot;end_of_data&quot; if gap == &quot;eod&quot; else (&quot;trailing_stop&quot; if p[&quot;trailed&quot;] else &quot;initial_stop&quot;)
+        trades.append(dict(symbol=st[0], stream=st[1], dir=p[&quot;dir&quot;], entry_time=grid[p[&quot;i&quot;]],
+                           exit_time=grid[i], entry=p[&quot;entry&quot;], exit=px, sl_pct=p[&quot;sl&quot;],
+                           notional=p[&quot;notional&quot;], risk_usd=p[&quot;notional&quot;] * p[&quot;sl&quot;],
+                           risk_pct_equity=p[&quot;notional&quot;] * p[&quot;sl&quot;] / p[&quot;eq&quot;], reason=why,
+                           gap_exit=gap is True, trail_activated=p[&quot;active&quot;],
+                           slip_in=p[&quot;slip_in&quot;], slip_out=slip_out,
+                           cost_usd=p[&quot;notional&quot;] * cost, funding_usd=p[&quot;notional&quot;] * fund,
+                           pnl=pnl, R=pnl / (p[&quot;notional&quot;] * p[&quot;sl&quot;]), bars=i - p[&quot;i&quot;]))
+
+    for i in range(i0, n):
+        if i &gt; i0 and month[i] != month[i - 1]:        # new month: reset lock reference
+            month_start, locked = equity, False
+        # A) bar opens beyond the stop (initial or trailing) -&gt; exit at the open
+        for st in list(pos):
+            p, o = pos[st], M[st[0]][&quot;o&quot;][i]
+            if (o &lt;= p[&quot;stop&quot;]) if p[&quot;dir&quot;] &gt; 0 else (o &gt;= p[&quot;stop&quot;]):
+                close(st, i, o, True)
+        if equity &lt;= month_start * (1 + MONTH_LOCK):
+            locked = True
+        # B) entries at the open from signals on the close of bar i-1, beta-priority order
+        for st in STREAMS:
+            sym, typ = st
+            m = M[sym]
+            dr = int(m[&quot;sig&quot;][typ][i - 1])
+            if dr == 0:
+                continue
+            if st in pos or last_exit[st] &gt;= i:        # stream still held a position at the signal close
+                skipped[&quot;busy&quot;] += 1
+                continue
+            if locked:
+                skipped[&quot;lock&quot;] += 1
+                continue
+            sl = BASE_SL[sym] + m[&quot;dvol&quot;][i - 1]       # d_vol at the signal-bar close
+            if not np.isfinite(sl):
+                continue
+            want = RISK * equity / sl
+            room = LEV_CAP * equity - open_notional
+            if room &lt;= 1e-12:
+                skipped[&quot;cap_full&quot;] += 1
+                continue
+            notional = min(want, room)
+            skipped[&quot;cap_reduced&quot;] += notional &lt; want
+            e = m[&quot;o&quot;][i]
+            pos[st] = dict(i=i, dir=dr, entry=e, sl=sl, notional=notional, eq=equity,
+                           stop=e * (1 - dr * sl), act=e * (1 + dr * ACTIVATE_MULT * sl),
+                           ext=e, active=False, trailed=False, slip_in=m[&quot;slip&quot;][i - 1])
+            open_notional += notional
+        # C) intrabar stop check, then roll the trailing stop forward for the next bar
+        for st in list(pos):
+            p, m = pos[st], M[st[0]]
+            h, l = m[&quot;h&quot;][i], m[&quot;l&quot;][i]
+            if p[&quot;dir&quot;] &gt; 0:
+                if l &lt;= p[&quot;stop&quot;]:
+                    close(st, i, p[&quot;stop&quot;], False)
+                    continue
+                p[&quot;ext&quot;] = max(p[&quot;ext&quot;], h)            # highest high since entry
+                if not p[&quot;active&quot;] and p[&quot;ext&quot;] &gt; p[&quot;act&quot;]:
+                    p[&quot;active&quot;] = True
+                if p[&quot;active&quot;]:
+                    new = p[&quot;ext&quot;] - ATR_MULT * m[&quot;atr&quot;][i]
+                    if new &gt; p[&quot;stop&quot;]:
+                        p[&quot;stop&quot;], p[&quot;trailed&quot;] = new, True
+            else:
+                if h &gt;= p[&quot;stop&quot;]:
+                    close(st, i, p[&quot;stop&quot;], False)
+                    continue
+                p[&quot;ext&quot;] = min(p[&quot;ext&quot;], l)            # lowest low since entry
+                if not p[&quot;active&quot;] and p[&quot;ext&quot;] &lt; p[&quot;act&quot;]:
+                    p[&quot;active&quot;] = True
+                if p[&quot;active&quot;]:
+                    new = p[&quot;ext&quot;] + ATR_MULT * m[&quot;atr&quot;][i]
+                    if new &lt; p[&quot;stop&quot;]:
+                        p[&quot;stop&quot;], p[&quot;trailed&quot;] = new, True
+        # D) mark-to-market equity at the 15m close (entry-side costs + assumed exit costs booked)
+        u = 0.0
+        for st, p in pos.items():
+            m = M[st[0]]
+            u += p[&quot;notional&quot;] * (p[&quot;dir&quot;] * (m[&quot;c&quot;][i] / p[&quot;entry&quot;] - 1)
+                                  - 2 * FEE_SIDE - p[&quot;slip_in&quot;] - SLIP_FIXED
+                                  - p[&quot;dir&quot;] * (m[&quot;cumf&quot;][i] - m[&quot;cumf&quot;][p[&quot;i&quot;]]))
+        mtm[i], realised[i] = equity + u, equity
+        gross_lev[i] = open_notional / equity
+    for st in list(pos):                               # still open when the data ends
+        close(st, n - 1, M[st[0]][&quot;c&quot;][n - 1], &quot;eod&quot;)
+    realised[n - 1] = mtm[n - 1] = equity
+
+    report(grid[i0:], mtm[i0:], realised[i0:], gross_lev[i0:], pd.DataFrame(trades), skipped, info, M, i0)
+
+
+# ----------------------------------------------------------------------------- report
+def report(idx, mtm, realised, lev, T, skipped, info, M, i0):
+    T = T.sort_values([&quot;entry_time&quot;, &quot;exit_time&quot;]).reset_index(drop=True)
+    eq = pd.Series(realised, index=idx)
+    per = idx.tz_localize(None).to_period(&quot;M&quot;)
+    end_eq = eq.groupby(per).last()
+    start_eq = end_eq.shift(1).fillna(EQUITY0)
+    m = pd.Series(mtm, index=idx)
+    end_mtm = m.groupby(per).last()
+    monthly = pd.DataFrame({
+        &quot;trades_opened&quot;: T.groupby(T.entry_time.dt.tz_localize(None).dt.to_period(&quot;M&quot;)).size()
+                          .reindex(end_eq.index).fillna(0).astype(int),
+        &quot;return_pct&quot;: (end_eq / start_eq - 1) * 100,
+        &quot;month_end_equity&quot;: end_eq,
+        &quot;mtm_return_pct&quot;: (end_mtm / end_mtm.shift(1).fillna(EQUITY0) - 1) * 100,
+        &quot;month_end_mtm_equity&quot;: end_mtm})
+    monthly.index.name = &quot;month&quot;
+
+    dd = m / np.maximum(m.cummax(), EQUITY0) - 1
+    years = (idx[-1] - idx[0] + pd.Timedelta(minutes=15)) / pd.Timedelta(days=365.25)
+    final = eq.iloc[-1]
+    wins, losses = T[T.pnl &gt; 0], T[T.pnl &lt;= 0]
+    C = T[T.reason != &quot;end_of_data&quot;]
+    ini, trl = C[C.reason == &quot;initial_stop&quot;], C[C.reason == &quot;trailing_stop&quot;]
+    desc = lambda g: (f&quot;{len(g):5d} trades | win {100 * (g.pnl &gt; 0).mean():6.2f} % | avg {g.R.mean():+.3f} R | &quot;
+                      f&quot;sum {g.R.sum():+9.2f} R | pnl {g.pnl.sum():+9.2f} USD | gap-open exits {int(g.gap_exit.sum())} | &quot;
+                      f&quot;avg hold {g.bars.mean() / 96:.2f} d&quot;)
+
+    lines = [&quot;=&quot; * 100, f&quot;Data used : {idx[0]}  -&gt;  {idx[-1]}   ({years:.3f} years)&quot;]
+    for s, (miss, flast) in info.items():
+        lines.append(f&quot;  {s}: forward-filled candles={miss}, last funding print={flast:%Y-%m-%d %H:%M}, &quot;
+                     f&quot;bars in window with NaN volrank={int(np.isnan(M[s][&#x27;volrank&#x27;][i0:]).sum())}&quot;)
+    lines += [&quot;&quot;, &quot;1) MONTH-BY-MONTH (return_pct / month_end_equity = realised; mtm_* = mark-to-market)&quot;,
+              monthly.to_string(float_format=lambda x: f&quot;{x:,.2f}&quot;), &quot;&quot;,
+              &quot;2) HEADLINE&quot;,
+              f&quot;Final equity            : {final:,.2f} USD  (start {EQUITY0:.2f})&quot;,
+              f&quot;Total return            : {(final / EQUITY0 - 1) * 100:,.2f} %&quot;,
+              f&quot;CAGR                    : {((final / EQUITY0) ** (1 / years) - 1) * 100:,.2f} %&quot;,
+              f&quot;Max drawdown (MTM, 15m) : {dd.min() * 100:,.2f} %  (trough {dd.idxmin()})&quot;,
+              f&quot;Worst month (realised)  : {monthly.return_pct.idxmin()}  {monthly.return_pct.min():,.2f} %&quot;,
+              f&quot;Best month (realised)   : {monthly.return_pct.idxmax()}  {monthly.return_pct.max():,.2f} %&quot;,
+              f&quot;Worst month (MTM)       : {monthly.mtm_return_pct.idxmin()}  {monthly.mtm_return_pct.min():,.2f} %&quot;,
+              f&quot;Best month (MTM)        : {monthly.mtm_return_pct.idxmax()}  {monthly.mtm_return_pct.max():,.2f} %&quot;,
+              f&quot;Positive months         : {(monthly.return_pct &gt; 0).sum()} / {len(monthly)} realised, &quot;
+              f&quot;{(monthly.mtm_return_pct &gt; 0).sum()} / {len(monthly)} MTM&quot;, &quot;&quot;,
+              &quot;3) TRADES&quot;,
+              f&quot;Number of trades        : {len(T)}&quot;,
+              f&quot;Win rate                : {len(wins) / len(T) * 100:,.2f} %&quot;,
+              f&quot;Average win             : {wins.R.mean():+.3f} R   (median {wins.R.median():+.3f} R, max {wins.R.max():+.2f} R)&quot;,
+              f&quot;Average loss            : {losses.R.mean():+.3f} R   (median {losses.R.median():+.3f} R, min {losses.R.min():+.2f} R)&quot;,
+              f&quot;Expectancy              : {T.R.mean():+.4f} R per trade&quot;,
+              f&quot;Profit factor           : {wins.pnl.sum() / -losses.pnl.sum():.3f}&quot;,
+              f&quot;Avg risk per trade      : {T.risk_pct_equity.mean() * 100:.4f} % of equity &quot;
+              f&quot;(min {T.risk_pct_equity.min() * 100:.4f} %, max {T.risk_pct_equity.max() * 100:.4f} %)&quot;,
+              f&quot;Avg initial SL distance : {T.sl_pct.mean() * 100:.3f} %&quot;,
+              f&quot;Avg holding time        : {T.bars.mean() / 96:.2f} days (median {T.bars.median() / 96:.2f}, max {T.bars.max() / 96:.1f})&quot;,
+              f&quot;Open notional / equity  : mean {lev.mean():.2f}x, max {lev.max():.2f}x&quot;,
+              f&quot;Signals not taken       : stream busy={skipped[&#x27;busy&#x27;]}, month-lock={skipped[&#x27;lock&#x27;]}, &quot;
+              f&quot;cap full={skipped[&#x27;cap_full&#x27;]}; size reduced by cap={int(skipped[&#x27;cap_reduced&#x27;])}&quot;, &quot;&quot;,
+              &quot;4) EXIT ANALYTICS&quot;,
+              f&quot;Initial stop   : {desc(ini)}&quot;,
+              f&quot;Trailing stop  : {desc(trl)}&quot;,
+              f&quot;End of data    : {int((T.reason == &#x27;end_of_data&#x27;).sum())} trades closed at the last close &quot;
+              f&quot;(pnl {T[T.reason == &#x27;end_of_data&#x27;].pnl.sum():+.2f} USD)&quot;,
+              f&quot;Trail activated (reached +1.5 x SL) on {int(T.trail_activated.sum())} of {len(T)} trades&quot;, &quot;&quot;,
+              &quot;COSTS&quot;,
+              f&quot;Fees + slippage           : {T.cost_usd.sum():,.2f} USD &quot;
+              f&quot;(avg round trip {100 * (T.cost_usd.sum() / T.notional.sum()):.4f} % of notional)&quot;,
+              f&quot;Net funding paid          : {T.funding_usd.sum():,.2f} USD  (negative = received)&quot;,
+              f&quot;Gross PnL before costs    : {T.pnl.sum() + T.cost_usd.sum() + T.funding_usd.sum():,.2f} USD&quot;,
+              f&quot;Net PnL                   : {T.pnl.sum():,.2f} USD&quot;, &quot;&quot;,
+              &quot;PER STREAM&quot;]
+    g = T.groupby([&quot;symbol&quot;, &quot;stream&quot;])
+    ps = pd.DataFrame({&quot;trades&quot;: g.size(), &quot;win_%&quot;: g.pnl.apply(lambda x: (x &gt; 0).mean() * 100),
+                       &quot;avg_R&quot;: g.R.mean(), &quot;sum_R&quot;: g.R.sum(), &quot;pnl_usd&quot;: g.pnl.sum(),
+                       &quot;trail_exits&quot;: g.reason.apply(lambda x: (x == &quot;trailing_stop&quot;).sum()),
+                       &quot;avg_days&quot;: g.bars.mean() / 96})
+    lines.append(ps.to_string(float_format=lambda x: f&quot;{x:,.3f}&quot;))
+    gd = T.groupby(&quot;dir&quot;)
+    lines += [&quot;&quot;, &quot;BY DIRECTION&quot;, pd.DataFrame({&quot;trades&quot;: gd.size(), &quot;avg_R&quot;: gd.R.mean(),
+                                                 &quot;pnl_usd&quot;: gd.pnl.sum()}).to_string(float_format=lambda x: f&quot;{x:,.3f}&quot;)]
+    txt = &quot;\n&quot;.join(lines)
+    print(txt)
+    open(f&quot;{OUT}/report.txt&quot;, &quot;w&quot;).write(txt + &quot;\n&quot;)
+    monthly.to_csv(f&quot;{OUT}/monthly.csv&quot;)
+    T.to_csv(f&quot;{OUT}/trades.csv&quot;, index=False)
+    pd.DataFrame({&quot;mtm_equity&quot;: m, &quot;realised_equity&quot;: eq}).to_csv(f&quot;{OUT}/equity_15m.csv&quot;)
+
+
+if __name__ == &quot;__main__&quot;:
+    run()
+</pre>
+</body></html>
