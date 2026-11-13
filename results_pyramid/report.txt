@@ -1,0 +1,121 @@
+====================================================================================================
+Data used : 2022-11-13 00:00:00+00:00  ->  2026-11-12 23:45:00+00:00   (4.000 years)
+  BTCUSDT: forward-filled candles=0, last funding print=2026-10-31 16:00, bars in window with NaN volrank=10943
+  ETHUSDT: forward-filled candles=0, last funding print=2026-10-31 16:00, bars in window with NaN volrank=10943
+  SOLUSDT: forward-filled candles=0, last funding print=2026-10-31 16:00, bars in window with NaN volrank=10943
+  XRPUSDT: forward-filled candles=0, last funding print=2026-10-31 16:00, bars in window with NaN volrank=10943
+
+1) MONTH-BY-MONTH (return_pct / month_end_equity = realised; mtm_* = mark-to-market)
+         trades_opened  return_pct  month_end_equity  mtm_return_pct  month_end_mtm_equity
+month                                                                                     
+2022-11             32        0.61            100.61            1.47                101.47
+2022-12             89       -1.90             98.69           -2.73                 98.69
+2023-01             86        7.86            106.45            7.86                106.45
+2023-02             48        3.18            109.84            3.18                109.84
+2023-03             81        8.51            119.19            8.52                119.19
+2023-04            115        4.14            124.12            3.47                123.33
+2023-05             98       -6.36            116.22           -5.80                116.18
+2023-06             83        2.14            118.71            2.04                118.55
+2023-07             71       -2.54            115.69           -2.42                115.69
+2023-08             76        7.40            124.24            8.20                125.17
+2023-09             60       -6.52            116.14           -6.94                116.48
+2023-10             52       10.84            128.73           10.52                128.73
+2023-11             66       -1.34            127.00           -1.34                127.00
+2023-12             77        1.18            128.50            1.18                128.50
+2024-01             38        3.59            133.11            3.66                133.20
+2024-02            131       -0.60            132.31           -0.67                132.31
+2024-03             15       -2.72            128.71           -2.72                128.71
+2024-04             75        6.62            137.23            6.87                137.55
+2024-05             77        2.22            140.27            1.98                140.27
+2024-06             72       -3.57            135.27           -3.57                135.27
+2024-07            102        9.01            147.46            9.26                147.80
+2024-08             60        7.00            157.78            6.76                157.78
+2024-09             93        1.52            160.18            1.73                160.52
+2024-10             79       -4.09            153.63           -4.30                153.63
+2024-11             42        7.68            165.42            7.68                165.42
+2024-12             65        0.77            166.69            0.49                166.24
+2025-01             97        7.03            178.41            7.20                178.21
+2025-02             94        8.05            192.78            8.18                192.78
+2025-03             43        2.74            198.07            2.61                197.82
+2025-04             74        4.04            206.07            4.04                205.81
+2025-05             90        9.39            225.42            9.53                225.42
+2025-06             79       -2.53            219.71           -2.87                218.94
+2025-07             84        5.83            232.52            6.20                232.52
+2025-08             63        9.62            254.89            9.62                254.89
+2025-09             60       -4.47            243.49           -4.47                243.49
+2025-10             55       10.86            269.93           10.86                269.93
+2025-11             28        3.65            279.78            3.65                279.78
+2025-12             73       -5.61            264.07           -5.64                264.00
+2026-01             65       -1.55            259.97           -1.14                260.99
+2026-02             36        0.23            260.56            0.57                262.46
+2026-03             76        0.40            261.61           -0.77                260.45
+2026-04             55       -1.08            258.78           -0.64                258.78
+2026-05             84       -4.46            247.26           -4.50                247.13
+2026-06             81       -3.08            239.63           -3.21                239.20
+2026-07             70        0.18            240.06            0.44                240.25
+2026-08             60        9.10            261.91            9.02                261.91
+2026-09             54       -3.83            251.88           -4.16                251.01
+2026-10             83       -2.99            244.36           -2.65                244.36
+2026-11             29        0.63            245.90            0.63                245.90
+
+2) HEADLINE
+Final equity            : 245.90 USD  (start 100.00)
+Total return            : 145.90 %
+CAGR                    : 25.22 %
+Max drawdown (MTM, 15m) : -19.61 %  (trough 2026-08-18 13:15:00+00:00)
+Worst month (realised)  : 2023-09  -6.52 %
+Best month (realised)   : 2025-10  10.86 %
+Worst month (MTM)       : 2023-09  -6.94 %
+Best month (MTM)        : 2025-10  10.86 %
+Positive months         : 31 / 49 realised, 30 / 49 MTM
+
+3) TRADES
+Number of positions     : 3416  (1671 long, 1745 short)
+Win rate                : 47.72 %
+Average win             : +0.720 R   (median +0.560 R, max +5.74 R)
+Average loss            : -0.547 R   (median -0.445 R, min -1.10 R)
+Expectancy              : +0.0575 R per position
+Profit factor           : 1.169
+Avg risk per position   : 0.4996 % of equity (min 0.1454 %, max 0.5000 %)
+Avg initial SL distance : 3.312 %
+Avg holding time        : 14.7 h (median 17.2 h, max 1.0 d)
+
+4) EXIT ANALYTICS
+(A) Initial SL        :   555 positions | win   0.00 % | avg -1.038 R | sum   -575.99 R | pnl   -500.39 USD | at-open (gap) 0 | avg hold 11.0 h
+(B) ATR trailing stop :   461 positions | win 100.00 % | avg +1.414 R | sum   +651.75 R | pnl   +538.53 USD | at-open (gap) 107 | avg hold 9.9 h
+(C) Reversal / time   :  2399 positions | win  48.73 % | avg +0.050 R | sum   +120.80 R | pnl   +107.90 USD | at-open (gap) 0 | avg hold 16.5 h
+      flow reversal (S/F) :   926 positions | win  38.88 % | avg -0.048 R | sum    -44.77 R | pnl    -43.84 USD | at-open (gap) 0 | avg hold 4.7 h
+      24h time exit (W)   :  1473 positions | win  54.92 % | avg +0.112 R | sum   +165.57 R | pnl   +151.74 USD | at-open (gap) 0 | avg hold 24.0 h
+    End of data       :     1 positions | win   0.00 % | avg -0.115 R | sum     -0.11 R | pnl     -0.14 USD | at-open (gap) 0 | avg hold 10.5 h
+Trail activated (reached +1.5 x SL) on 503 of 3416 positions
+
+5) CONCURRENCY ANALYTICS
+Max concurrent positions (portfolio) : 19  (first reached 2024-09-06 21:00:00+00:00)
+Mean concurrent positions            : 1.44   | share of bars with >=1 open: 54.4 %
+Max concurrent positions per stream  : SOL-W=8, XRP-W=11, ETH-W=6, ETH-S=3, ETH-F=6, BTC-W=5, BTC-S=3, BTC-F=5
+Open notional / equity               : mean 0.23x, max 3.00x
+Signals not taken                    : cooldown=1637, month-lock=0, cap full=19; size reduced by cap=6
+
+COSTS
+Fees + slippage           : 117.43 USD (avg round trip 0.1191 % of notional)
+Net funding paid          : 2.12 USD  (negative = received)
+Gross PnL before costs    : 265.44 USD
+Net PnL                   : 145.90 USD
+
+PER STREAM
+                positions  win_%  avg_R   sum_R  pnl_usd  cost_usd  avg_hours
+symbol  stream                                                               
+BTCUSDT F             342 37.719 -0.035 -11.870  -17.679    14.611      4.450
+        S             212 44.811  0.017   3.699   -5.042    10.149      4.445
+        W             730 50.137  0.064  46.529   22.204    29.395     18.605
+ETHUSDT F             304 45.066  0.069  20.899   16.961     9.743      4.687
+        S             197 45.178  0.116  22.940   15.931     7.258      4.764
+        W             712 47.331  0.032  23.030   23.087    21.168     19.430
+SOLUSDT W             463 51.188  0.070  32.199   28.377    12.014     19.460
+XRPUSDT W             456 52.632  0.129  59.016   62.059    13.093     19.999
+
+BY DIRECTION
+     positions  avg_R  pnl_usd
+dir                           
+-1        1745  0.019   33.977
+ 1        1671  0.098  111.922
