@@ -1,0 +1,115 @@
+==============================================================================
+Data used : 2022-11-13 00:00:00+00:00  ->  2026-11-12 23:45:00+00:00   (4.000 years)
+  BTCUSDT: forward-filled candles=0, last funding print=2026-10-31 16:00, bars in window with NaN volrank=10943
+  ETHUSDT: forward-filled candles=0, last funding print=2026-10-31 16:00, bars in window with NaN volrank=10943
+  SOLUSDT: forward-filled candles=0, last funding print=2026-10-31 16:00, bars in window with NaN volrank=10943
+  XRPUSDT: forward-filled candles=0, last funding print=2026-10-31 16:00, bars in window with NaN volrank=10943
+  BNBUSDT: forward-filled candles=0, last funding print=2026-10-31 16:00, bars in window with NaN volrank=10943
+  DOGEUSDT: forward-filled candles=0, last funding print=2026-10-31 16:00, bars in window with NaN volrank=10943
+  ADAUSDT: forward-filled candles=0, last funding print=2026-10-31 16:00, bars in window with NaN volrank=10943
+  AVAXUSDT: forward-filled candles=0, last funding print=2026-10-31 16:00, bars in window with NaN volrank=10943
+  LINKUSDT: forward-filled candles=0, last funding print=2026-10-31 16:00, bars in window with NaN volrank=10943
+  LTCUSDT: forward-filled candles=0, last funding print=2026-10-31 16:00, bars in window with NaN volrank=10943
+  DOTUSDT: forward-filled candles=0, last funding print=2026-10-31 16:00, bars in window with NaN volrank=10943
+  BCHUSDT: forward-filled candles=0, last funding print=2026-10-31 16:00, bars in window with NaN volrank=10943
+
+1) MONTH-BY-MONTH (realised equity)
+         trades_opened  return_pct  month_end_equity
+month                                               
+2022-11             49       -0.54             99.46
+2022-12             99        0.17             99.63
+2023-01             88        5.21            104.82
+2023-02             65       -2.10            102.61
+2023-03             82        5.97            108.74
+2023-04             92        0.64            109.44
+2023-05             98       -1.75            107.52
+2023-06             83        3.84            111.65
+2023-07             76        2.13            114.03
+2023-08             84        9.77            125.17
+2023-09             86       -2.40            122.17
+2023-10             86        8.50            132.56
+2023-11             65       -1.47            130.62
+2023-12             87        3.81            135.60
+2024-01             56        3.91            140.90
+2024-02            121        4.15            146.75
+2024-03             23       -0.25            146.38
+2024-04             85        8.64            159.03
+2024-05             98        6.36            169.14
+2024-06            113       -3.79            162.74
+2024-07            120        9.72            178.56
+2024-08             96       11.82            199.67
+2024-09            125       -2.71            194.25
+2024-10            100       -2.90            188.62
+2024-11             50        6.23            200.38
+2024-12             61        3.35            207.10
+2025-01            114        7.11            221.82
+2025-02             83        9.97            243.93
+2025-03             69        5.73            257.90
+2025-04            107        4.98            270.74
+2025-05            127       12.22            303.83
+2025-06            114       -0.41            302.58
+2025-07            111        9.87            332.43
+2025-08            103       16.28            386.56
+2025-09            110       -6.58            361.14
+2025-10            114       18.17            426.75
+2025-11             50        2.58            437.74
+2025-12            122       -9.07            398.04
+2026-01            122        2.42            407.68
+2026-02             62        1.03            411.88
+2026-03            107       -1.73            404.76
+2026-04            101       -8.88            368.83
+2026-05            147       -2.13            360.99
+2026-06             91        2.52            370.08
+2026-07            119       -6.24            346.98
+2026-08             99       23.74            429.35
+2026-09             82       -3.98            412.26
+2026-10            121       -8.80            375.99
+2026-11             46       -4.19            360.24
+
+2) HEADLINE
+Final equity            : 360.24 USD  (start 100.00)
+Total return            : 260.24 %
+CAGR                    : 37.77 %
+Max drawdown (MTM, 15m) : -30.76 %  (trough 2026-08-13 22:15:00+00:00)
+Worst month             : 2025-12  -9.07 %
+Best month              : 2026-08  23.74 %
+Positive months         : 30 / 49
+
+3) TRADES
+Number of trades        : 4509
+Win rate                : 48.04 %
+Average win             : +0.796 R
+Average loss            : -0.610 R
+Expectancy              : +0.0656 R per trade
+Profit factor           : 1.144
+Avg risk per trade      : 0.5000 % of equity (min 0.5000 %, max 0.5000 %)
+Avg SL distance         : 3.854 %
+Exit reasons            : {'time': 3549, 'stop': 910, 'target': 47, 'end_of_data': 3}
+Signals skipped         : month-lock=0, cap full=0; size reduced by cap=0
+
+4) COSTS
+Fees + slippage (0.10% RT): 157.09 USD
+Net funding paid          : 9.32 USD  (negative = received)
+Total fees + funding      : 166.40 USD
+Gross PnL before costs    : 426.64 USD
+Net PnL                   : 260.24 USD
+
+PER STREAM
+                 trades  win_%  avg_R   sum_R  pnl_usd  fees_usd
+symbol   stream                                                 
+ADAUSDT  W          327 44.954 -0.002  -0.679   -0.736     9.295
+AVAXUSDT W          256 50.391  0.054  13.708    6.825     7.375
+BCHUSDT  W          365 47.397  0.008   2.833   20.449    11.315
+BNBUSDT  W          344 43.023 -0.032 -10.943  -22.535    14.529
+BTCUSDT  F          181 51.381  0.135  24.356   13.706     8.692
+         S          166 54.819  0.185  30.735   20.025     8.003
+         W          407 50.123  0.076  30.768   15.309    18.390
+DOGEUSDT W          308 44.156  0.017   5.258   -1.687     9.540
+DOTUSDT  W          310 47.097  0.030   9.211   13.109     8.827
+ETHUSDT  F          168 45.833  0.164  27.523   20.571     6.123
+         S          162 46.914  0.173  28.066   25.173     5.810
+         W          421 45.606  0.063  26.393   17.414    13.818
+LINKUSDT W          250 50.000  0.100  24.912   23.908     7.066
+LTCUSDT  W          303 47.195  0.040  12.214   20.763    10.203
+SOLUSDT  W          284 51.761  0.121  34.277   39.273     8.991
+XRPUSDT  W          257 54.086  0.145  37.168   48.671     9.113
