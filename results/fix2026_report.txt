@@ -1,0 +1,16 @@
+--- risk 1.0% per trade, monthly loss lock -7%
+baseline                                     x 19.57 CAGR  110.3% DD  35.9% worst   -9.4% months+ 27/49 trades 4211 | {2022: 7.6, 2023: 95.8, 2024: 349.6, 2025: 134.8, 2026: -12.0}
+volatility filter <= 0.9                     x 19.43 CAGR  110.0% DD  31.2% worst   -9.8% months+ 27/49 trades 3568 | {2022: 0.0, 2023: 85.3, 2024: 435.0, 2025: 120.4, 2026: -11.1}
+volatility filter <= 0.8                     x 26.66 CAGR  127.2% DD  22.7% worst   -9.4% months+ 30/49 trades 3296 | {2022: 0.0, 2023: 89.6, 2024: 432.8, 2025: 169.4, 2026: -2.1}
+volatility filter <= 0.7                     x 26.41 CAGR  126.7% DD  27.9% worst   -9.4% months+ 30/49 trades 2914 | {2022: 0.0, 2023: 86.6, 2024: 373.6, 2025: 227.9, 2026: -8.9}
+vol <= 0.8 + 30-day trend filter on S2       x 23.40 CAGR  119.9% DD  18.8% worst   -8.6% months+ 31/49 trades 2948 | {2022: 0.0, 2023: 91.8, 2024: 273.4, 2025: 194.8, 2026: 10.8}
+vol <= 0.8, cost 0.14%                       x  6.99 CAGR   62.6% DD  42.7% worst   -9.8% months+ 27/49 trades 3078 | {2022: 0.0, 2023: 67.8, 2024: 200.4, 2025: 99.0, 2026: -30.3}
+vol <= 0.8, cost 0.20%                       x  2.62 CAGR   27.2% DD  52.6% worst   -9.7% months+ 23/49 trades 2889 | {2022: 0.0, 2023: 43.9, 2024: 145.8, 2025: 27.5, 2026: -41.9}
+--- risk 0.5% per trade, monthly loss lock off
+baseline                                     x  7.41 CAGR   65.0% DD  24.2% worst  -10.7% months+ 32/49 trades 5207 | {2022: 2.2, 2023: 49.6, 2024: 129.5, 2025: 92.9, 2026: 9.6}
+volatility filter <= 0.9                     x  6.88 CAGR   61.9% DD  19.9% worst  -10.7% months+ 31/49 trades 4292 | {2022: 0.0, 2023: 38.9, 2024: 143.3, 2025: 74.0, 2026: 16.9}
+volatility filter <= 0.8                     x  8.15 CAGR   69.0% DD  16.6% worst  -10.7% months+ 34/49 trades 3856 | {2022: 0.0, 2023: 46.3, 2024: 132.8, 2025: 90.5, 2026: 25.6}
+volatility filter <= 0.7                     x  8.08 CAGR   68.6% DD  18.7% worst  -10.7% months+ 35/49 trades 3399 | {2022: 0.0, 2023: 44.6, 2024: 120.2, 2025: 111.3, 2026: 20.2}
+vol <= 0.8 + 30-day trend filter on S2       x  7.52 CAGR   65.6% DD  11.5% worst   -9.3% months+ 33/49 trades 3323 | {2022: 0.0, 2023: 48.4, 2024: 95.9, 2025: 95.1, 2026: 32.6}
+vol <= 0.8, cost 0.14%                       x  5.44 CAGR   52.7% DD  19.9% worst  -11.8% months+ 33/49 trades 3856 | {2022: 0.0, 2023: 33.3, 2024: 108.6, 2025: 71.8, 2026: 13.9}
+vol <= 0.8, cost 0.20%                       x  2.96 CAGR   31.2% DD  27.1% worst  -13.3% months+ 31/49 trades 3856 | {2022: 0.0, 2023: 15.9, 2024: 77.0, 2025: 47.0, 2026: -1.8}

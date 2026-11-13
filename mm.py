@@ -18,7 +18,10 @@ _cache = {}
 def data(sym):
     if sym not in _cache:
         d = B.load(sym); s2, h2, _, _ = B.signals_s2(d); s3, h3, _, _ = B.signals_s3(d)
-        _cache[sym] = dict(d=d, S=s2[0], F=s2[1], W=s3[0])
+        lc = np.log(d.close); sg = lc.diff().rolling(672).std()
+        volrank = (sg * np.sqrt(96)).rolling(96 * 180).rank(pct=True)          # today's volatility vs the last 180 days
+        tr30 = np.sign(lc - lc.shift(2880))                                    # direction of the last 30 days
+        _cache[sym] = dict(d=d, S=s2[0], F=s2[1], W=s3[0], volrank=volrank.values, tr30=tr30.fillna(0).values.astype(np.int64))
     return _cache[sym]
 HOLD = {"S": 48, "F": 48, "W": 96}
 
@@ -78,13 +81,21 @@ def engine(o, h, l, fund, sig, hold, coin, slp, tpp, rm, month, i0, i1, risk, le
         eqc[i] = eq
     return TE[:k], TX[:k], TS[:k], TD[:k], TP[:k], TR[:k], TK[:k], eqc
 
-def run(streams, sl, tp, hold=None, start=START, end=END, risk=0.01, lev_cap=1e9, month_loss=0.0, compound=False, rmult=None, cost=None):
+def run(streams, sl, tp, hold=None, start=START, end=END, risk=0.01, lev_cap=1e9, month_loss=0.0, compound=False, rmult=None, cost=None, vol_max=None, trend_sleeves=()):
     """streams: list of (coin, sleeve).  sl / tp: a number, {coin: v} or {(coin, sleeve): v}; tp 0 = none.  rmult: {sleeve: risk multiplier}."""
     coins = sorted({c for c, _ in streams}); ci = {c: j for j, c in enumerate(coins)}
     idx = data(coins[0])["d"].index
     o = np.column_stack([data(c)["d"].open.values for c in coins]); h = np.column_stack([data(c)["d"].high.values for c in coins])
     l = np.column_stack([data(c)["d"].low.values for c in coins]); f = np.column_stack([data(c)["d"].funding.values for c in coins])
-    sig = np.column_stack([data(c)[s] for c, s in streams]).astype(np.int64)
+    cols = []
+    for c, sv in streams:
+        x = data(c)[sv].astype(np.int64).copy()
+        if vol_max is not None:                                # regime filter: no new trades when volatility is in its top range
+            vr = data(c)["volrank"]; x[~(vr <= vol_max)] = 0
+        if sv in trend_sleeves:                                # trend filter: only trade in the direction of the last 30 days
+            x[x != data(c)["tr30"]] = 0
+        cols.append(x)
+    sig = np.column_stack(cols)
     hd = np.array([(hold or HOLD)[s] if isinstance(hold or HOLD, dict) else hold for _, s in streams], np.int64)
     co = np.array([ci[c] for c, _ in streams], np.int64)
     def pick(x, c, sv):                                    # number, {coin: v} or {(coin, sleeve): v}
