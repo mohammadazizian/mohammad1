@@ -3,3 +3,4 @@ __pycache__/
 results/equity_15m.csv
 results_trail/equity_15m.csv
 results_pyramid/equity_15m.csv
+results_limit/equity_15m.csv
