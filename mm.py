@@ -93,7 +93,7 @@ def engine(o, h, l, fund, sig, hold, coin, slp, tpp, rm, month, i0, i1, risk, le
         eqc[i] = eq
     return TE[:k], TX[:k], TS[:k], TD[:k], TP[:k], TR[:k], TK[:k], eqc
 
-def run(streams, sl, tp, hold=None, start=START, end=END, risk=0.01, lev_cap=1e9, month_loss=0.0, compound=False, rmult=None, cost=None, vol_max=None, trend_sleeves=()):
+def run(streams, sl, tp, hold=None, start=START, end=END, risk=0.01, lev_cap=1e9, month_loss=0.0, compound=False, rmult=None, cost=None, vol_max=None, trend_sleeves=(), lock_period="month"):
     """streams: list of (coin, sleeve).  sl / tp: a number, {coin: v} or {(coin, sleeve): v}; tp 0 = none.  rmult: {sleeve: risk multiplier}."""
     coins = sorted({c for c, _ in streams}); ci = {c: j for j, c in enumerate(coins)}
     idx = data(coins[0])["d"].index
@@ -116,6 +116,8 @@ def run(streams, sl, tp, hold=None, start=START, end=END, risk=0.01, lev_cap=1e9
     slp = np.array([pick(sl, c, sv) for c, sv in streams], float); tpp = np.array([pick(tp, c, sv) for c, sv in streams], float)
     rm = np.array([(rmult or {}).get(sv, 1.0) for _, sv in streams], float)
     month = (idx.year * 12 + idx.month).values
+    if lock_period == "week":                               # loss lock measured per ISO week (Monday 00:00 UTC) instead of per month
+        month = ((idx.asi8 // 10**9 - 4 * 86400) // (7 * 86400)).astype(np.int64)
     i0 = idx.searchsorted(start); i1 = idx.searchsorted(end)
     TE, TX, TS, TD, TP, TR, TK, eqc = engine(o, h, l, f, sig, hd, co, slp, tpp, rm, month, i0, i1, risk, lev_cap, month_loss, compound, 2 * (B.FEE + B.SLIP) if cost is None else cost)
     tr = pd.DataFrame({"entry": idx[TE], "exit": idx[TX], "stream": [f"{streams[s][0][:-4]}-{streams[s][1]}" for s in TS], "dir": TD,
