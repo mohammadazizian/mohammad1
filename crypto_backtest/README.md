@@ -39,6 +39,36 @@ Full tables: `results/backtest_output.txt`, `results/*_monthly.csv`, `results/*_
 With months counted from the 13th instead (13 Nov 2024 → 12 Nov 2026, `--anchor-day 13`):
 BTC 22/24, ETH 21/24.
 
+## Follow-up tests: regime filters and walk-forward
+
+**Regime filters** (base parameters, profit lock on; `--trend-filter` enables the first one):
+
+| Filter | BTC 2022-03..2024-10 | BTC 2024-11..2026-10 | ETH 2022-03..2024-10 | ETH 2024-11..2026-10 |
+|---|---|---|---|---|
+| none (default) | 22/32, −2.7%, DD −23% | 21/24, +38.6%, DD −13% | 26/32, +8.2%, DD −32% | 22/24, +38.5%, DD −15% |
+| trend: longs above / shorts below SMA720 | 22/32, +9.9%, DD −18% | 20/24, +35.4%, DD −9% | 27/32, +44.1%, DD −13% | 17/24, +17.3%, DD −15% |
+| entries 00–12 UTC only | 21/32, −0.2% | 15/24, +12.4% | 26/32, +24.8% | 19/24, +19.0% |
+
+No filter improved both periods on both assets. The trend filter lowers drawdowns and helps
+2022–24, but halves ETH's 2024–26 profit and leaves it at 17/24. It is available as an option and
+is off by default. Volatility level, efficiency ratio and volume regime showed no consistent
+relationship with trade outcomes.
+
+**Walk-forward** (`walkforward.py`): parameters and filter are re-selected from the preceding
+training window only, then traded on the following months, so every traded month is out-of-sample.
+Results for Nov 2024 – Oct 2026 with the 2% profit lock:
+
+| Training / re-selection | BTC | ETH |
+|---|---|---|
+| 24 months / 6 months | 15/24, +13.8% | 20/24, +19.8% |
+| 18 months / 6 months | 16/24, +14.7% | 20/24, +14.5% |
+| 12 months / 3 months | 14/24, −7.8% | 17/24, −13.4% |
+
+Full tables: `results/walkforward_*.txt`. The fixed-parameter backtest above (+38.6% / +38.5%,
+21/24 and 22/24) is therefore optimistic: with honest re-selection roughly a third to a half of the
+profit survives when training windows are 18–24 months, BTC falls below the 70% line, and a
+12-month window is too short to select parameters reliably.
+
 ## Read this before trading it
 
 * **The profit lock shapes the distribution; it does not create edge.** It turns the PnL into many

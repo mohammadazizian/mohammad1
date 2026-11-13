@@ -57,6 +57,8 @@ PARAMS = dict(
     # governor
     month_profit_lock=0.02,      # +2% month-to-date -> flatten and stand down
     month_loss_cap=None,         # optional symmetric rule, off by default
+    # optional regime filter (off by default): only take longs above / shorts below the SMA of this length
+    trend_filter=None,           # e.g. 720 (30 days of 1H bars)
     # costs
     taker=0.0004, maker=0.0001, slippage=0.0002, limit_penetration=0.0001,
 )
@@ -147,6 +149,9 @@ def signals(df, p):
     b_long = (r > p["impulse_k"]) & (loc > p["close_loc"])
     b_short = (r < -p["impulse_k"]) & (loc < 1 - p["close_loc"])
     tp = p["tp_atr"] * atr(df, p["atr_len"])
+    if p.get("trend_filter"):
+        up = c > c.rolling(p["trend_filter"]).mean()
+        a_long, b_long, a_short, b_short = a_long & up, b_long & up, a_short & ~up, b_short & ~up
 
     def sh(x):
         return x.shift(1).fillna(False).to_numpy(dtype=bool)
@@ -159,12 +164,12 @@ def signals(df, p):
 
 
 # ----------------------------------------------------------------------------- engine
-def backtest(df, p, anchor_day=1):
+def backtest(df, p, anchor_day=1, sleeves=None):
     """Event-driven bar simulation. Returns (equity Series [fraction of notional, additive], trades DataFrame).
     anchor_day: day of month on which the governor's 'month' starts (1 = calendar months)."""
     o, h, l, c = (df[k].to_numpy() for k in ("open", "high", "low", "close"))
     n = len(df)
-    sl = signals(df, p)
+    sl = sleeves if sleeves is not None else signals(df, p)   # 'hold' may be an int or a per-bar array
     K = len(sl)
     w = 1.0 / K
     taker, maker, slip, pen = p["taker"], p["maker"], p["slippage"], p["limit_penetration"]
@@ -177,6 +182,7 @@ def backtest(df, p, anchor_day=1):
     ep = [0.0] * K
     tp = [0.0] * K
     eb = [0] * K
+    hd = [0] * K
     eq = np.zeros(n)
     trades = []
     realized = 0.0
@@ -213,11 +219,12 @@ def backtest(df, p, anchor_day=1):
                     ep[j] = o[i] * (1 + slip * d)      # market order at the open
                     tp[j] = ep[j] + d * s["tp"][i]
                     eb[j] = i
+                    hd[j] = s["hold"] if np.isscalar(s["hold"]) else s["hold"][i]
                     realized -= w * taker
                     just_in = True
                     entered = True
             if pos[j] and not just_in:
-                if i - eb[j] >= s["hold"]:             # time stop at the open
+                if i - eb[j] >= hd[j]:             # time stop at the open
                     close(j, i, o[i] * (1 - slip * pos[j]), taker, "time")
                 elif pos[j] == 1 and h[i] >= tp[j] * (1 + pen):
                     close(j, i, max(tp[j], o[i]), maker, "tp")
@@ -284,6 +291,7 @@ def main():
     ap.add_argument("--end", default="2026-10", help="last month of the test (YYYY-MM)")
     ap.add_argument("--anchor-day", type=int, default=1, help="day of month the monthly periods start on")
     ap.add_argument("--no-governor", action="store_true")
+    ap.add_argument("--trend-filter", action="store_true", help="longs only above / shorts only below the 720-bar SMA")
     ap.add_argument("--refresh", action="store_true", help="re-download data")
     ap.add_argument("--out", default=None, help="directory for CSV output")
     a = ap.parse_args()
@@ -291,7 +299,9 @@ def main():
     p = dict(PARAMS)
     if a.no_governor:
         p["month_profit_lock"] = None
-    warm = (pd.Period(a.start, "M") - 2).strftime("%Y-%m")           # indicator warm-up
+    if a.trend_filter:
+        p["trend_filter"] = 720
+    warm = max(pd.Period(a.start, "M") - 2, pd.Period("2022-01", "M")).strftime("%Y-%m")   # indicator warm-up
     data_end = a.end if a.anchor_day == 1 else (pd.Period(a.end, "M") + 1).strftime("%Y-%m")
     pd.set_option("display.width", 200)
     ok = True
