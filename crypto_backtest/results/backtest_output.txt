@@ -1,0 +1,88 @@
+
+==============================================================================
+BTCUSDT  1H   2024-11 .. 2026-10
+         net_pnl_%  trades  win_rate_% result
+month                                        
+2024-11       2.01       7        86.0    WIN
+2024-12       2.21      17        65.0    WIN
+2025-01      -7.06      16        50.0   LOSS
+2025-02       2.00       1       100.0    WIN
+2025-03       2.05       7        57.0    WIN
+2025-04       2.23       6        67.0    WIN
+2025-05       2.45       6        67.0    WIN
+2025-06      -1.47      15        53.0   LOSS
+2025-07       2.07       6        83.0    WIN
+2025-08       2.08      17        65.0    WIN
+2025-09       2.24      15        60.0    WIN
+2025-10       2.44       3       100.0    WIN
+2025-11       2.78       2       100.0    WIN
+2025-12       2.05       2       100.0    WIN
+2026-01       2.03       2       100.0    WIN
+2026-02       2.50       2       100.0    WIN
+2026-03       2.72       2       100.0    WIN
+2026-04       2.42       3       100.0    WIN
+2026-05       2.04       4       100.0    WIN
+2026-06       2.00       1       100.0    WIN
+2026-07       2.12       2       100.0    WIN
+2026-08       3.50       8        62.0    WIN
+2026-09       2.09       2       100.0    WIN
+2026-10      -0.89      17        59.0   LOSS
+
+  months                         24
+  profitable_months              21
+  profitable_months_%            87.5
+  months_with_trades_%           100.0
+  min_trades_in_a_month          1
+  total_net_pnl_%                38.6
+  best_month_%                   3.5
+  worst_month_%                  -7.06
+  max_drawdown_%                 -13.0
+  trades                         163
+  trade_win_rate_%               68.1
+  avg_net_profit_per_trade_bps   47.4
+  round_trip_cost_bps            12.0
+
+==============================================================================
+ETHUSDT  1H   2024-11 .. 2026-10
+         net_pnl_%  trades  win_rate_% result
+month                                        
+2024-11      -8.00      19        68.0   LOSS
+2024-12       2.18       5        60.0    WIN
+2025-01       2.52       1       100.0    WIN
+2025-02       2.28       1       100.0    WIN
+2025-03       3.23       6        83.0    WIN
+2025-04       2.52       5        40.0    WIN
+2025-05       3.03       5        60.0    WIN
+2025-06       3.08       1       100.0    WIN
+2025-07       2.08       5        60.0    WIN
+2025-08       2.08       5        80.0    WIN
+2025-09       2.10       5        80.0    WIN
+2025-10       2.08       2       100.0    WIN
+2025-11       2.35       4        75.0    WIN
+2025-12       2.42       2       100.0    WIN
+2026-01       2.18       1       100.0    WIN
+2026-02       2.04       3       100.0    WIN
+2026-03       2.98       4        75.0    WIN
+2026-04       2.04       2       100.0    WIN
+2026-05       2.11       9        78.0    WIN
+2026-06       2.12       2       100.0    WIN
+2026-07       2.74       1       100.0    WIN
+2026-08       6.56       6        67.0    WIN
+2026-09     -11.47      15        40.0   LOSS
+2026-10       3.24       3       100.0    WIN
+
+  months                         24
+  profitable_months              22
+  profitable_months_%            91.7
+  months_with_trades_%           100.0
+  min_trades_in_a_month          1
+  total_net_pnl_%                38.5
+  best_month_%                   6.56
+  worst_month_%                  -11.47
+  max_drawdown_%                 -15.3
+  trades                         112
+  trade_win_rate_%               70.5
+  avg_net_profit_per_trade_bps   68.8
+  round_trip_cost_bps            12.0
+
+ACCEPTANCE (>=70% profitable months, a trade in every month, on both assets): PASS
