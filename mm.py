@@ -117,7 +117,7 @@ def run(streams, sl, tp, hold=None, start=START, end=END, risk=0.01, lev_cap=1e9
     rm = np.array([(rmult or {}).get(sv, 1.0) for _, sv in streams], float)
     month = (idx.year * 12 + idx.month).values
     if lock_period == "week":                               # loss lock measured per ISO week (Monday 00:00 UTC) instead of per month
-        month = ((idx.asi8 // 10**9 - 4 * 86400) // (7 * 86400)).astype(np.int64)
+        month = np.asarray((idx.normalize() - pd.Timestamp("1970-01-05", tz="UTC")).days // 7, dtype=np.int64)   # 1970-01-05 was a Monday
     i0 = idx.searchsorted(start); i1 = idx.searchsorted(end)
     TE, TX, TS, TD, TP, TR, TK, eqc = engine(o, h, l, f, sig, hd, co, slp, tpp, rm, month, i0, i1, risk, lev_cap, month_loss, compound, 2 * (B.FEE + B.SLIP) if cost is None else cost)
     tr = pd.DataFrame({"entry": idx[TE], "exit": idx[TX], "stream": [f"{streams[s][0][:-4]}-{streams[s][1]}" for s in TS], "dir": TD,
