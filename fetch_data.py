@@ -12,8 +12,8 @@ def get(url, dst):
     except Exception as e: print("skip", url, e)
 if __name__ == "__main__":
     os.makedirs("data/raw", exist_ok=True)
-    for s in ["BTCUSDT", "ETHUSDT"]:
-        for ym in months((2024, 9), (2026, 10)):
+    for s in ["BTCUSDT", "ETHUSDT", "SOLUSDT", "BNBUSDT", "XRPUSDT", "DOGEUSDT"]:
+        for ym in months((2022, 9), (2026, 10)):
             get(f"{BASE}/monthly/klines/{s}/5m/{s}-5m-{ym}.zip", f"data/raw/{s}-5m-{ym}.zip")
             get(f"{BASE}/monthly/fundingRate/{s}/{s}-fundingRate-{ym}.zip", f"data/raw/{s}-fundingRate-{ym}.zip")
         for day in range(1, 12):

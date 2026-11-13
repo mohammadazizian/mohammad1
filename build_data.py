@@ -29,7 +29,7 @@ def load(sym, raw="data/raw"):
     return df
 
 if __name__ == "__main__":
-    for s in ["BTCUSDT", "ETHUSDT"]:
+    for s in (sys.argv[1:] or ["BTCUSDT", "ETHUSDT"]):
         d = load(s)
         gaps = (d.index.to_series().diff() != pd.Timedelta("5min")).sum() - 1
         print(s, d.shape, d.index[0], d.index[-1], "gaps:", gaps, "fund events:", (d.funding != 0).sum())

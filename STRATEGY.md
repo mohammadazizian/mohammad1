@@ -113,3 +113,11 @@ Tested the two published forms on 15m bars over all four years (`research/pd_lib
 ## PDH/PDL with limit orders on 5m bars
 
 `research/pd_limit.py`: resting limit at the level (fade) or at the level after a breakout close (retest), maker fee 0.02 % on limit fills, taker 0.04 % + 0.01 % slippage on stops and time exits, fills only when price trades through the limit. 456 variants over two day boundaries (00:00 and 13:00 UTC): 0 net profitable on both coins in both periods; average result per coin and two-year period between -26 % and -51 %.
+
+# Six-coin bot with stops on every trade (`bot6.py`)
+
+Strategies 2 and 3 on BTC, ETH, SOL, BNB, XRP, DOGE, 2022-11-12 -> 2026-11-11, one account per coin, 4 x ATR(96) stop on every trade,
+run with and without a monthly loss lock at -5 %. Full tables in `results/bot6_report.txt`. Summary: both strategies stay profitable on
+BTC, ETH and SOL; Strategy 2 loses on BNB, XRP and DOGE; Strategy 3 loses on BNB and is flat on DOGE. No coin reaches 80 % profitable
+months once the stop is added to Strategy 2 except ETH (40/49). The loss lock caps the worst month near -6 to -7 % and cuts drawdown.
+Data for the four extra coins is not committed; run `python fetch_data.py` then `python build_data.py SOLUSDT BNBUSDT XRPUSDT DOGEUSDT`.

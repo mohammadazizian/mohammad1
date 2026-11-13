@@ -1,3 +1,7 @@
 data/raw/
 __pycache__/
 *.pkl
+data/SOLUSDT_5m.parquet
+data/BNBUSDT_5m.parquet
+data/XRPUSDT_5m.parquet
+data/DOGEUSDT_5m.parquet
