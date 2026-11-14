@@ -179,3 +179,51 @@ Same rules on the preceding two years (`--start 2022-11-12 --end 2024-11-11`,
 
 The strategy fades moves, and it lost heavily in 2022–24 when BTC trended; its 2024–26 result
 depends on that period's mean-reverting behaviour.
+
+---
+
+# Momentum-Shock v2 (redesign against a requirement list) — `strategy_v2.py`
+
+`python strategy_v2.py --out results_v2` (BTC + ETH) · `python strategy_v2.py --all-coins`
+
+Binance USDT-M perpetual 1H candles with real funding, January 2022 – October 2026 (58 months).
+
+**Rules.** Two entry rules, each trading half of one fixed notional:
+A) Bollinger z(20) crosses ±2.5 → follow; stop 3×ATR(24), target 6×ATR(24) (1:2).
+B) 1H return beyond ±3σ(480) closing in the outer 40% of the bar → follow; stop 3×ATR, target 3×ATR (1:1).
+Any trade still open after 48 bars is closed. When month-to-date mark-to-market PnL reaches +2%,
+everything is closed and trading stops until the next month.
+
+**How the parameters were chosen.** Stop, targets and lock were picked on pooled results of ten
+coins for 2022–2024 only (highest median profit among variants with risk:reward ≥ 1:1 on both rules);
+2025–2026 was then used as validation. The entry rules themselves came from the earlier BTC/ETH work.
+
+| Requirement | BTC | ETH |
+|---|---|---|
+| Trade in every month | yes (min 1) | yes (min 1) |
+| ≥ 80% profitable months | 47/58 (81%) | 48/58 (83%) |
+| Fixed position size | yes | yes |
+| Profitable each year 2023–2026 | +5.4 / +14.0 / +9.7 / +13.2 | **−9.3** / +20.3 / +24.1 / +16.0 |
+| Risk:reward | planned 1:2 and 1:1; realised avg win/avg loss 1.27, win rate 49% | 1.23, 48% |
+| Total net / max drawdown | +61.9% / −19.5% | +44.3% / **−49.5%** |
+| Worst month | −10.6% | −16.2% |
+
+**Ten coins** (`results_v2/all_coins.txt`): 9 of 10 have ≥ 79% profitable months, 7 of 10 are
+profitable in total (BNB, XRP and DOGE lose), and only 4 of 10 are profitable in 2026.
+Validation period 2025–2026: median coin 86% profitable months, +22%.
+
+**What is not met / weak**
+* ETH lost in 2022 and 2023; its drawdown at 1x notional was about half the notional.
+* Months are asymmetric: winning months are capped near +2%, losing months reach −10% to −16%.
+  A monthly loss cap of −8% (`--loss-cap 0.08`) makes all ten coins profitable in total but drops
+  ETH to 45/58 (78%); tighter caps destroy the 80%.
+* Without the monthly lock (`--no-lock`) the same entries give 47–48% profitable months and
+  BTC −5%, ETH +24%: the lock's profit-taking, not the entry signal, carries the result.
+* Other markets: the same rules on Binance's tokenised gold (PAXGUSDT) and EURUSDT pairs lost money
+  even at 1 bp cost per side. The logic (drift after price shocks) is a documented effect, but this
+  parameterisation is not validated outside crypto.
+* The earlier trend-filtered volume-delta design, chosen on 2022–2024 only, made +50.7% in 2025 but
+  −14.8% in 2026 (ten-coin average) with 57% profitable months; it was rejected.
+
+`multi_coin_test.py` / `results_multi_coin/` hold the earlier risk-sized ten-coin test of the first
+two strategies.
