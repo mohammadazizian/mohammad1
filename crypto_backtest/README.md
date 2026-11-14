@@ -270,3 +270,44 @@ Sharpe ratio of 3 at ~100% a year. Tested on ten perpetuals, 2022-01 .. 2026-10
 | v2 with +8% target / −8% cap | 8% reached in 20 (BTC) and 26 (ETH) of 58 months |
 
 No strategy or sizing scheme tested reaches the target; leverage only scales losses with gains.
+
+---
+
+# Verification of the other session's strategies 2 and 3 (`s23_verification/`)
+
+Code for strategies 2/3 and the money-management engine (`mm.py`, `bot6.py`, `strategy2.py`,
+`strategy3.py`, `build_data.py`) is copied from branch `claude/crypto-trading-backtest-rerxwz`.
+New here: `fetch_data.py` (5m data back to 2020 and seven more coins), `oos_test.py`,
+`six_year_run.py`, `time_of_day.py`, `time_of_day_adaptive.py`; outputs in `s23_verification/results/`.
+
+**Reproduction.** Strategy 2 and 3 monthly results and the fixed-stop account (x7.41) reproduce exactly.
+
+**"Strict" account** (BTC + ETH shock/flow momentum with 30-day trend and volatility filters, large-trade
+momentum on BTC/ETH/SOL, fixed % stops and targets, risk per trade, 3x leverage cap, monthly loss lock):
+
+| | Tuning window 2022-11 → 2026-11 | Untouched 2020-11 → 2022-11 | Six years 2020-11 → 2026-11 |
+|---|---|---|---|
+| Risk 0.5%: CAGR / max drawdown | 81% / 10.6% | 50% / 14.1% | 70% / 14.1% |
+| Risk 0.5%: profitable months | 39/49 | 17/25 | 56/73 (77%), median month +3.9% |
+| Risk 1%, lock −10%: CAGR / drawdown | — | — | 146% / 25.7%, 55/73 months, median +6.0%, ≥ 8% in 33/73 |
+| Risk 0.5% at 0.20% round-trip cost | — | — | CAGR 45%, 46/73 months |
+
+Every calendar year 2020–2026 is positive (weakest: 2021 +15.7%, 2026 +24.3% at 0.5% risk).
+The same rules without the strict filters made −0.6% with a 56% drawdown on 2020–22.
+
+**Does not transfer to other coins.** On BNB, XRP, DOGE, ADA, AVAX, LINK, DOT (never used for tuning,
+stops scaled by volatility) one account loses 5% a year with a 50% drawdown; single coins range from
+−12% to +9% a year.
+
+**Other weak points.** 46 trades a month, 36% win rate, longest losing streak 23 trades; 58% of exits are
+1–1.5% stops filled at the exact stop price in the backtest; results fall quickly with costs.
+
+# Time-of-day study (`time_of_day.py`)
+
+Ten coins, hourly, 2022–2026. Unconditional hour effects are a few basis points (only 13:00 UTC is
+negative in all five years, −2.5 to −6 bp) against a 10 bp round-trip cost. Of 1,056 fixed-hour rules
+(enter at hour h, hold 1–24 h, long/short, or follow/fade the preceding 4–24 h move), 61 had t > 2 on
+2022–24 and none had t > 2 on 2025–26. The strongest pattern, following the day's move in the US evening
+(18–23 UTC), was strongly positive in 2022–24 (9–10 of 10 coins) and strongly negative in 2025–26 (0 of
+10 coins); a rule that switches between follow and fade using trailing 90–365-day performance was
+positive in 13 of 54 variants (`time_of_day_adaptive.py`).

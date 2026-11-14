@@ -1,0 +1,34 @@
+=== 1. reproduce on the tuning window 2022-11-12 -> 2026-11-12
+strict S2x+S3x (reported x8.95, CAGR 73%)      x 10.74 CAGR   81.0% DD  10.6% worst   -7.0% months+ 39/49 (active 39/49) win 38.8% n 2322 | {2022: -2.8, 2023: 92.8, 2024: 113.6, 2025: 115.8, 2026: 24.3}
+plain S2+S3 fixed stops (reported x7.41)       x  7.41 CAGR   65.0% DD  24.2% worst  -10.7% months+ 32/49 (active 32/49) win 34.0% n 5207 | {2022: 2.2, 2023: 49.6, 2024: 129.5, 2025: 92.9, 2026: 9.6}
+=== 2. UNTOUCHED EARLIER PERIOD 2020-11-12 -> 2022-11-12 (same rules, same stops)
+strict S2x+S3x                                 x  2.25 CAGR   50.0% DD  14.1% worst   -7.1% months+ 17/25 (active 17/24) win 30.0% n 1004 | {2020: 12.1, 2021: 15.7, 2022: 73.3}
+strict S2x only                                x  1.73 CAGR   31.6% DD  13.7% worst   -7.9% months+ 13/25 (active 13/23) win 36.8% n 397 | {2020: 6.5, 2021: 15.5, 2022: 40.8}
+plain S2+S3 fixed stops                        x  0.99 CAGR   -0.6% DD  56.4% worst  -19.2% months+ 13/25 (active 13/25) win 23.3% n 3132 | {2020: 2.6, 2021: -32.9, 2022: 43.6}
+strict, cost 0.14%                             x  2.01 CAGR   41.9% DD  16.0% worst   -7.5% months+ 17/25 (active 17/24) win 29.6% n 1004 | {2020: 11.7, 2021: 9.9, 2022: 63.9}
+strict, risk 1%                                x  2.96 CAGR   72.1% DD  27.8% worst   -7.8% months+ 15/25 (active 15/24) win 29.1% n 941 | {2020: 18.1, 2021: 23.9, 2022: 102.2}
+--- original governor versions (strategy2.py / strategy3.py) on 2020-11-12 -> 2022-11-12
+   S2 BTCUSDT: months+ 21/25 total +57.3% worst -12.1 DD 13.5 PF 1.58 n 168
+   S2 ETHUSDT: months+ 17/25 total -4.5% worst -12.7 DD 42.3 PF 0.96 n 166
+   S3 BTCUSDT: months+ 23/25 total +54.1% worst -7.5 DD 19.8 PF 1.67 n 132
+   S3 ETHUSDT: months+ 20/25 total +18.3% worst -9.7 DD 24.2 PF 1.18 n 160
+=== 3. COINS NEVER USED FOR TUNING, 2022-11-12 -> 2026-11-12 (stops scaled by each coin volatility relative to BTC)
+   BNBUSDT vol ratio 1.00 stop 1.00%
+   XRPUSDT vol ratio 1.30 stop 1.30%
+   DOGEUSDT vol ratio 1.59 stop 1.59%
+   ADAUSDT vol ratio 1.51 stop 1.51%
+   AVAXUSDT vol ratio 1.64 stop 1.64%
+   LINKUSDT vol ratio 1.58 stop 1.58%
+   DOTUSDT vol ratio 1.51 stop 1.51%
+   SOLUSDT vol ratio 1.83 stop 1.83%
+BNBUSDT strict S2x+S3x own account             x  0.88 CAGR   -3.1% DD  36.6% worst   -7.1% months+ 18/49 (active 18/48) win 27.2% n 930 | {2022: 5.3, 2023: 4.6, 2024: -12.1, 2025: -4.2, 2026: -4.8}
+XRPUSDT strict S2x+S3x own account             x  0.61 CAGR  -11.6% DD  41.3% worst   -7.3% months+ 15/49 (active 15/48) win 24.8% n 765 | {2022: -4.5, 2023: -16.0, 2024: -6.0, 2025: -14.3, 2026: -5.4}
+DOGEUSDT strict S2x+S3x own account            x  1.34 CAGR    7.5% DD  23.5% worst   -6.8% months+ 24/49 (active 24/46) win 29.2% n 852 | {2022: -6.7, 2023: -11.1, 2024: 13.0, 2025: 24.2, 2026: 14.8}
+ADAUSDT strict S2x+S3x own account             x  0.86 CAGR   -3.7% DD  27.5% worst   -5.9% months+ 19/49 (active 19/48) win 26.9% n 799 | {2022: -0.1, 2023: 14.0, 2024: -17.6, 2025: 8.5, 2026: -15.4}
+AVAXUSDT strict S2x+S3x own account            x  1.31 CAGR    6.9% DD  17.7% worst   -7.5% months+ 26/49 (active 26/48) win 31.7% n 695 | {2022: 0.6, 2023: 9.9, 2024: -11.6, 2025: 34.3, 2026: -0.4}
+LINKUSDT strict S2x+S3x own account            x  1.43 CAGR    9.4% DD  11.5% worst   -4.9% months+ 23/49 (active 23/48) win 31.9% n 689 | {2022: -4.9, 2023: 15.5, 2024: 9.1, 2025: 22.7, 2026: -2.4}
+DOTUSDT strict S2x+S3x own account             x  0.83 CAGR   -4.7% DD  25.3% worst   -6.4% months+ 14/49 (active 14/48) win 27.6% n 760 | {2022: -2.1, 2023: -14.2, 2024: -5.6, 2025: 1.0, 2026: 3.0}
+SOLUSDT strict S2x+S3x own account             x  1.38 CAGR    8.4% DD   9.2% worst   -3.7% months+ 24/49 (active 24/49) win 35.9% n 727 | {2022: 4.5, 2023: 18.5, 2024: -0.8, 2025: 16.2, 2026: -3.1}
+7 new coins, one account                       x  0.81 CAGR   -5.0% DD  49.6% worst  -11.1% months+ 18/49 (active 18/48) win 28.4% n 4377 | {2022: -7.2, 2023: -6.3, 2024: -15.4, 2025: 27.5, 2026: -13.4}
+7 new coins, S2x only                          x  0.70 CAGR   -8.6% DD  48.9% worst  -11.2% months+ 18/49 (active 18/48) win 31.4% n 2204 | {2022: -7.1, 2023: 1.4, 2024: -20.8, 2025: 24.1, 2026: -24.8}
+BTC+ETH strict S2x+S3x(BTC,ETH) for comparison x  8.73 CAGR   71.9% DD  11.1% worst   -7.2% months+ 37/49 (active 37/49) win 38.8% n 1968 | {2022: -2.4, 2023: 77.8, 2024: 102.9, 2025: 103.9, 2026: 21.6}
