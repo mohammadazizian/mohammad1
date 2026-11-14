@@ -18,6 +18,7 @@ Idea: after an abnormal price shock, price tends to keep drifting the same way f
   Monthly profit lock: when month-to-date mark-to-market PnL reaches +2.0% of the notional (and at
         least one trade was opened this month) everything is closed at the next bar's open and no
         trade is opened until the next calendar month.
+  Monthly loss cap: the same happens when month-to-date PnL falls to -10% of the notional.
 
 Execution model (what a bot can actually do)
   * signal on a CLOSED bar -> market order at the next bar's open
@@ -42,7 +43,7 @@ import numpy as np
 import pandas as pd
 
 P = dict(bb_len=20, bb_k=2.5, vol_len=480, imp_k=3.0, close_loc=0.6, atr_len=24,
-         stop_atr=3.0, tp_atr_a=6.0, tp_atr_b=3.0, max_hold=48, month_lock=0.02, month_loss_cap=None,
+         stop_atr=3.0, tp_atr_a=6.0, tp_atr_b=3.0, max_hold=48, month_lock=0.02, month_loss_cap=0.10,
          taker=0.0004, maker=0.0001, slippage=0.0002, limit_pen=0.0001)
 FIRST, LAST = "2022-01", "2026-10"
 TOP10 = ["BTCUSDT", "ETHUSDT", "BNBUSDT", "SOLUSDT", "XRPUSDT", "ADAUSDT", "DOGEUSDT", "AVAXUSDT", "LINKUSDT", "DOTUSDT"]
@@ -204,13 +205,13 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--all-coins", action="store_true")
     ap.add_argument("--no-lock", action="store_true")
-    ap.add_argument("--loss-cap", type=float, default=None, help="optional: also stop for the month at this loss, e.g. 0.08")
+    ap.add_argument("--loss-cap", type=float, default=P["month_loss_cap"], help="monthly loss cap as a fraction (0 = off)")
     ap.add_argument("--out", default=None)
     a = ap.parse_args()
     p = dict(P)
     if a.no_lock:
         p["month_lock"] = None
-    p["month_loss_cap"] = a.loss_cap
+    p["month_loss_cap"] = a.loss_cap or None
     pd.set_option("display.width", 220)
     rows = []
     for sym in (TOP10 if a.all_coins else TOP10[:2]):

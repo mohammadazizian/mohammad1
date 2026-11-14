@@ -227,3 +227,28 @@ Validation period 2025–2026: median coin 86% profitable months, +22%.
 
 `multi_coin_test.py` / `results_multi_coin/` hold the earlier risk-sized ten-coin test of the first
 two strategies.
+
+## v2 update: monthly loss cap enabled, 8% target and news filter tested
+
+`strategy_v2.py` now stops for the month at **−10%** as well as at +2% (`--loss-cap 0` turns it off).
+The figures in the table above are superseded by these (2022-01 .. 2026-10, 58 months):
+
+| | BTC | ETH |
+|---|---|---|
+| Profitable months | 47/58 (81%) | 47/58 (81%) |
+| Year by year 2022–2026 | +19.6 / +5.4 / +12.5 / +10.2 / +13.2 | +2.9 / **−16.1** / +20.3 / +15.2 / +16.0 |
+| Total net / per year | +60.9% / ≈ 12.6% | +38.3% / ≈ 7.9% |
+| Worst month / max drawdown | −10.1% / −20.5% | −11.7% / −44.6% |
+
+Ten coins (`results_v2/all_coins.txt`): 8 of 10 reach ≥ 81% profitable months, 8 of 10 are
+profitable in total (BNB and DOGE lose), 3 of 10 are profitable in 2026. A −8% cap leaves ETH at 78%.
+
+**8% per month target.** Raising the monthly target to +8% with a −8% cap (same thing as 4x leverage
+on a +2% / −2% rule) reaches the target in 20 of 58 months on BTC and 26 of 58 on ETH. A ten-coin
+account with a +8% target reaches it in 29 of 58 months with a −8% cap and 40 of 58 with a −16% cap,
+with drawdowns of 77% to 135% of the account. The rules do not have enough edge for that target.
+
+**News filter.** Entries near FOMC, CPI and NFP releases (dates hard-coded from memory; CPI only to
+September 2025, NFP approximated as first Fridays) showed no stable effect: CPI-window trades
+averaged −177 bp in 2022–24 and +104 bp in 2025–26, NFP +107 bp then 0 bp. Blocking entries before
+or around the releases changed results within noise, so no news filter was added.
