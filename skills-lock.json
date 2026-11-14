@@ -1,11 +1,47 @@
 {
   "version": 2,
   "skills": {
+    "backtesting-frameworks": {
+      "source": "wshobson/agents",
+      "sourceType": "github",
+      "skillPath": "plugins/quantitative-trading/skills/backtesting-frameworks/SKILL.md",
+      "computedHash": "06911073e6cb32003d4057134ab32548e7efd59d87e878c9f7f8915ca06ac260"
+    },
+    "backtesting-trading-strategies": {
+      "source": "jeremylongshore/tons-of-skills-marketplace",
+      "sourceType": "github",
+      "skillPath": "skills/.curated/backtesting-trading-strategies/SKILL.md",
+      "computedHash": "bb24d71c43d4a8f301fa1b2cef5f687e38aa7ccc3715fd2219d906ff0664c5f7"
+    },
+    "edge-strategy-designer": {
+      "source": "tradermonty/claude-trading-skills",
+      "sourceType": "github",
+      "skillPath": "skills/edge-strategy-designer/SKILL.md",
+      "computedHash": "9483e5acfd2ebd7b0960a2661bd1de6f681813e2cafda517ce2cccfc4986b3e0"
+    },
+    "edge-strategy-reviewer": {
+      "source": "tradermonty/claude-trading-skills",
+      "sourceType": "github",
+      "skillPath": "skills/edge-strategy-reviewer/SKILL.md",
+      "computedHash": "dfad4538e51fce10903120eddd26a26fda116d06e8aee9b98c17a87497eee99a"
+    },
     "find-skills": {
       "source": "vercel-labs/skills",
       "sourceType": "github",
       "skillPath": "skills/find-skills/SKILL.md",
       "computedHash": "7bc223e2aafbdbf6e50ea243ba6ef67fe432bb069ab439fea0390795dac0bf7f"
+    },
+    "strategy-pivot-designer": {
+      "source": "tradermonty/claude-trading-skills",
+      "sourceType": "github",
+      "skillPath": "skills/strategy-pivot-designer/SKILL.md",
+      "computedHash": "f743504dbfe4df01d270564c064fa182f42b13a644345e26dde1e3c71653d6f6"
+    },
+    "trading-signal": {
+      "source": "binance/binance-skills-hub",
+      "sourceType": "github",
+      "skillPath": "skills/binance-web3/trading-signal/SKILL.md",
+      "computedHash": "c531840bb4016e871b58a0312ceda442278b23cc49ac14300b3467e8cbddcf0f"
     }
   }
 }
