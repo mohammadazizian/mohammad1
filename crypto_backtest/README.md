@@ -252,3 +252,21 @@ with drawdowns of 77% to 135% of the account. The rules do not have enough edge 
 September 2025, NFP approximated as first Fridays) showed no stable effect: CPI-window trades
 averaged −177 bp in 2022–24 and +104 bp in 2025–26, NFP +107 bp then 0 bp. Blocking entries before
 or around the releases changed results within noise, so no news filter was added.
+
+## Search for an 8%-per-month design (not found)
+
+Target: most coins make ≥ 8% in most months with ≥ 80% profitable months. That needs roughly a
+Sharpe ratio of 3 at ~100% a year. Tested on ten perpetuals, 2022-01 .. 2026-10
+(`research_alt_strategies.py`, output in `results_v2/alt_strategies_vs_8pct_target.txt`):
+
+| Approach | Result |
+|---|---|
+| Momentum-Shock v2, per coin | Sharpe ≈ 1.25 on the ten-coin average, ≈ 8–13% a year on BTC/ETH |
+| Funding carry (long spot / short perp while funding > 0) | 76% profitable months, Sharpe ≈ 2.4, but only ≈ 5% a year; cannot be levered without borrowing at a similar rate |
+| Cross-sectional reversal (1–28 days) | loses 3–10% a month |
+| Cross-sectional momentum (5–28 days, 54 variants) | Sharpe up to 1.4 on 2022–24, **negative on 2025–26** for nearly every variant |
+| Daily trend (SMA 10–100) | Sharpe 0.1–0.4 on the basket, −23% to −42% worst months |
+| v2 + cross-sectional momentum, risk-balanced, 5x | 8% reached in 28 of 58 months, worst month −42%, drawdown −91% |
+| v2 with +8% target / −8% cap | 8% reached in 20 (BTC) and 26 (ETH) of 58 months |
+
+No strategy or sizing scheme tested reaches the target; leverage only scales losses with gains.

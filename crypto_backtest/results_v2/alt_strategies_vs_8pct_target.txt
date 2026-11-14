@@ -1,0 +1,38 @@
+funding per year (sum of rates, %):
+       BTC   ETH   BNB   SOL   XRP   ADA  DOGE  AVAX  LINK   DOT
+t                                                               
+2022   4.2   0.8 -12.6 -38.0   0.0  -1.0   3.4  -5.2   5.9 -14.3
+2023   7.9   8.3  -8.3   1.3   8.2   7.2  10.0   7.5  10.2   1.6
+2024  12.0  13.0  -3.3  13.7  14.2  14.0  14.0  10.6  13.4  11.5
+2025   5.1   4.9  -2.1   0.4   3.5   4.1   4.3   0.1   5.1   1.1
+2026   2.6   1.7   2.3  -0.5   0.2   1.3   2.6   1.1   3.9  -3.3
+carry BTC thr0bp/8h                          months+  76% mean +0.43%/mo median +0.45 Sharpe 2.48 worst   -0.8 DD   -1.5 yrs[1, 7, 11, 5, 1] | leverage for median 8%:  17.7x -> worst month     -14% DD     -26%
+carry ETH thr0bp/8h                          months+  76% mean +0.42%/mo median +0.37 Sharpe 2.31 worst   -0.5 DD   -1.3 yrs[0, 8, 13, 4, 0] | leverage for median 8%:  21.7x -> worst month     -11% DD     -28%
+carry 10 coins equal thr0bp/8h               months+  66% mean +0.30%/mo median +0.15 Sharpe 1.62 worst   -0.5 DD   -1.8 yrs[0, 6, 11, 1, -1] | leverage for median 8%:  52.0x -> worst month     -25% DD     -93%
+carry BTC thr0.5bp/8h                        months+  38% mean +0.13%/mo median -0.01 Sharpe 0.68 worst   -0.9 DD   -4.0 yrs[-3, 2, 9, 1, -1] | leverage for median 8%:   nanx -> worst month     nan% DD     nan%
+carry ETH thr0.5bp/8h                        months+  34% mean +0.15%/mo median -0.01 Sharpe 0.72 worst   -0.8 DD   -4.9 yrs[-2, 3, 12, -2, -2] | leverage for median 8%:   nanx -> worst month     nan% DD     nan%
+carry 10 coins equal thr0.5bp/8h             months+  36% mean +0.15%/mo median -0.09 Sharpe 0.78 worst   -0.4 DD   -3.5 yrs[-1, 3, 10, -1, -2] | leverage for median 8%:   nanx -> worst month     nan% DD     nan%
+carry top-2 by trailing funding (weekly)     months+  24% mean -0.03%/mo median -0.17 Sharpe -0.17 worst   -0.7 DD   -5.2 yrs[-3, 1, 5, -3, -2] | leverage for median 8%:   nanx -> worst month     nan% DD     nan%
+carry top-3 by trailing funding (weekly)     months+  34% mean +0.06%/mo median -0.11 Sharpe 0.35 worst   -0.5 DD   -4.0 yrs[-1, 2, 7, -2, -2] | leverage for median 8%:   nanx -> worst month     nan% DD     nan%
+cross-section momentum 1d (gross 2x)         months+  45% mean -0.44%/mo median -0.93 Sharpe -0.11 worst  -25.6 DD -113.2 yrs[-35, -14, 55, 4, -35] | leverage for median 8%:   nanx -> worst month     nan% DD     nan%
+cross-section reversal 1d (gross 2x)         months+  26% mean -9.66%/mo median -9.33 Sharpe -2.41 worst  -56.6 DD -561.5 yrs[-85, -109, -176, -126, -65] | leverage for median 8%:   nanx -> worst month     nan% DD     nan%
+cross-section momentum 3d (gross 2x)         months+  48% mean -0.60%/mo median -0.78 Sharpe -0.19 worst  -20.2 DD -137.3 yrs[37, 22, 10, -65, -40] | leverage for median 8%:   nanx -> worst month     nan% DD     nan%
+cross-section reversal 3d (gross 2x)         months+  29% mean -5.26%/mo median -5.14 Sharpe -1.66 worst  -33.9 DD -316.1 yrs[-105, -94, -81, -6, -19] | leverage for median 8%:   nanx -> worst month     nan% DD     nan%
+cross-section momentum 7d (gross 2x)         months+  50% mean +1.09%/mo median +0.17 Sharpe 0.22 worst  -42.3 DD  -75.8 yrs[35, 46, 52, -30, -39] | leverage for median 8%:  46.4x -> worst month   -1962% DD   -3515%
+cross-section reversal 7d (gross 2x)         months+  33% mean -5.04%/mo median -3.88 Sharpe -1.05 worst  -77.2 DD -307.3 yrs[-80, -94, -98, -19, -2] | leverage for median 8%:   nanx -> worst month     nan% DD     nan%
+cross-section momentum 14d (gross 2x)        months+  59% mean +2.92%/mo median +2.83 Sharpe 0.64 worst  -30.2 DD  -53.0 yrs[59, 46, 70, 18, -24] | leverage for median 8%:   2.8x -> worst month     -85% DD    -150%
+cross-section reversal 14d (gross 2x)        months+  34% mean -5.83%/mo median -5.83 Sharpe -1.31 worst  -62.0 DD -349.9 yrs[-92, -82, -106, -53, -6] | leverage for median 8%:   nanx -> worst month     nan% DD     nan%
+cross-section momentum 28d (gross 2x)        months+  45% mean +0.97%/mo median -1.55 Sharpe 0.20 worst  -30.4 DD -105.4 yrs[-2, 61, 93, 9, -105] | leverage for median 8%:   nanx -> worst month     nan% DD     nan%
+cross-section reversal 28d (gross 2x)        months+  48% mean -3.00%/mo median -0.64 Sharpe -0.63 worst  -67.1 DD -264.2 yrs[-23, -83, -118, -31, 80] | leverage for median 8%:   nanx -> worst month     nan% DD     nan%
+trend SMA10d long/short 10 coins (gross 1x)  months+  55% mean +0.67%/mo median +1.06 Sharpe 0.18 worst  -33.9 DD  -73.5 yrs[21, 15, 62, -50, -9] | leverage for median 8%:   7.5x -> worst month    -255% DD    -553%
+   trend SMA10d BTC only                     months+  50% mean -0.94%/mo median +0.07 Sharpe -0.23 worst  -45.5 DD  -93.3 yrs[-66, -7, 28, -19, 10] | leverage for median 8%: 121.5x -> worst month   -5534% DD  -11339%
+   trend SMA10d ETH only                     months+  45% mean -1.00%/mo median -2.60 Sharpe -0.23 worst  -28.7 DD -143.4 yrs[68, -94, 51, -68, -14] | leverage for median 8%:   nanx -> worst month     nan% DD     nan%
+trend SMA20d long/short 10 coins (gross 1x)  months+  60% mean +1.53%/mo median +2.48 Sharpe 0.34 worst  -41.6 DD  -75.4 yrs[27, 32, 81, -60, 9] | leverage for median 8%:   3.2x -> worst month    -134% DD    -243%
+   trend SMA20d BTC only                     months+  45% mean +0.03%/mo median -1.37 Sharpe 0.01 worst  -31.4 DD  -81.4 yrs[-24, -10, 15, -25, 46] | leverage for median 8%:   nanx -> worst month     nan% DD     nan%
+   trend SMA20d ETH only                     months+  55% mean +1.43%/mo median +1.15 Sharpe 0.29 worst  -36.5 DD  -84.7 yrs[54, -43, 28, 6, 38] | leverage for median 8%:   6.9x -> worst month    -253% DD    -588%
+trend SMA50d long/short 10 coins (gross 1x)  months+  47% mean +1.74%/mo median -1.13 Sharpe 0.39 worst  -22.8 DD  -66.6 yrs[2, 42, 29, 15, 13] | leverage for median 8%:   nanx -> worst month     nan% DD     nan%
+   trend SMA50d BTC only                     months+  53% mean +2.06%/mo median +0.50 Sharpe 0.49 worst  -34.0 DD  -67.0 yrs[-48, 81, 34, 14, 39] | leverage for median 8%:  16.0x -> worst month    -544% DD   -1073%
+   trend SMA50d ETH only                     months+  53% mean +4.27%/mo median +1.52 Sharpe 0.80 worst  -41.1 DD  -73.1 yrs[20, 27, -1, 133, 69] | leverage for median 8%:   5.3x -> worst month    -216% DD    -385%
+trend SMA100d long/short 10 coins (gross 1x) months+  41% mean +0.41%/mo median -2.02 Sharpe 0.09 worst  -24.7 DD -122.4 yrs[-13, -18, 32, 3, 19] | leverage for median 8%:   nanx -> worst month     nan% DD     nan%
+   trend SMA100d BTC only                    months+  53% mean +1.94%/mo median +0.60 Sharpe 0.50 worst  -26.6 DD  -61.5 yrs[38, 28, 18, 14, 14] | leverage for median 8%:  13.3x -> worst month    -353% DD    -817%
+   trend SMA100d ETH only                    months+  50% mean +0.98%/mo median +0.14 Sharpe 0.18 worst  -49.6 DD -118.5 yrs[-43, 19, -21, 84, 17] | leverage for median 8%:  55.5x -> worst month   -2752% DD   -6579%
