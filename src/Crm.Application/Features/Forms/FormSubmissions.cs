@@ -4,7 +4,7 @@ namespace Crm.Application.Features.Forms;
 
 /// <summary>Thrown when submitted values break the form's validation rules (field key → error code).</summary>
 public sealed class FormValidationException(IReadOnlyDictionary<string, FormFieldError> errors)
-    : Exception("The submitted form is invalid.")
+    : Exception("The submitted form is invalid."), IExpectedException
 {
     public IReadOnlyDictionary<string, FormFieldError> Errors { get; } = errors;
 }

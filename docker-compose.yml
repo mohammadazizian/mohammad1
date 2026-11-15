@@ -1,0 +1,55 @@
+# Atlas CRM - application + SQL Server.
+#   cp .env.example .env      (then change the passwords)
+#   docker compose up --build
+# The app applies EF Core migrations and seeds its data on start-up.
+
+services:
+  db:
+    image: mcr.microsoft.com/mssql/server:${MSSQL_IMAGE_TAG:-2022-latest}
+    container_name: crm-db
+    restart: unless-stopped
+    environment:
+      ACCEPT_EULA: "Y"
+      MSSQL_PID: ${MSSQL_PID:-Developer}
+      MSSQL_SA_PASSWORD: ${MSSQL_SA_PASSWORD:?Set MSSQL_SA_PASSWORD in .env}
+    ports:
+      - "${MSSQL_PORT:-14330}:1433"
+    volumes:
+      - crm-sql-data:/var/opt/mssql
+    healthcheck:
+      test: ["CMD-SHELL", "/opt/mssql-tools18/bin/sqlcmd -S localhost -U sa -P \"$$MSSQL_SA_PASSWORD\" -C -Q 'SELECT 1' -b -o /dev/null"]
+      interval: 10s
+      timeout: 5s
+      retries: 12
+      start_period: 30s
+
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        SDK_IMAGE: ${SDK_IMAGE:-mcr.microsoft.com/dotnet/sdk:10.0}
+        RUNTIME_IMAGE: ${RUNTIME_IMAGE:-mcr.microsoft.com/dotnet/aspnet:10.0}
+    image: atlas-crm-web:latest
+    container_name: crm-web
+    restart: unless-stopped
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      ASPNETCORE_ENVIRONMENT: ${ASPNETCORE_ENVIRONMENT:-Production}
+      ConnectionStrings__DefaultConnection: "Server=db,1433;Database=${MSSQL_DATABASE:-CrmDb};User Id=sa;Password=${MSSQL_SA_PASSWORD};TrustServerCertificate=True;MultipleActiveResultSets=True"
+      Seed__AdminUserName: ${ADMIN_USERNAME:-admin}
+      Seed__AdminPassword: ${ADMIN_PASSWORD:-Admin@12345}
+      Seed__DemoPassword: ${DEMO_PASSWORD:-Demo@12345}
+      Seed__DemoData: ${SEED_DEMO_DATA:-true}
+      Localization__DefaultCulture: ${DEFAULT_CULTURE:-en-US}
+      Regional__TimeZone: ${TIME_ZONE:-Asia/Tehran}
+    ports:
+      - "${APP_PORT:-8080}:8080"
+    volumes:
+      - crm-app-data:/app/App_Data
+
+volumes:
+  crm-sql-data:
+  crm-app-data:

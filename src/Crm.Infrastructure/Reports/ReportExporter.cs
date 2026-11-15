@@ -107,8 +107,15 @@ public sealed class ReportExporter : IReportExporter
                 {
                     foreach (var value in row)
                     {
-                        grid.Cell().BorderBottom(0.5f).BorderColor(Colors.Grey.Lighten3).Padding(4)
-                            .Text(ToText(value));
+                        // Latin-only values (e-mails, phone numbers, SKUs) keep their natural left-to-right
+                        // order inside a right-to-left report: wrap them in a Unicode LTR embedding.
+                        var text = ToText(value);
+                        if (table.RightToLeft && text.Length != 0 && !ContainsRightToLeft(text))
+                        {
+                            text = $"\u202A{text}\u202C";
+                        }
+
+                        grid.Cell().BorderBottom(0.5f).BorderColor(Colors.Grey.Lighten3).Padding(4).Text(text);
                     }
                 }
             });
@@ -121,6 +128,8 @@ public sealed class ReportExporter : IReportExporter
                 text.TotalPages();
             });
         })).GeneratePdf();
+
+    private static bool ContainsRightToLeft(string text) => text.Any(c => c is >= '\u0590' and <= '\u08FF' or >= '\uFB1D' and <= '\uFEFC');
 
     private static string ToText(object? value) => value switch
     {

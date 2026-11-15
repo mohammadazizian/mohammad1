@@ -2,6 +2,9 @@ using FluentValidation.Results;
 
 namespace Crm.Application.Common.Exceptions;
 
+/// <summary>Marks exceptions that describe an expected business outcome (not logged as errors).</summary>
+public interface IExpectedException;
+
 public class NotFoundException(string name, object key) : Exception($"{name} ({key}) was not found.");
 
 public class ForbiddenAccessException(string? message = null) : Exception(message ?? "Access denied.");

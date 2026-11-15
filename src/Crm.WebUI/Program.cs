@@ -31,6 +31,15 @@ try
     app.UseLocalizedValidation();
 
     // ---- HTTP pipeline -------------------------------------------------------------------
+    // Outermost, so the logged status code is the one the client really received.
+    app.UseSerilogRequestLogging(options =>
+        options.GetLevel = (context, _, exception) =>
+            exception is not null || context.Response.StatusCode >= 500
+                ? Serilog.Events.LogEventLevel.Error
+                : context.Request.Path.StartsWithSegments("/health")
+                    ? Serilog.Events.LogEventLevel.Verbose
+                    : Serilog.Events.LogEventLevel.Information);
+
     app.UseExceptionHandler(new ExceptionHandlerOptions
     {
         ExceptionHandlingPath = "/Error",
@@ -45,13 +54,6 @@ try
     }
 
     app.UseStaticFiles();
-    app.UseSerilogRequestLogging(options =>
-        options.GetLevel = (context, _, exception) =>
-            exception is not null || context.Response.StatusCode >= 500
-                ? Serilog.Events.LogEventLevel.Error
-                : context.Request.Path.StartsWithSegments("/health")
-                    ? Serilog.Events.LogEventLevel.Verbose
-                    : Serilog.Events.LogEventLevel.Information);
 
     app.UseRouting();
     app.UseRequestLocalization();

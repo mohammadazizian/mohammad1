@@ -1,0 +1,434 @@
+# key<TAB>Persian<TAB>English (optional; defaults to the key)
+# Source of truth of the shared UI texts. Run generate_resx.py after editing.
+(empty)	(خالی)
+Access denied	دسترسی غیرمجاز
+Active	فعال
+Activity	فعالیت‌ها
+Add	افزودن
+Add contact	افزودن مخاطب
+Add field	افزودن فیلد
+Add option	افزودن گزینه
+Add role	افزودن نقش
+Add task	افزودن وظیفه
+Add the first field to get started.	برای شروع، اولین فیلد را اضافه کنید.
+Address	نشانی
+Administration	مدیریت سامانه
+Administrators always have every permission, including forms created later.	مدیران سامانه همیشه همه مجوزها را دارند، حتی برای فرم‌هایی که بعداً ساخته می‌شوند.
+All	همه
+All categories	همه دسته‌ها
+All products are sufficiently stocked.	موجودی همه محصولات کافی است.
+All statuses	همه وضعیت‌ها
+All tasks	همه وظایف
+All types	همه انواع
+Amount	مبلغ
+An alert is raised when total stock falls to this level.	وقتی موجودی کل به این مقدار برسد هشدار صادر می‌شود.
+Answers	پاسخ‌ها
+Are you sure?	آیا مطمئن هستید؟
+Assign to role	واگذاری به نقش
+Assign to user	واگذاری به کاربر
+Atlas CRM	اطلس CRM
+Attach files	پیوست فایل
+Back to dashboard	بازگشت به داشبورد
+Calculate	محاسبه
+Cancel	انصراف
+Catalogue, prices and stock on hand.	کاتالوگ، قیمت‌ها و موجودی انبار.
+Categories	دسته‌بندی‌ها
+Category	دسته‌بندی
+Chart	نمودار
+Chat	گفتگو
+City	شهر
+Close	بستن
+Closed	تاریخ بسته‌شدن
+Code	کد
+Column	ستون
+Columns	ستون‌ها
+Companies and individuals you do business with.	شرکت‌ها و اشخاصی که با آن‌ها کار می‌کنید.
+Company	شرکت
+Configure the report and press Run.	گزارش را تنظیم کنید و «اجرا» را بزنید.
+Contact	اطلاعات تماس
+Contacts	مخاطبان
+Control what each role may view, create, edit and delete - per module and per form.	تعیین کنید هر نقش در هر ماژول و هر فرم چه چیزی را ببیند، ایجاد، ویرایش یا حذف کند.
+Convert this lead to a customer?	این سرنخ به مشتری تبدیل شود؟
+Convert to customer	تبدیل به مشتری
+Cost	بهای تمام‌شده
+Country	کشور
+Create	ایجاد
+Created	تاریخ ایجاد
+CRM	مدیریت مشتریان
+Custom forms	فرم‌های سفارشی
+Customer	مشتری
+Customers	مشتریان
+Dashboard	داشبورد
+Data set	مجموعه داده
+Date	تاریخ
+Dates as YYYY-MM-DD; yes/no as true/false.	تاریخ به شکل YYYY-MM-DD و بله/خیر به شکل true/false وارد شود.
+Deals	معاملات
+Delete	حذف
+Delete this form and all of its entries?	این فرم و همه رکوردهای آن حذف شود؟
+Deleted.	حذف شد.
+Descending	نزولی
+Description	توضیحات
+Description (English)	توضیحات (انگلیسی)
+Description (Persian)	توضیحات (فارسی)
+Design	طراحی
+Design custom forms. Each form gets its own menu entry, permissions and collaboration tools.	فرم‌های سفارشی طراحی کنید. هر فرم منو، مجوزها و ابزارهای همکاری خودش را دارد.
+Design form	طراحی فرم
+Details	جزئیات
+Draft	پیش‌نویس
+Drag a card to move the deal through the pipeline.	برای جابه‌جایی معامله در قیف فروش، کارت را بکشید.
+Due	مهلت
+Edit	ویرایش
+Edit customer	ویرایش مشتری
+Edit deal	ویرایش معامله
+Edit entry	ویرایش رکورد
+Edit lead	ویرایش سرنخ
+Edit product	ویرایش محصول
+Edit user	ویرایش کاربر
+Email	ایمیل
+Entries	رکوردها
+Entry	رکورد
+Error	خطا
+Estimated value	ارزش تخمینی
+Every receipt, issue and transfer between warehouses.	همه ورودها، خروج‌ها و انتقال‌های بین انبارها.
+Expected close date	تاریخ پیش‌بینی بسته‌شدن
+Fields	فیلدها
+Filters	فیلترها
+First name	نام
+Form builder	فرم‌ساز
+Forms	فرم‌ها
+From	از
+From warehouse	از انبار
+Full name	نام کامل
+General	مشخصات کلی
+Group by	گروه‌بندی بر اساس
+Grouping & chart	گروه‌بندی و نمودار
+Hello, {0}	سلام، {0}
+Here is what is happening in your business today.	نگاهی به وضعیت امروز کسب‌وکار شما.
+In stock	موجود
+Inactive	غیرفعال
+Interaction history	تاریخچه تعاملات
+Inventory	انبار
+Invalid user name or password.	نام کاربری یا گذرواژه نادرست است.
+Key	کلید
+Label (English)	برچسب (انگلیسی)
+Label (Persian)	برچسب (فارسی)
+Language	زبان
+Last name	نام خانوادگی
+Lead converted to customer.	سرنخ به مشتری تبدیل شد.
+Leads	سرنخ‌ها
+Leave empty to keep the current password.	برای حفظ گذرواژه فعلی خالی بگذارید.
+Limited to the first {0} rows	محدود به {0} ردیف اول
+Linked object type	نوع شیء مرتبط
+Location	مکان
+Locations where stock is kept.	مکان‌های نگهداری موجودی.
+Log interaction	ثبت تعامل
+Low stock	کمبود موجودی
+Low stock only	فقط کمبود موجودی
+Low stock threshold	حد هشدار موجودی
+Mark all as read	علامت‌گذاری همه به‌عنوان خوانده‌شده
+Mark as done	انجام شد
+Maximum	حداکثر
+Maximum length	حداکثر طول
+Mentions, task assignments, reminders and stock alerts.	اشاره‌ها، واگذاری وظایف، یادآورها و هشدارهای موجودی.
+Minimum	حداقل
+Module	ماژول
+Move down	انتقال به پایین
+Move up	انتقال به بالا
+My pending tasks	وظایف در انتظار من
+My reminders	یادآورهای من
+My tasks	وظایف من
+Name	نام
+Name (English)	نام (انگلیسی)
+Name (Persian)	نام (فارسی)
+Navigation	منو
+New customer	مشتری جدید
+New deal	معامله جدید
+New entry	رکورد جدید
+New form	فرم جدید
+New lead	سرنخ جدید
+New movement	گردش جدید
+New product	محصول جدید
+New task	وظیفه جدید
+New user	کاربر جدید
+Next	بعدی
+No	خیر
+No activity yet.	هنوز فعالیتی ثبت نشده است.
+No contacts yet.	هنوز مخاطبی ثبت نشده است.
+No customers found.	مشتری‌ای یافت نشد.
+No data matches the filters.	داده‌ای با این فیلترها یافت نشد.
+No deals yet.	هنوز معامله‌ای ثبت نشده است.
+No entries yet.	هنوز رکوردی ثبت نشده است.
+No forms yet.	هنوز فرمی ساخته نشده است.
+No grouping	بدون گروه‌بندی
+No interactions logged yet.	هنوز تعاملی ثبت نشده است.
+No leads found.	سرنخی یافت نشد.
+No messages yet. Start the conversation.	هنوز پیامی نیست. گفتگو را شروع کنید.
+No products found.	محصولی یافت نشد.
+No results	نتیجه‌ای یافت نشد
+No stock movements found.	گردش موجودی‌ای یافت نشد.
+No stock recorded yet.	هنوز موجودی‌ای ثبت نشده است.
+No tasks for this item yet.	هنوز وظیفه‌ای برای این مورد ثبت نشده است.
+No tasks found.	وظیفه‌ای یافت نشد.
+Note	یادداشت
+Notes	یادداشت‌ها
+Nothing to do - enjoy your day.	کاری در انتظار نیست؛ روز خوبی داشته باشید.
+Notifications	اعلان‌ها
+Number	شماره
+Of column	روی ستون
+Open	باز کردن
+Open board	مشاهده تابلو
+Open customer	مشاهده مشتری
+Open deals	معاملات باز
+Open only	فقط باز
+Open pipeline	معاملات در جریان
+Open tasks	وظایف باز
+Operator	عملگر
+Options	گزینه‌ها
+Pages	صفحه‌ها
+Password	گذرواژه
+Pattern (regular expression)	الگو (عبارت منظم)
+People who can sign in, and the roles they hold.	افرادی که می‌توانند وارد شوند و نقش‌های آن‌ها.
+Permissions	مجوزها
+Permissions updated.	مجوزها به‌روزرسانی شد.
+Phone	تلفن
+Pick a data set, choose columns, filter, group and visualize - then export.	مجموعه داده و ستون‌ها را انتخاب، فیلتر و گروه‌بندی کنید، نمودار ببینید و خروجی بگیرید.
+Please choose one of the available options.	لطفاً یکی از گزینه‌های موجود را انتخاب کنید.
+Please enter a valid date.	لطفاً تاریخ معتبر وارد کنید.
+Please enter a valid number.	لطفاً عدد معتبر وارد کنید.
+Position	سمت
+Postal code	کد پستی
+Potential customers you are qualifying.	مشتریان بالقوه‌ای که در حال ارزیابی آن‌ها هستید.
+Previous	قبلی
+Primary	اصلی
+Priority	اولویت
+Product	محصول
+Products	محصولات
+Published	منتشرشده
+Published (visible in the menu and open for new entries)	منتشرشده (در منو نمایش داده می‌شود و ثبت رکورد جدید ممکن است)
+Quantity	تعداد
+Recent activity	فعالیت‌های اخیر
+Recent stock movements	آخرین گردش‌های موجودی
+Reference	مرجع
+Remember me	مرا به خاطر بسپار
+Remind at	زمان یادآوری
+Remind me to…	یادآوری کن که…
+Reminder	یادآور
+Reminder set.	یادآور ثبت شد.
+Reopen	بازگشایی
+Reply	پاسخ
+Replying to {0}	در پاسخ به {0}
+Report builder	گزارش‌ساز
+Reports	گزارش‌ها
+Request id	شناسه درخواست
+Required	اجباری
+Role	نقش
+Role name	نام نقش
+Roles	نقش‌ها
+Roles & permissions	نقش‌ها و مجوزها
+Rows	ردیف‌ها
+Run report	اجرای گزارش
+SKU	کد کالا (SKU)
+Sales funnel	قیف فروش
+Save	ذخیره
+Save form	ذخیره فرم
+Save permissions	ذخیره مجوزها
+Saved successfully.	با موفقیت ذخیره شد.
+Scope	محدوده
+Search	جستجو
+Search by name or SKU…	جستجو بر اساس نام یا کد کالا…
+Search by name, company or email…	جستجو بر اساس نام، شرکت یا ایمیل…
+Search by name, email or phone…	جستجو بر اساس نام، ایمیل یا تلفن…
+Search by number, reference or product…	جستجو بر اساس شماره، مرجع یا محصول…
+Search tasks…	جستجوی وظایف…
+Search…	جستجو…
+Send	ارسال
+Set reminder	ثبت یادآور
+Showing the first {0} rows - export to get everything.	{0} ردیف اول نمایش داده شده است؛ برای همه داده‌ها خروجی بگیرید.
+Sign out	خروج
+Something went wrong. Please try again.	خطایی رخ داد. لطفاً دوباره تلاش کنید.
+Sort by	مرتب‌سازی بر اساس
+Source	منبع
+Stage	مرحله
+Status	وضعیت
+Stock	موجودی
+Stock by warehouse	موجودی به تفکیک انبار
+Stock movement recorded.	گردش موجودی ثبت شد.
+Stock movements	گردش موجودی
+Street	خیابان
+Subject	موضوع
+Submitted by	ثبت‌کننده
+System	سیستم
+Task created.	وظیفه ایجاد شد.
+Tasks	وظایف
+Tasks & reminders	وظایف و یادآورها
+Tax ID	شناسه مالیاتی
+The data was changed by someone else. Please reload and try again.	این داده توسط شخص دیگری تغییر کرده است. صفحه را بازخوانی و دوباره تلاش کنید.
+The form definition could not be read.	تعریف فرم قابل خواندن نیست.
+The operation is not allowed.	این عملیات مجاز نیست.
+The request is invalid.	درخواست نامعتبر است.
+The requested item was not found.	مورد درخواستی یافت نشد.
+The text is too long (maximum {0} characters).	متن بیش از حد طولانی است (حداکثر {0} نویسه).
+The value does not have the expected format.	قالب مقدار واردشده درست نیست.
+The value is invalid.	مقدار نامعتبر است.
+The value must be between {0} and {1}.	مقدار باید بین {0} و {1} باشد.
+The {0} field is not a valid e-mail address.	«{0}» یک نشانی ایمیل معتبر نیست.
+The {0} field is required.	وارد کردن «{0}» الزامی است.
+This account has been deactivated.	این حساب کاربری غیرفعال شده است.
+This account is temporarily locked. Please try again later.	این حساب موقتاً قفل شده است. لطفاً بعداً دوباره تلاش کنید.
+This field is required.	تکمیل این فیلد الزامی است.
+Threshold	حد هشدار
+Title	عنوان
+Title (English)	عنوان (انگلیسی)
+Title (Persian)	عنوان (فارسی)
+To	به
+To warehouse	به انبار
+Total quantity	موجودی کل
+Type	نوع
+Unit	واحد
+Unit price	قیمت واحد
+Use 2-64 Latin letters, digits, dots, dashes or underscores.	از ۲ تا ۶۴ حرف لاتین، رقم، نقطه، خط تیره یا زیرخط استفاده کنید.
+Used in URLs and permissions; cannot be changed later.	در نشانی‌ها و مجوزها استفاده می‌شود و بعداً قابل تغییر نیست.
+User	کاربر
+User name	نام کاربری
+Users	کاربران
+Value	مقدار
+View	مشاهده
+View all	مشاهده همه
+Warehouses	انبارها
+Weighted forecast	پیش‌بینی وزنی
+Won this month: {0}	موفق در این ماه: {0}
+Work assigned to you, your roles, or created by you.	کارهایی که به شما یا نقش‌های شما واگذار شده یا خودتان ایجاد کرده‌اید.
+Workspace	فضای کاری
+Write a message… use @ to mention a colleague, # to link an object	پیام بنویسید… با @ همکار را صدا بزنید و با # یک شیء را پیوند دهید
+Yes	بله
+You cannot deactivate yourself or remove your own administrator role.	نمی‌توانید خودتان را غیرفعال یا نقش مدیر سامانه را از خود حذف کنید.
+You do not have permission to do this.	شما مجوز انجام این کار را ندارید.
+You're all caught up.	همه اعلان‌ها را دیده‌اید.
+by	بر اساس
+{0} active leads	{0} سرنخ فعال
+{0} entries	{0} رکورد
+{0} fields	{0} فیلد
+{0} is typing…	{0} در حال نوشتن است…
+{0} items	{0} مورد
+{0} open deals	{0} معامله باز
+{0} overdue	{0} مورد معوق
+# ---- Business rule and validation messages ----
+A customer with open deals cannot be deleted.	مشتری دارای معامله باز قابل حذف نیست.
+A product that still has stock cannot be deleted.	محصولی که هنوز موجودی دارد قابل حذف نیست.
+A category that still contains products cannot be deleted.	دسته‌ای که هنوز محصول دارد قابل حذف نیست.
+A warehouse that still holds stock cannot be deleted.	انباری که هنوز موجودی دارد قابل حذف نیست.
+A converted lead can no longer be edited.	سرنخ تبدیل‌شده دیگر قابل ویرایش نیست.
+This lead has already been converted.	این سرنخ قبلاً تبدیل شده است.
+Use the convert action to convert a lead.	برای تبدیل سرنخ از دکمه «تبدیل به مشتری» استفاده کنید.
+The target stage belongs to a different pipeline.	مرحله مقصد متعلق به قیف فروش دیگری است.
+Quantity must be greater than zero.	تعداد باید بزرگ‌تر از صفر باشد.
+A source warehouse is required.	انتخاب انبار مبدأ الزامی است.
+A destination warehouse is required.	انتخاب انبار مقصد الزامی است.
+Source and destination warehouses must differ.	انبار مبدأ و مقصد نباید یکسان باشند.
+SKU must be 3-32 characters of A-Z, 0-9 and '-'.	کد کالا باید ۳ تا ۳۲ نویسه از A-Z، ‏0-9 و «-» باشد.
+Form code must be 2-40 characters of a-z, 0-9 and '-'.	کد فرم باید ۲ تا ۴۰ نویسه از a-z، ‏0-9 و «-» باشد.
+A form needs at least one field.	فرم باید دست‌کم یک فیلد داشته باشد.
+A form can have at most 100 fields.	فرم حداکثر می‌تواند ۱۰۰ فیلد داشته باشد.
+Every field needs an English label.	هر فیلد باید برچسب انگلیسی داشته باشد.
+Min must not be greater than max.	حداقل نباید از حداکثر بزرگ‌تر باشد.
+This form is not published.	این فرم منتشر نشده است.
+System roles cannot be deleted.	نقش‌های سیستمی قابل حذف نیستند.
+Role not found.	نقش یافت نشد.
+User not found.	کاربر یافت نشد.
+Access denied.	دسترسی غیرمجاز.
+# ---- Field / column captions (humanized property names) ----
+Assigned to	واگذارشده به
+Assigned to role	واگذاری به نقش
+Attachments	پیوست‌ها
+Body	متن پیام
+Closed at	تاریخ بسته‌شدن
+Completed at	تاریخ انجام
+Created at	تاریخ ایجاد
+Customer id	مشتری	Customer
+Due at	مهلت	Due
+From warehouse id	از انبار	From warehouse
+Is active	فعال	Active
+Message	پیام
+Name en	نام (انگلیسی)	Name (English)
+Name fa	نام (فارسی)	Name (Persian)
+Occurred at	تاریخ
+Probability	احتمال موفقیت (٪)	Probability (%)
+Product id	محصول	Product
+Related to	مرتبط با
+Stage id	مرحله	Stage
+Title en	عنوان (انگلیسی)	Title (English)
+Title fa	عنوان (فارسی)	Title (Persian)
+To warehouse id	به انبار	To warehouse
+# ---- Report operators ----
+op_eq	برابر با	equals
+op_neq	مخالف	not equal
+op_contains	شامل	contains
+op_startswith	شروع با	starts with
+op_gt	بزرگ‌تر از	greater than
+op_gte	بزرگ‌تر یا مساوی	greater or equal
+op_lt	کوچک‌تر از	less than
+op_lte	کوچک‌تر یا مساوی	less or equal
+# ---- Enums: {EnumType}_{Member} ----
+CustomerType_B2B	شرکتی (B2B)	Business (B2B)
+CustomerType_B2C	شخصی (B2C)	Individual (B2C)
+LeadStatus_New	جدید	New
+LeadStatus_Contacted	تماس گرفته‌شده	Contacted
+LeadStatus_Qualified	واجد شرایط	Qualified
+LeadStatus_Lost	ازدست‌رفته	Lost
+LeadStatus_Converted	تبدیل‌شده	Converted
+LeadSource_Website	وب‌سایت	Website
+LeadSource_Referral	معرفی	Referral
+LeadSource_Campaign	کمپین	Campaign
+LeadSource_ColdCall	تماس سرد	Cold call
+LeadSource_Exhibition	نمایشگاه	Exhibition
+LeadSource_Other	سایر	Other
+InteractionType_Call	تماس تلفنی	Call
+InteractionType_Email	ایمیل	Email
+InteractionType_Meeting	جلسه	Meeting
+InteractionType_Note	یادداشت	Note
+StockMovementType_In	ورود	Stock in
+StockMovementType_Out	خروج	Stock out
+StockMovementType_Transfer	انتقال	Transfer
+TaskItemStatus_Open	باز	Open
+TaskItemStatus_InProgress	در حال انجام	In progress
+TaskItemStatus_Done	انجام‌شده	Done
+TaskItemStatus_Cancelled	لغوشده	Cancelled
+TaskPriority_Low	کم	Low
+TaskPriority_Normal	عادی	Normal
+TaskPriority_High	زیاد	High
+TaskPriority_Urgent	فوری	Urgent
+ActivityAction_Created	ایجاد کرد	created
+ActivityAction_Updated	ویرایش کرد	updated
+ActivityAction_Deleted	حذف کرد	deleted
+ActivityAction_Commented	پیام گذاشت	commented
+ActivityAction_TaskCreated	وظیفه افزود	added a task
+ActivityAction_TaskCompleted	وظیفه را انجام داد	completed a task
+ActivityAction_ReminderSet	یادآور ثبت کرد	set a reminder
+ActivityAction_StageChanged	مرحله را تغییر داد	changed the stage
+ActivityAction_Converted	به مشتری تبدیل کرد	converted to customer
+NotificationType_Mention	در گفتگو به شما اشاره شد	You were mentioned
+NotificationType_TaskAssigned	وظیفه جدید برای شما	New task assigned
+NotificationType_Reminder	یادآور	Reminder
+NotificationType_LowStock	هشدار کمبود موجودی	Low stock alert
+FormFieldType_Text	متن کوتاه	Text
+FormFieldType_Number	عدد	Number
+FormFieldType_Dropdown	فهرست انتخابی	Dropdown
+FormFieldType_Date	تاریخ	Date
+FormFieldType_File	فایل	File
+FormFieldType_EntityLookup	پیوند به شیء	Entity lookup
+FormFieldType_TextArea	متن بلند	Long text
+TrackableEntityType_Customer	مشتری	Customer
+TrackableEntityType_Product	محصول	Product
+TrackableEntityType_InventoryTransaction	گردش موجودی	Stock movement
+TrackableEntityType_FormSubmission	فرم ثبت‌شده	Form entry
+TrackableEntityType_Lead	سرنخ	Lead
+TrackableEntityType_Deal	معامله	Deal
+ReportAggregate_Count	تعداد	Count
+ReportAggregate_Sum	مجموع	Sum
+ReportAggregate_Average	میانگین	Average
+ReportAggregate_Min	کمترین	Minimum
+ReportAggregate_Max	بیشترین	Maximum
+ReportChartType_Bar	میله‌ای	Bar
+ReportChartType_Line	خطی	Line
+ReportChartType_Pie	دایره‌ای	Pie
+ReportChartType_Doughnut	حلقه‌ای	Doughnut

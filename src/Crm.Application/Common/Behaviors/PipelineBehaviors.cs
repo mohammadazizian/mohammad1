@@ -51,7 +51,7 @@ public sealed class LoggingBehavior<TRequest, TResponse>(
 
             return response;
         }
-        catch (Exception ex) when (ex is not (AppValidationException or NotFoundException or DomainException or ForbiddenAccessException))
+        catch (Exception ex) when (ex is not (AppValidationException or NotFoundException or DomainException or ForbiddenAccessException or IExpectedException))
         {
             logger.LogError(ex, "Request {RequestName} failed for user {UserName}", requestName, currentUser.UserName);
             throw;

@@ -1,7 +1,7 @@
 @* Shared <head> content of the application and the sign-in layouts. *@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>@(ViewData["Title"] is string title ? $"{title} · " : string.Empty)@L["Atlas CRM"]</title>
+<title>@(ViewData["Title"]?.ToString() is { Length: > 0 } title ? $"{title} · " : string.Empty)@L["Atlas CRM"]</title>
 <link rel="icon" href="~/favicon.ico" />
 @if (Culture.IsRtl)
 {

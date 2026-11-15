@@ -22,7 +22,7 @@ else
                     </div>
                     @if (!string.IsNullOrEmpty(item.Details))
                     {
-                        <div class="text-muted text-truncate" dir="auto">@item.Details</div>
+                        <div class="text-muted text-truncate bidi-plain">@item.Details</div>
                     }
                     <div class="timeline-meta"><time-display value="item.OccurredAt" mode="Relative" /></div>
                 </div>

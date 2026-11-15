@@ -11,8 +11,11 @@ public static partial class TextHelpers
     public static string Humanize(string pascalCase)
     {
         var words = WordBoundary().Replace(pascalCase, " ");
-        return words.Length == 0 ? words : char.ToUpperInvariant(words[0]) + words[1..].ToLowerInvariant();
+        var text = words.Length == 0 ? words : char.ToUpperInvariant(words[0]) + words[1..].ToLowerInvariant();
+        return Acronyms.GetValueOrDefault(text, text);
     }
+
+    private static readonly Dictionary<string, string> Acronyms = new() { ["Sku"] = "SKU", ["Tax id"] = "Tax ID" };
 
     [GeneratedRegex("(?<=[a-z0-9])(?=[A-Z])")]
     private static partial Regex WordBoundary();

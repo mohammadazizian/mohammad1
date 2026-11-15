@@ -198,7 +198,7 @@
           },
           scales: circular ? {} : {
             x: { reverse: rtl, grid: { display: false } },
-            y: { position: rtl ? 'right' : 'left', beginAtZero: true, grid: { color: '#eef0f3' } },
+            y: { position: rtl ? 'right' : 'left', beginAtZero: true, grid: { color: '#eef0f3' }, ticks: { precision: config.values.every(Number.isInteger) ? 0 : undefined } },
           },
         },
       });

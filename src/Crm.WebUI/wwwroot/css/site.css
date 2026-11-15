@@ -162,6 +162,11 @@ html[dir="rtl"] .table > thead th { letter-spacing: 0; font-size: 0.78rem; }
 .cell-title:hover { color: var(--app-primary); }
 .cell-sub { color: var(--app-muted); font-size: 0.8rem; }
 .num { font-variant-numeric: tabular-nums; }
+/* Mixed-language text: let each paragraph pick its own direction but keep the page alignment. */
+.bidi-plain { unicode-bidi: plaintext; text-align: start; }
+/* Data cells often hold Latin text (names, e-mails) inside an RTL page. Resolving the
+   direction per cell keeps punctuation such as "Co." or "+98 21 ..." in the right place. */
+td, dd, .cell-title, .cell-sub, .kanban-card-title, .task-title, .drawer-context a { unicode-bidi: plaintext; }
 
 .btn { --bs-btn-font-size: 0.875rem; --bs-btn-border-radius: 9px; --bs-btn-font-weight: 500; }
 .btn-sm { --bs-btn-font-size: 0.8rem; --bs-btn-border-radius: 8px; }
