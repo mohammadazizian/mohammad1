@@ -1,0 +1,78 @@
+@model DynamicFormViewModel
+@using Crm.Domain.Forms
+@*
+    Renders the input fields of ANY dynamic form from its JSON schema: localized labels,
+    HTML5 validation attributes mirroring the schema rules, and server-side error messages.
+    The surrounding <form> element belongs to the hosting page.
+*@
+@{
+    var culture = Culture.CultureName;
+}
+<div class="row g-3">
+    @foreach (var field in Model.Form.Fields)
+    {
+        var name = DynamicFormViewModel.InputName(field);
+        var value = Model.Values.GetValueOrDefault(field.Key);
+        var error = Model.Errors.GetValueOrDefault(field.Key);
+        var invalid = error is null ? null : "is-invalid";
+        var wide = field.Type is FormFieldType.TextArea or FormFieldType.File;
+
+        <div class="@(wide ? "col-12" : "col-md-6") @(field.Required ? "required" : null)">
+            <label class="form-label" for="@name">@field.Label.Get(culture)</label>
+            @switch (field.Type)
+            {
+                case FormFieldType.TextArea:
+                    <textarea class="form-control @invalid" id="@name" name="@name" rows="4" dir="auto"
+                              required="@field.Required" maxlength="@field.MaxLength">@value</textarea>
+                    break;
+
+                case FormFieldType.Number:
+                    <input type="number" class="form-control @invalid" id="@name" name="@name" value="@value" dir="ltr" step="any"
+                           required="@field.Required" min="@field.Min?.ToString(System.Globalization.CultureInfo.InvariantCulture)" max="@field.Max?.ToString(System.Globalization.CultureInfo.InvariantCulture)" />
+                    break;
+
+                case FormFieldType.Date:
+                    <input type="date" class="form-control @invalid" id="@name" name="@name" value="@value" required="@field.Required" />
+                    break;
+
+                case FormFieldType.Dropdown:
+                    <select class="form-select @invalid" id="@name" name="@name" required="@field.Required">
+                        <option value="">—</option>
+                        @foreach (var option in field.Options)
+                        {
+                            <option value="@option.Value" selected="@(option.Value == value)">@option.Label.Get(culture)</option>
+                        }
+                    </select>
+                    break;
+
+                case FormFieldType.EntityLookup:
+                    <select class="form-select @invalid" id="@name" name="@name" required="@field.Required">
+                        <option value="">—</option>
+                        @foreach (var option in Model.LookupOptions.GetValueOrDefault(field.Key) ?? [])
+                        {
+                            <option value="@option.Value" selected="@string.Equals(option.Value, value, StringComparison.OrdinalIgnoreCase)">@option.Label</option>
+                        }
+                    </select>
+                    break;
+
+                case FormFieldType.File:
+                    var existing = Model.ExistingFiles.GetValueOrDefault(field.Key);
+                    <input type="file" class="form-control @invalid" id="@name" name="@name" required="@(field.Required && existing?.Value is null)" />
+                    @if (existing?.Value is not null)
+                    {
+                        <div class="form-text"><i class="bi bi-paperclip"></i> <a href="/Files/@existing.Value?name=@Uri.EscapeDataString(existing.Display ?? existing.Value)">@existing.Display</a></div>
+                    }
+                    break;
+
+                default:
+                    <input type="text" class="form-control @invalid" id="@name" name="@name" value="@value" dir="auto"
+                           required="@field.Required" maxlength="@field.MaxLength" pattern="@field.Pattern" />
+                    break;
+            }
+            @if (error is not null)
+            {
+                <div class="invalid-feedback d-block">@error</div>
+            }
+        </div>
+    }
+</div>

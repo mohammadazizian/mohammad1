@@ -1,0 +1,37 @@
+@page
+@using Crm.Domain.Inventory
+@model Crm.WebUI.Pages.Inventory.IndexModel
+@{
+    ViewData["Title"] = L["Stock movements"];
+}
+<div class="page-header">
+    <div>
+        <h1>@L["Stock movements"]</h1>
+        <p class="page-subtitle">@L["Every receipt, issue and transfer between warehouses."]</p>
+    </div>
+    <div class="page-actions">
+        <a class="btn btn-primary" href="/Inventory/Create" asp-permission="Inventory.Create"><i class="bi bi-plus-lg me-1"></i>@L["New movement"]</a>
+    </div>
+</div>
+
+<div class="card table-card">
+    <form class="d-flex flex-wrap gap-2 p-3 border-bottom" method="get"
+          hx-get="/Inventory" hx-target="#list" hx-push-url="true"
+          hx-trigger="input changed delay:300ms from:find input[type=search], change from:find select, submit">
+        <input type="hidden" name="productId" value="@Model.ProductId" />
+        <div class="search-box flex-grow-1">
+            <i class="bi bi-search"></i>
+            <input type="search" class="form-control" name="q" value="@Model.Q" placeholder="@L["Search by number, reference or product…"]" aria-label="@L["Search"]" />
+        </div>
+        <select class="form-select w-auto" name="type" aria-label="@L["Type"]">
+            <option value="">@L["All types"]</option>
+            @foreach (var type in Enum.GetValues<StockMovementType>())
+            {
+                <option value="@type" selected="@(Model.Type == type)">@L.Enum(type)</option>
+            }
+        </select>
+    </form>
+    <div id="list">
+        <partial name="_ListPartial" model="Model" />
+    </div>
+</div>

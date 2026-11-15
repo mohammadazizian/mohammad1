@@ -1,0 +1,36 @@
+@model Crm.WebUI.Pages.Products.CategoriesModel
+@* Inline-editable category list; every action swaps this fragment (htmx). *@
+<table class="table">
+    <thead>
+        <tr>
+            <th>@L["Name (English)"]</th>
+            <th>@L["Name (Persian)"]</th>
+            <th class="text-end">@L["Products"]</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var category in Model.Categories)
+        {
+            <tr>
+                <td dir="ltr" class="text-start fw-medium">@category.Name.En</td>
+                <td dir="rtl" class="text-start">@category.Name.Fa</td>
+                <td class="text-end num">@Fmt.Number(category.ProductCount)</td>
+                <td class="text-end">
+                    <button type="button" class="btn btn-sm btn-link text-muted p-0" title="@L["Delete"]" asp-permission="Products.Delete"
+                            hx-post="/Products/Categories?handler=Delete&id=@category.Id" hx-target="#categories" hx-confirm="@L["Are you sure?"]">
+                        <i class="bi bi-trash"></i>
+                    </button>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+@if (Model.CanEdit)
+{
+    <form class="row g-2 p-3 border-top" hx-post="/Products/Categories?handler=Save" hx-target="#categories">
+        <div class="col"><input class="form-control" name="NameEn" placeholder="@L["Name (English)"]" required maxlength="100" dir="ltr" /></div>
+        <div class="col"><input class="form-control" name="NameFa" placeholder="@L["Name (Persian)"]" maxlength="100" dir="rtl" /></div>
+        <div class="col-auto"><button type="submit" class="btn btn-primary"><i class="bi bi-plus-lg me-1"></i>@L["Add"]</button></div>
+    </form>
+}

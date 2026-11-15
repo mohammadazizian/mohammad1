@@ -1,3 +1,4 @@
+using System.Globalization;
 using ClosedXML.Excel;
 using Crm.Application.Features.Reports;
 using QuestPDF.Drawing;
@@ -107,7 +108,7 @@ public sealed class ReportExporter : IReportExporter
                     foreach (var value in row)
                     {
                         grid.Cell().BorderBottom(0.5f).BorderColor(Colors.Grey.Lighten3).Padding(4)
-                            .Text(value?.ToString() ?? string.Empty);
+                            .Text(ToText(value));
                     }
                 }
             });
@@ -120,6 +121,14 @@ public sealed class ReportExporter : IReportExporter
                 text.TotalPages();
             });
         })).GeneratePdf();
+
+    private static string ToText(object? value) => value switch
+    {
+        null => string.Empty,
+        decimal number => number.ToString("#,0.##", CultureInfo.InvariantCulture),
+        IFormattable formattable => formattable.ToString(null, CultureInfo.InvariantCulture),
+        _ => value.ToString() ?? string.Empty,
+    };
 
     private static XLCellValue ToCellValue(object? value) => value switch
     {

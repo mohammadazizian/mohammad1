@@ -1,0 +1,86 @@
+@page "{id:guid}"
+@model Crm.WebUI.Pages.Admin.Roles.PermissionsModel
+@{
+    ViewData["Title"] = Model.Role.Name;
+    var actions = Permissions.Actions.All;
+}
+<div class="page-header">
+    <div>
+        <a class="cell-sub" href="/Admin/Roles"><i class="bi bi-chevron-@(Culture.IsRtl ? "right" : "left")"></i> @L["Roles & permissions"]</a>
+        <h1 class="mt-1">@Model.Role.Name</h1>
+        <p class="page-subtitle" dir="auto">@Model.Role.Description</p>
+    </div>
+</div>
+
+@if (Model.IsAdministrator)
+{
+    <div class="alert alert-info" style="max-inline-size: 900px"><i class="bi bi-info-circle me-1"></i>@L["Administrators always have every permission, including forms created later."]</div>
+}
+
+<form method="post" class="card table-card" style="max-inline-size: 900px" data-permission-matrix>
+    <table class="table permission-matrix">
+        <thead>
+            <tr>
+                <th>@L["Module"]</th>
+                @foreach (var action in actions)
+                {
+                    <th>@L[action]</th>
+                }
+                <th>@L["All"]</th>
+            </tr>
+        </thead>
+        <tbody>
+            @{ var formsHeaderShown = false; }
+            @foreach (var row in Model.Rows)
+            {
+                if (row.IsForm && !formsHeaderShown)
+                {
+                    formsHeaderShown = true;
+                    <tr><td colspan="@(actions.Count + 2)" class="bg-light fw-semibold text-muted small">@L["Custom forms"]</td></tr>
+                }
+                <tr>
+                    <td class="fw-medium">@if (row.IsForm) { <i class="bi bi-ui-checks text-muted me-1"></i> }@row.Label</td>
+                    @foreach (var action in actions)
+                    {
+                        var permission = Permissions.For(row.Module, action);
+                        <td>
+                            <input class="form-check-input" type="checkbox" name="permissions" value="@permission" aria-label="@row.Label - @L[action]"
+                                   checked="@(Model.IsAdministrator || Model.Granted.Contains(permission))" disabled="@(!Model.CanEdit)" />
+                        </td>
+                    }
+                    <td><input class="form-check-input" type="checkbox" data-toggle-row disabled="@(!Model.CanEdit)" aria-label="@L["All"]" /></td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    @if (Model.CanEdit)
+    {
+        <div class="card-footer bg-transparent d-flex gap-2 justify-content-end">
+            <a class="btn btn-light" href="/Admin/Roles">@L["Cancel"]</a>
+            <button type="submit" class="btn btn-primary">@L["Save permissions"]</button>
+        </div>
+    }
+</form>
+
+@section Scripts {
+    <script>
+        // "All" checkbox per row: toggles and mirrors the four action checkboxes.
+        (function () {
+            const matrix = document.querySelector('[data-permission-matrix]');
+            const sync = (row) => {
+                const boxes = [...row.querySelectorAll('input[name="permissions"]')];
+                const toggle = row.querySelector('[data-toggle-row]');
+                if (toggle) toggle.checked = boxes.length > 0 && boxes.every((b) => b.checked);
+            };
+            matrix.querySelectorAll('tbody tr').forEach(sync);
+            matrix.addEventListener('change', (e) => {
+                const row = e.target.closest('tr');
+                if (e.target.matches('[data-toggle-row]')) {
+                    row.querySelectorAll('input[name="permissions"]').forEach((b) => (b.checked = e.target.checked));
+                } else {
+                    sync(row);
+                }
+            });
+        })();
+    </script>
+}

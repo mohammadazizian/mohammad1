@@ -1,0 +1,28 @@
+@model Crm.WebUI.Pages.Admin.Users.IndexModel
+<div class="table-responsive">
+    <table class="table table-hover">
+        <thead>
+            <tr><th>@L["User"]</th><th>@L["User name"]</th><th>@L["Roles"]</th><th>@L["Status"]</th><th></th></tr>
+        </thead>
+        <tbody>
+            @foreach (var user in Model.Users)
+            {
+                <tr>
+                    <td>
+                        <div class="d-flex align-items-center gap-2">
+                            <span class="avatar avatar-sm">@(user.FullName.Length > 0 ? user.FullName[..1] : "?")</span>
+                            <div>
+                                <div class="fw-semibold">@user.FullName</div>
+                                <div class="cell-sub text-start" dir="ltr">@user.Email</div>
+                            </div>
+                        </div>
+                    </td>
+                    <td dir="ltr" class="text-start">@user.UserName</td>
+                    <td>@foreach (var role in user.Roles) { <span class="pill pill-primary me-1">@role</span> }</td>
+                    <td><span class="pill @(user.IsActive ? "pill-success" : null)">@L[user.IsActive ? "Active" : "Inactive"]</span></td>
+                    <td class="text-end"><a class="btn btn-sm btn-light" href="/Admin/Users/Edit/@user.Id" asp-permission="Users.Edit"><i class="bi bi-pencil"></i></a></td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

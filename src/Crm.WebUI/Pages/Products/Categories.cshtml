@@ -1,0 +1,14 @@
+@page
+@model Crm.WebUI.Pages.Products.CategoriesModel
+@{
+    ViewData["Title"] = L["Categories"];
+}
+<div class="page-header">
+    <div>
+        <a class="cell-sub" href="/Products"><i class="bi bi-chevron-@(Culture.IsRtl ? "right" : "left")"></i> @L["Products"]</a>
+        <h1 class="mt-1">@L["Categories"]</h1>
+    </div>
+</div>
+<div class="card table-card" style="max-inline-size: 760px" id="categories">
+    <partial name="_CategoryListPartial" model="Model" />
+</div>

@@ -1,0 +1,41 @@
+@model Crm.WebUI.Pages.Inventory.IndexModel
+@if (Model.Transactions.Items.Count == 0)
+{
+    <div class="empty-state"><i class="bi bi-arrow-left-right"></i>@L["No stock movements found."]</div>
+}
+else
+{
+    <div class="table-responsive">
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th>@L["Number"]</th>
+                    <th>@L["Type"]</th>
+                    <th>@L["Product"]</th>
+                    <th>@L["From"]</th>
+                    <th>@L["To"]</th>
+                    <th class="text-end">@L["Quantity"]</th>
+                    <th>@L["Date"]</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.Transactions.Items)
+                {
+                    <tr>
+                        <td><a class="cell-title" href="/Inventory/Details/@item.Id" dir="ltr">@item.Number</a></td>
+                        <td><partial name="_MovementTypePartial" model="item.Type" /></td>
+                        <td>
+                            <a class="text-body" href="/Products/Details/@item.ProductId" dir="auto">@item.ProductName</a>
+                            <div class="cell-sub text-start" dir="ltr">@item.ProductSku</div>
+                        </td>
+                        <td>@(item.FromWarehouse ?? "—")</td>
+                        <td>@(item.ToWarehouse ?? "—")</td>
+                        <td class="text-end num fw-semibold">@Fmt.Number(item.Quantity) <span class="cell-sub fw-normal">@item.Unit</span></td>
+                        <td class="cell-sub"><time-display value="item.OccurredAt" mode="DateTime" /></td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+    <partial name="_PagerPartial" model="PagerViewModel.For(Model.Transactions, Context.Request)" />
+}

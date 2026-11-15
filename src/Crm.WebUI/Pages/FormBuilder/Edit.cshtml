@@ -1,0 +1,149 @@
+@page "{id:guid?}"
+@using Crm.Domain.Forms
+@model Crm.WebUI.Pages.FormBuilder.EditModel
+@{
+    ViewData["Title"] = L[Model.IsNew ? "New form" : "Design form"];
+}
+<div class="page-header">
+    <div>
+        <a class="cell-sub" href="/FormBuilder"><i class="bi bi-chevron-@(Culture.IsRtl ? "right" : "left")"></i> @L["Form builder"]</a>
+        <h1 class="mt-1">@ViewData["Title"]</h1>
+    </div>
+</div>
+
+<form method="post" data-form-builder style="max-inline-size: 980px">
+    <div asp-validation-summary="All"></div>
+    <input type="hidden" asp-for="Input.Id" />
+    <input type="hidden" asp-for="FieldsJson" data-fields-json />
+
+    <div class="card mb-4">
+        <div class="card-header"><h2 class="card-title">@L["General"]</h2></div>
+        <div class="card-body">
+            <div class="row g-3">
+                <div class="col-md-4 required">
+                    <label class="form-label" asp-for="Input.Code">@L["Code"]</label>
+                    <input class="form-control" asp-for="Input.Code" dir="ltr" placeholder="site-visit" readonly="@(!Model.IsNew)" />
+                    <div class="form-text">@L["Used in URLs and permissions; cannot be changed later."]</div>
+                </div>
+                <div class="col-md-4 required">
+                    <label class="form-label" asp-for="Input.TitleEn">@L["Title (English)"]</label>
+                    <input class="form-control" asp-for="Input.TitleEn" dir="ltr" />
+                </div>
+                <div class="col-md-4">
+                    <label class="form-label" asp-for="Input.TitleFa">@L["Title (Persian)"]</label>
+                    <input class="form-control" asp-for="Input.TitleFa" dir="rtl" />
+                </div>
+                <div class="col-md-6">
+                    <label class="form-label" asp-for="Input.DescriptionEn">@L["Description (English)"]</label>
+                    <textarea class="form-control" asp-for="Input.DescriptionEn" rows="2" dir="ltr"></textarea>
+                </div>
+                <div class="col-md-6">
+                    <label class="form-label" asp-for="Input.DescriptionFa">@L["Description (Persian)"]</label>
+                    <textarea class="form-control" asp-for="Input.DescriptionFa" rows="2" dir="rtl"></textarea>
+                </div>
+                <div class="col-12">
+                    <div class="form-check form-switch">
+                        <input class="form-check-input" asp-for="Input.IsPublished" />
+                        <label class="form-check-label" asp-for="Input.IsPublished">@L["Published (visible in the menu and open for new entries)"]</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="d-flex align-items-center justify-content-between mb-2">
+        <h2 class="h6 mb-0">@L["Fields"]</h2>
+        <button type="button" class="btn btn-sm btn-outline-primary" data-add-field><i class="bi bi-plus-lg me-1"></i>@L["Add field"]</button>
+    </div>
+    <div data-fields></div>
+    <div class="empty-state card d-none" data-fields-empty><i class="bi bi-input-cursor-text"></i>@L["Add the first field to get started."]</div>
+
+    <div class="d-flex gap-2 justify-content-end mt-4">
+        <a class="btn btn-light" href="/FormBuilder">@L["Cancel"]</a>
+        <button type="submit" class="btn btn-primary">@L["Save form"]</button>
+    </div>
+</form>
+
+@* ---- Client-side templates (localized on the server, instantiated by form-builder.js) ---- *@
+<template id="fieldTemplate">
+    <div class="builder-field" data-field>
+        <div class="builder-field-header">
+            <span class="builder-field-index" data-index></span>
+            <span class="fw-semibold flex-grow-1 text-truncate" data-summary></span>
+            <button type="button" class="btn btn-sm btn-light" data-move="-1" title="@L["Move up"]"><i class="bi bi-arrow-up"></i></button>
+            <button type="button" class="btn btn-sm btn-light" data-move="1" title="@L["Move down"]"><i class="bi bi-arrow-down"></i></button>
+            <button type="button" class="btn btn-sm btn-light text-danger" data-remove title="@L["Delete"]"><i class="bi bi-trash"></i></button>
+        </div>
+        <div class="row g-2">
+            <div class="col-md-3">
+                <label class="form-label">@L["Type"]</label>
+                <select class="form-select form-select-sm" data-prop="type">
+                    @foreach (var type in Enum.GetValues<FormFieldType>())
+                    {
+                        <option value="@type">@L.Enum(type)</option>
+                    }
+                </select>
+            </div>
+            <div class="col-md-3">
+                <label class="form-label">@L["Key"]</label>
+                <input class="form-control form-control-sm" data-prop="key" dir="ltr" maxlength="50" placeholder="fieldKey" />
+            </div>
+            <div class="col-md-3">
+                <label class="form-label">@L["Label (English)"]</label>
+                <input class="form-control form-control-sm" data-prop="labelEn" dir="ltr" maxlength="200" />
+            </div>
+            <div class="col-md-3">
+                <label class="form-label">@L["Label (Persian)"]</label>
+                <input class="form-control form-control-sm" data-prop="labelFa" dir="rtl" maxlength="200" />
+            </div>
+            <div class="col-md-3 d-flex align-items-end">
+                <label class="form-check mb-1"><input class="form-check-input" type="checkbox" data-prop="required" /> <span class="form-check-label">@L["Required"]</span></label>
+            </div>
+            <div class="col-md-3" data-for="Number">
+                <label class="form-label">@L["Minimum"]</label>
+                <input type="number" step="any" class="form-control form-control-sm" data-prop="min" dir="ltr" />
+            </div>
+            <div class="col-md-3" data-for="Number">
+                <label class="form-label">@L["Maximum"]</label>
+                <input type="number" step="any" class="form-control form-control-sm" data-prop="max" dir="ltr" />
+            </div>
+            <div class="col-md-3" data-for="Text TextArea">
+                <label class="form-label">@L["Maximum length"]</label>
+                <input type="number" min="1" class="form-control form-control-sm" data-prop="maxLength" dir="ltr" />
+            </div>
+            <div class="col-md-6" data-for="Text">
+                <label class="form-label">@L["Pattern (regular expression)"]</label>
+                <input class="form-control form-control-sm" data-prop="pattern" dir="ltr" placeholder="^[0-9]{10}$" />
+            </div>
+            <div class="col-md-6" data-for="EntityLookup">
+                <label class="form-label">@L["Linked object type"]</label>
+                <select class="form-select form-select-sm" data-prop="lookupEntityType">
+                    @foreach (var type in Enum.GetValues<TrackableEntityType>())
+                    {
+                        <option value="@type">@L.Enum(type)</option>
+                    }
+                </select>
+            </div>
+        </div>
+        <div class="builder-options" data-for="Dropdown">
+            <div class="d-flex align-items-center justify-content-between mb-2">
+                <span class="form-label mb-0">@L["Options"]</span>
+                <button type="button" class="btn btn-sm btn-light" data-add-option><i class="bi bi-plus-lg me-1"></i>@L["Add option"]</button>
+            </div>
+            <div data-options></div>
+        </div>
+    </div>
+</template>
+
+<template id="optionTemplate">
+    <div class="row g-2 mb-2" data-option>
+        <div class="col"><input class="form-control form-control-sm" data-opt="value" dir="ltr" placeholder="@L["Value"]" /></div>
+        <div class="col"><input class="form-control form-control-sm" data-opt="labelEn" dir="ltr" placeholder="@L["Label (English)"]" /></div>
+        <div class="col"><input class="form-control form-control-sm" data-opt="labelFa" dir="rtl" placeholder="@L["Label (Persian)"]" /></div>
+        <div class="col-auto"><button type="button" class="btn btn-sm btn-light text-danger" data-remove-option><i class="bi bi-x-lg"></i></button></div>
+    </div>
+</template>
+
+@section Scripts {
+    <script src="~/js/form-builder.js" asp-append-version="true"></script>
+}

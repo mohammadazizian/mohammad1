@@ -1,0 +1,72 @@
+@page "{id:guid?}"
+@model Crm.WebUI.Pages.Products.EditModel
+@{
+    ViewData["Title"] = L[Model.IsNew ? "New product" : "Edit product"];
+    var backUrl = Model.IsNew ? "/Products" : $"/Products/Details/{Model.Input.Id}";
+}
+<div class="page-header">
+    <div><h1>@ViewData["Title"]</h1></div>
+</div>
+
+<form method="post" class="card" style="max-inline-size: 860px">
+    <div class="card-body">
+        <div asp-validation-summary="ModelOnly"></div>
+        <input type="hidden" asp-for="Input.Id" />
+        <div class="row g-3">
+            <div class="col-md-4 required">
+                <label class="form-label" asp-for="Input.Sku">@L["SKU"]</label>
+                <input class="form-control text-uppercase" asp-for="Input.Sku" dir="ltr" placeholder="LAP-PRO-14" />
+                <span asp-validation-for="Input.Sku"></span>
+            </div>
+            <div class="col-md-8 required">
+                <label class="form-label" asp-for="Input.Name">@L["Name"]</label>
+                <input class="form-control" asp-for="Input.Name" dir="auto" />
+                <span asp-validation-for="Input.Name"></span>
+            </div>
+            <div class="col-md-4">
+                <label class="form-label" asp-for="Input.CategoryId">@L["Category"]</label>
+                <select class="form-select" asp-for="Input.CategoryId">
+                    <option value="">—</option>
+                    @foreach (var category in Model.Categories)
+                    {
+                        <option value="@category.Id">@category.Name.Get(Culture.CultureName)</option>
+                    }
+                </select>
+            </div>
+            <div class="col-md-4">
+                <label class="form-label" asp-for="Input.UnitPrice">@L["Unit price"]</label>
+                <input class="form-control" asp-for="Input.UnitPrice" type="number" min="0" step="0.01" dir="ltr" />
+                <span asp-validation-for="Input.UnitPrice"></span>
+            </div>
+            <div class="col-md-4">
+                <label class="form-label" asp-for="Input.Cost">@L["Cost"]</label>
+                <input class="form-control" asp-for="Input.Cost" type="number" min="0" step="0.01" dir="ltr" />
+                <span asp-validation-for="Input.Cost"></span>
+            </div>
+            <div class="col-md-4 required">
+                <label class="form-label" asp-for="Input.Unit">@L["Unit"]</label>
+                <input class="form-control" asp-for="Input.Unit" dir="auto" />
+                <span asp-validation-for="Input.Unit"></span>
+            </div>
+            <div class="col-md-4">
+                <label class="form-label" asp-for="Input.LowStockThreshold">@L["Low stock threshold"]</label>
+                <input class="form-control" asp-for="Input.LowStockThreshold" type="number" min="0" step="0.01" dir="ltr" />
+                <div class="form-text">@L["An alert is raised when total stock falls to this level."]</div>
+            </div>
+            <div class="col-md-4 d-flex align-items-center">
+                <div class="form-check form-switch mt-3">
+                    <input class="form-check-input" asp-for="Input.IsActive" />
+                    <label class="form-check-label" asp-for="Input.IsActive">@L["Active"]</label>
+                </div>
+            </div>
+            <div class="col-12">
+                <label class="form-label" asp-for="Input.Description">@L["Description"]</label>
+                <textarea class="form-control" asp-for="Input.Description" rows="3" dir="auto"></textarea>
+            </div>
+        </div>
+    </div>
+    <div class="card-footer bg-transparent d-flex gap-2 justify-content-end">
+        <a class="btn btn-light" href="@backUrl">@L["Cancel"]</a>
+        <button type="submit" class="btn btn-primary">@L["Save"]</button>
+    </div>
+</form>

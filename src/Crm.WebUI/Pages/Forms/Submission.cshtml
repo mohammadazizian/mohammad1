@@ -1,0 +1,47 @@
+@page "{id:guid}"
+@model Crm.WebUI.Pages.Forms.SubmissionModel
+@{
+    var s = Model.Submission;
+    ViewData["Title"] = s.Title;
+}
+<div class="page-header">
+    <div>
+        <a class="cell-sub" href="/Forms/Submissions/@Model.Form.Code"><i class="bi bi-chevron-@(Culture.IsRtl ? "right" : "left")"></i> @Model.Form.Title.Get(Culture.CultureName)</a>
+        <h1 class="mt-1">@s.Title</h1>
+        <p class="page-subtitle">@L["Submitted by"] @s.SubmittedByName · <time-display value="s.CreatedAt" mode="DateTime" /></p>
+    </div>
+    <div class="page-actions">
+        @* A form submission is chat-, task- and reminder-enabled like any built-in entity. *@
+        <vc:entity-collaboration type="FormSubmission" id="s.Id" />
+        @if (Model.CanEdit)
+        {
+            <a class="btn btn-light" href="/Forms/Fill/@Model.Form.Code/@s.Id"><i class="bi bi-pencil me-1"></i>@L["Edit"]</a>
+        }
+        @if (Model.CanDelete)
+        {
+            <form method="post" asp-page-handler="Delete" asp-route-id="@s.Id" data-confirm="@L["Are you sure?"]">
+                <button type="submit" class="btn btn-light text-danger" title="@L["Delete"]"><i class="bi bi-trash"></i></button>
+            </form>
+        }
+    </div>
+</div>
+
+<div class="row g-4">
+    <div class="col-lg-7">
+        <div class="card">
+            <div class="card-header"><h2 class="card-title">@L["Answers"]</h2></div>
+            <div class="card-body">
+                <dl class="detail-list">
+                    @foreach (var field in Model.Form.Fields)
+                    {
+                        <dt>@field.Label.Get(Culture.CultureName)</dt>
+                        <dd><partial name="_FormValuePartial" model="(field, s.ValueOf(field.Key))" /></dd>
+                    }
+                </dl>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-5">
+        <vc:activity-timeline type="FormSubmission" id="s.Id" />
+    </div>
+</div>

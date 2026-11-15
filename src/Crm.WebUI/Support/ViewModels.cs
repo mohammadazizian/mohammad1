@@ -11,11 +11,14 @@ namespace Crm.WebUI.Support;
 /// <summary>Model of the shared pager partial.</summary>
 public sealed record PagerViewModel(int Page, int TotalPages, int TotalCount, Func<int, string> Url, string Target = "#list")
 {
-    /// <summary>Builds a pager that keeps the current query string and only changes the page number.</summary>
+    // Keys that belong to a single action (htmx posts) and must not leak into paging links.
+    private static readonly HashSet<string> TransientKeys = new(StringComparer.OrdinalIgnoreCase) { "p", "handler", "id", "status" };
+
+    /// <summary>Builds a pager that keeps the current filters and only changes the page number.</summary>
     public static PagerViewModel For<T>(PagedList<T> list, HttpRequest request, string target = "#list")
     {
         var query = request.Query
-            .Where(q => !string.Equals(q.Key, "p", StringComparison.OrdinalIgnoreCase) && !string.IsNullOrEmpty(q.Value))
+            .Where(q => !TransientKeys.Contains(q.Key) && !string.IsNullOrEmpty(q.Value))
             .ToDictionary(q => q.Key, q => (string?)q.Value.ToString());
 
         return new PagerViewModel(

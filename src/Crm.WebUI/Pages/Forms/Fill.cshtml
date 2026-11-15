@@ -1,0 +1,25 @@
+@page "{code}/{submissionId:guid?}"
+@model Crm.WebUI.Pages.Forms.FillModel
+@{
+    var title = Model.Form.Title.Get(Culture.CultureName);
+    ViewData["Title"] = title;
+    var backUrl = Model.SubmissionId is { } id ? $"/Forms/Submission/{id}" : $"/Forms/Submissions/{Model.Form.Code}";
+}
+<div class="page-header">
+    <div>
+        <a class="cell-sub" href="/Forms/Submissions/@Model.Form.Code"><i class="bi bi-chevron-@(Culture.IsRtl ? "right" : "left")"></i> @title</a>
+        <h1 class="mt-1">@L[Model.SubmissionId is null ? "New entry" : "Edit entry"]</h1>
+        <p class="page-subtitle">@Model.Form.Description.Get(Culture.CultureName)</p>
+    </div>
+</div>
+
+<form method="post" enctype="multipart/form-data" class="card" style="max-inline-size: 860px">
+    <div class="card-body">
+        <div asp-validation-summary="ModelOnly"></div>
+        <partial name="_DynamicFormRendererPartial" model="Model.Renderer" />
+    </div>
+    <div class="card-footer bg-transparent d-flex gap-2 justify-content-end">
+        <a class="btn btn-light" href="@backUrl">@L["Cancel"]</a>
+        <button type="submit" class="btn btn-primary">@L["Save"]</button>
+    </div>
+</form>

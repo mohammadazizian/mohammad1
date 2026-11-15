@@ -1,0 +1,14 @@
+@page
+@model Crm.WebUI.Pages.Warehouses.IndexModel
+@{
+    ViewData["Title"] = L["Warehouses"];
+}
+<div class="page-header">
+    <div>
+        <h1>@L["Warehouses"]</h1>
+        <p class="page-subtitle">@L["Locations where stock is kept."]</p>
+    </div>
+</div>
+<div class="card table-card" style="max-inline-size: 900px" id="warehouses">
+    <partial name="_WarehouseListPartial" model="Model" />
+</div>

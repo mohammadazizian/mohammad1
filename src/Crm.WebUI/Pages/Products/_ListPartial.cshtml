@@ -1,0 +1,50 @@
+@model Crm.WebUI.Pages.Products.IndexModel
+@if (Model.Products.Items.Count == 0)
+{
+    <div class="empty-state"><i class="bi bi-box-seam"></i>@L["No products found."]</div>
+}
+else
+{
+    <div class="table-responsive">
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th>@L["Product"]</th>
+                    <th>@L["Category"]</th>
+                    <th class="text-end">@L["Unit price"]</th>
+                    <th class="text-end">@L["Stock"]</th>
+                    <th>@L["Status"]</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var product in Model.Products.Items)
+                {
+                    <tr>
+                        <td>
+                            <a class="cell-title" href="/Products/Details/@product.Id" dir="auto">@product.Name</a>
+                            <div class="cell-sub text-start" dir="ltr">@product.Sku</div>
+                        </td>
+                        <td>@product.Category?.Get(Culture.CultureName)</td>
+                        <td class="text-end num">@Fmt.Currency(product.UnitPrice)</td>
+                        <td class="text-end num"><span class="fw-semibold @(product.IsLowStock ? "text-danger" : null)">@Fmt.Number(product.TotalStock)</span> <span class="cell-sub">@product.Unit</span></td>
+                        <td>
+                            @if (!product.IsActive)
+                            {
+                                <span class="pill">@L["Inactive"]</span>
+                            }
+                            else if (product.IsLowStock)
+                            {
+                                <span class="pill pill-danger"><i class="bi bi-exclamation-triangle"></i> @L["Low stock"]</span>
+                            }
+                            else
+                            {
+                                <span class="pill pill-success">@L["In stock"]</span>
+                            }
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+    <partial name="_PagerPartial" model="PagerViewModel.For(Model.Products, Context.Request)" />
+}

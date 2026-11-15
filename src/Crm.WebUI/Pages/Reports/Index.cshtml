@@ -1,0 +1,57 @@
+@page
+@model Crm.WebUI.Pages.Reports.IndexModel
+@{
+    ViewData["Title"] = L["Reports"];
+}
+<div class="page-header">
+    <div>
+        <h1>@L["Report builder"]</h1>
+        <p class="page-subtitle">@L["Pick a data set, choose columns, filter, group and visualize - then export."]</p>
+    </div>
+</div>
+
+<div class="row g-4">
+    <div class="col-xl-4">
+        <form class="card" id="reportForm" method="post" hx-post="/Reports?handler=Run" hx-target="#result" hx-indicator="#running">
+            @Html.AntiForgeryToken()
+            <div class="card-body">
+                <label class="form-label" for="source">@L["Data set"]</label>
+                <select class="form-select mb-3" id="source" name="source"
+                        hx-get="/Reports?handler=Builder" hx-target="#builder" hx-trigger="change">
+                    @foreach (var source in Model.Sources)
+                    {
+                        <option value="@source.Key" selected="@(source.Key == Model.Source.Key)">@Model.SourceLabel(source)</option>
+                    }
+                </select>
+                <div id="builder">
+                    <partial name="_BuilderPartial" model="Model" />
+                </div>
+            </div>
+            <div class="card-footer bg-transparent d-flex flex-wrap gap-2">
+                <button type="submit" class="btn btn-primary"><i class="bi bi-play-fill me-1"></i>@L["Run report"]</button>
+                <button type="button" class="btn btn-light" data-export="xlsx"><i class="bi bi-file-earmark-excel me-1"></i>Excel</button>
+                <button type="button" class="btn btn-light" data-export="pdf"><i class="bi bi-file-earmark-pdf me-1"></i>PDF</button>
+                <span class="spinner-border spinner-border-sm text-primary align-self-center htmx-indicator" id="running"></span>
+            </div>
+        </form>
+    </div>
+    <div class="col-xl-8" id="result">
+        <div class="card"><div class="empty-state"><i class="bi bi-bar-chart"></i>@L["Configure the report and press Run."]</div></div>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="~/lib/chartjs/chart.umd.min.js"></script>
+    <script>
+        // Exports are regular file downloads: submit the same form natively to the export handler.
+        document.querySelectorAll('[data-export]').forEach((button) => button.addEventListener('click', () => {
+            const form = document.getElementById('reportForm');
+            const previous = form.action;
+            form.action = '/Reports?handler=Export&format=' + button.dataset.export;
+            form.submit();
+            form.action = previous;
+        }));
+        // Run once on load so the page opens with data.
+        document.addEventListener('DOMContentLoaded', () => htmx.trigger('#reportForm', 'submit'));
+    </script>
+}

@@ -1,0 +1,43 @@
+@using Crm.Domain.Forms
+@model Crm.WebUI.Pages.Forms.SubmissionsModel
+@{
+    // The first few non-file fields become the columns of the list.
+    var columns = Model.Form.Fields.Where(f => f.Type is not (FormFieldType.File or FormFieldType.TextArea)).Take(4).ToList();
+}
+@if (Model.Submissions.Items.Count == 0)
+{
+    <div class="empty-state"><i class="bi bi-ui-checks"></i>@L["No entries yet."]</div>
+}
+else
+{
+    <div class="table-responsive">
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th>@L["Entry"]</th>
+                    @foreach (var column in columns)
+                    {
+                        <th>@column.Label.Get(Culture.CultureName)</th>
+                    }
+                    <th>@L["Submitted by"]</th>
+                    <th>@L["Date"]</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var submission in Model.Submissions.Items)
+                {
+                    <tr>
+                        <td><a class="cell-title" href="/Forms/Submission/@submission.Id">@submission.Title</a></td>
+                        @foreach (var column in columns)
+                        {
+                            <td><partial name="_FormValuePartial" model="(column, submission.Values.FirstOrDefault(v => v.Key == column.Key))" /></td>
+                        }
+                        <td>@submission.SubmittedByName</td>
+                        <td class="cell-sub"><time-display value="submission.CreatedAt" /></td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+    <partial name="_PagerPartial" model="PagerViewModel.For(Model.Submissions, Context.Request)" />
+}

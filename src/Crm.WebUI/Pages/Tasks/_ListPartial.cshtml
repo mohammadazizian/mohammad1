@@ -1,0 +1,61 @@
+@using Crm.Domain.Collaboration
+@model Crm.WebUI.Pages.Tasks.IndexModel
+@{
+    var now = DateTime.UtcNow;
+}
+@if (Model.Tasks.Items.Count == 0)
+{
+    <div class="empty-state"><i class="bi bi-check2-circle"></i>@L["No tasks found."]</div>
+}
+else
+{
+    <div class="px-3">
+        @foreach (var task in Model.Tasks.Items)
+        {
+            <div class="task-row py-3 @(task.Status == TaskItemStatus.Done ? "done" : null)">
+                @if (Model.CanEdit)
+                {
+                    <button type="button" class="task-check" title="@L[task.IsOpen ? "Mark as done" : "Reopen"]"
+                            hx-post="/Tasks?handler=Status&id=@task.Id&status=@(task.IsOpen ? TaskItemStatus.Done : TaskItemStatus.Open)&@Model.FilterQuery" hx-target="#list">
+                        <i class="bi bi-check-lg"></i>
+                    </button>
+                }
+                <div class="flex-grow-1" style="min-inline-size: 0">
+                    <div class="task-title" dir="auto">@task.Title</div>
+                    @if (!string.IsNullOrWhiteSpace(task.Description))
+                    {
+                        <div class="cell-sub" dir="auto">@task.Description</div>
+                    }
+                    <div class="task-meta">
+                        <span class="pill @StatusStyles.For(task.Priority)">@L.Enum(task.Priority)</span>
+                        <span class="pill @StatusStyles.For(task.Status)">@L.Enum(task.Status)</span>
+                        @if (task is { EntityType: { } type, EntityId: { } id })
+                        {
+                            <a href="@EntityRoutes.Url(type, id)"><i class="bi @EntityRoutes.Icon(type)"></i> @task.EntityDisplayName</a>
+                        }
+                        @if (task.AssignedToUserName is not null)
+                        {
+                            <span><i class="bi bi-person"></i> @task.AssignedToUserName</span>
+                        }
+                        @if (task.AssignedToRole is not null)
+                        {
+                            <span><i class="bi bi-people"></i> @task.AssignedToRole</span>
+                        }
+                        @if (task.DueAt is not null)
+                        {
+                            <span class="@(task.IsOverdue(now) ? "overdue" : null)"><i class="bi bi-calendar-event"></i> <time-display value="task.DueAt" mode="DateTime" /></span>
+                        }
+                    </div>
+                </div>
+                @if (Model.CanDelete)
+                {
+                    <button type="button" class="btn btn-sm btn-link text-muted p-0" title="@L["Delete"]"
+                            hx-post="/Tasks?handler=Delete&id=@task.Id&@Model.FilterQuery" hx-target="#list" hx-confirm="@L["Are you sure?"]">
+                        <i class="bi bi-trash"></i>
+                    </button>
+                }
+            </div>
+        }
+    </div>
+    <partial name="_PagerPartial" model="PagerViewModel.For(Model.Tasks, Context.Request)" />
+}

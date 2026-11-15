@@ -1,0 +1,43 @@
+@page
+@model Crm.WebUI.Pages.Admin.Roles.IndexModel
+@{
+    ViewData["Title"] = L["Roles & permissions"];
+}
+<div class="page-header">
+    <div>
+        <h1>@L["Roles & permissions"]</h1>
+        <p class="page-subtitle">@L["Control what each role may view, create, edit and delete - per module and per form."]</p>
+    </div>
+</div>
+
+<div class="card table-card" style="max-inline-size: 980px">
+    <table class="table table-hover">
+        <thead>
+            <tr><th>@L["Role"]</th><th>@L["Description"]</th><th class="text-end">@L["Users"]</th><th></th></tr>
+        </thead>
+        <tbody>
+            @foreach (var role in Model.Roles)
+            {
+                <tr>
+                    <td class="fw-semibold">@role.Name @if (role.IsSystem) { <span class="pill ms-1"><i class="bi bi-lock"></i> @L["System"]</span> }</td>
+                    <td class="text-muted" dir="auto">@role.Description</td>
+                    <td class="text-end num">@Fmt.Number(role.UserCount)</td>
+                    <td class="text-end text-nowrap">
+                        <a class="btn btn-sm btn-light" href="/Admin/Roles/Permissions/@role.Id"><i class="bi bi-shield-check me-1"></i>@L["Permissions"]</a>
+                        @if (!role.IsSystem)
+                        {
+                            <form method="post" asp-page-handler="Delete" asp-route-id="@role.Id" class="d-inline" data-confirm="@L["Are you sure?"]" asp-permission="Roles.Delete">
+                                <button type="submit" class="btn btn-sm btn-light text-danger" title="@L["Delete"]"><i class="bi bi-trash"></i></button>
+                            </form>
+                        }
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <form method="post" asp-page-handler="Create" class="row g-2 p-3 border-top" asp-permission="Roles.Create">
+        <div class="col-md-4"><input class="form-control" name="name" placeholder="@L["Role name"]" required maxlength="100" dir="auto" /></div>
+        <div class="col"><input class="form-control" name="description" placeholder="@L["Description"]" maxlength="300" dir="auto" /></div>
+        <div class="col-auto"><button type="submit" class="btn btn-primary"><i class="bi bi-plus-lg me-1"></i>@L["Add role"]</button></div>
+    </form>
+</div>

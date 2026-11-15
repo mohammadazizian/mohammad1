@@ -1,0 +1,11 @@
+@using Crm.Domain.Inventory
+@model StockMovementType
+@{
+    var (style, icon) = Model switch
+    {
+        StockMovementType.In => ("pill-success", "bi-box-arrow-in-down"),
+        StockMovementType.Out => ("pill-warning", "bi-box-arrow-up"),
+        _ => ("pill-primary", "bi-arrow-left-right"),
+    };
+}
+<span class="pill @style"><i class="bi @icon"></i> @L.Enum(Model)</span>

@@ -1,0 +1,37 @@
+@page "{id:guid}"
+@model Crm.WebUI.Pages.Inventory.DetailsModel
+@{
+    var t = Model.Transaction;
+    ViewData["Title"] = t.Number;
+}
+<div class="page-header">
+    <div>
+        <a class="cell-sub" href="/Inventory"><i class="bi bi-chevron-@(Culture.IsRtl ? "right" : "left")"></i> @L["Stock movements"]</a>
+        <h1 class="mt-1"><span dir="ltr">@t.Number</span> <span class="align-middle ms-1"><partial name="_MovementTypePartial" model="t.Type" /></span></h1>
+    </div>
+    <div class="page-actions">
+        <vc:entity-collaboration type="InventoryTransaction" id="t.Id" />
+    </div>
+</div>
+
+<div class="row g-4">
+    <div class="col-lg-5">
+        <div class="card">
+            <div class="card-header"><h2 class="card-title">@L["Details"]</h2></div>
+            <div class="card-body">
+                <dl class="detail-list">
+                    <dt>@L["Product"]</dt><dd><a href="/Products/Details/@t.ProductId"><i class="bi bi-box-seam"></i> @t.ProductName</a> <span class="cell-sub" dir="ltr">@t.ProductSku</span></dd>
+                    <dt>@L["Quantity"]</dt><dd class="num fw-semibold">@Fmt.Number(t.Quantity) @t.Unit</dd>
+                    <dt>@L["From warehouse"]</dt><dd>@(t.FromWarehouse ?? "—")</dd>
+                    <dt>@L["To warehouse"]</dt><dd>@(t.ToWarehouse ?? "—")</dd>
+                    <dt>@L["Reference"]</dt><dd dir="auto">@(t.Reference ?? "—")</dd>
+                    <dt>@L["Note"]</dt><dd dir="auto">@(t.Note ?? "—")</dd>
+                    <dt>@L["Date"]</dt><dd><time-display value="t.OccurredAt" mode="DateTime" /></dd>
+                </dl>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-7">
+        <vc:activity-timeline type="InventoryTransaction" id="t.Id" />
+    </div>
+</div>

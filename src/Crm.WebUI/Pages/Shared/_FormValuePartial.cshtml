@@ -1,0 +1,35 @@
+@model (Crm.Domain.Forms.FormField Field, Crm.Domain.Forms.FormFieldValue? Value)
+@using Crm.Domain.Forms
+@* Read-only, localized rendering of one answered dynamic-form field. *@
+@{
+    var (field, answer) = Model;
+    var raw = answer?.Value;
+}
+@if (string.IsNullOrEmpty(raw))
+{
+    <span class="text-muted">—</span>
+}
+else
+{
+    switch (field.Type)
+    {
+        case FormFieldType.Dropdown:
+            <span>@(field.Options.FirstOrDefault(o => o.Value == raw)?.Label.Get(Culture.CultureName) ?? raw)</span>
+            break;
+        case FormFieldType.Date when DateTime.TryParse(raw, System.Globalization.CultureInfo.InvariantCulture, System.Globalization.DateTimeStyles.AssumeUniversal | System.Globalization.DateTimeStyles.AdjustToUniversal, out var date):
+            <span>@Fmt.Date(date.AddHours(12))</span>
+            break;
+        case FormFieldType.Number when decimal.TryParse(raw, System.Globalization.NumberStyles.Number, System.Globalization.CultureInfo.InvariantCulture, out var number):
+            <span class="num">@Fmt.Number(number)</span>
+            break;
+        case FormFieldType.EntityLookup when field.LookupEntityType is { } type && Guid.TryParse(raw, out var id):
+            <a href="@EntityRoutes.Url(type, id)"><i class="bi @EntityRoutes.Icon(type)"></i> @(answer!.Display ?? raw)</a>
+            break;
+        case FormFieldType.File:
+            <a class="chat-attachment m-0" href="/Files/@raw?name=@Uri.EscapeDataString(answer!.Display ?? raw)"><i class="bi bi-paperclip"></i> @(answer.Display ?? raw)</a>
+            break;
+        default:
+            <span dir="auto" style="white-space: pre-line">@raw</span>
+            break;
+    }
+}

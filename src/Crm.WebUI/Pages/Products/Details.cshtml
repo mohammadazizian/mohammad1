@@ -1,0 +1,100 @@
+@page "{id:guid}"
+@model Crm.WebUI.Pages.Products.DetailsModel
+@{
+    var p = Model.Product;
+    ViewData["Title"] = p.Name;
+}
+<div class="page-header">
+    <div>
+        <a class="cell-sub" href="/Products"><i class="bi bi-chevron-@(Culture.IsRtl ? "right" : "left")"></i> @L["Products"]</a>
+        <h1 class="mt-1" dir="auto">@p.Name
+            @if (p.IsLowStock)
+            {
+                <span class="pill pill-danger align-middle ms-1"><i class="bi bi-exclamation-triangle"></i> @L["Low stock"]</span>
+            }
+        </h1>
+        <p class="page-subtitle" dir="ltr" style="text-align: start">@p.Sku</p>
+    </div>
+    <div class="page-actions">
+        <vc:entity-collaboration type="Product" id="p.Id" />
+        <a class="btn btn-light" href="/Inventory/Create?productId=@p.Id" asp-permission="Inventory.Create"><i class="bi bi-arrow-left-right me-1"></i>@L["New movement"]</a>
+        <a class="btn btn-light" href="/Products/Edit/@p.Id" asp-permission="Products.Edit"><i class="bi bi-pencil me-1"></i>@L["Edit"]</a>
+        <form method="post" asp-page-handler="Delete" asp-route-id="@p.Id" data-confirm="@L["Are you sure?"]" asp-permission="Products.Delete">
+            <button type="submit" class="btn btn-light text-danger" title="@L["Delete"]"><i class="bi bi-trash"></i></button>
+        </form>
+    </div>
+</div>
+
+<div class="row g-4">
+    <div class="col-lg-5">
+        <div class="card mb-4">
+            <div class="card-header"><h2 class="card-title">@L["Details"]</h2></div>
+            <div class="card-body">
+                <dl class="detail-list">
+                    <dt>@L["Category"]</dt><dd>@(p.Category?.Get(Culture.CultureName) ?? "—")</dd>
+                    <dt>@L["Unit price"]</dt><dd class="num fw-semibold">@Fmt.Currency(p.UnitPrice)</dd>
+                    <dt>@L["Cost"]</dt><dd class="num">@Fmt.Currency(p.Cost)</dd>
+                    <dt>@L["Unit"]</dt><dd>@p.Unit</dd>
+                    <dt>@L["Low stock threshold"]</dt><dd class="num">@Fmt.Number(p.LowStockThreshold)</dd>
+                    <dt>@L["Status"]</dt><dd>@L[p.IsActive ? "Active" : "Inactive"]</dd>
+                </dl>
+                @if (!string.IsNullOrWhiteSpace(p.Description))
+                {
+                    <hr />
+                    <p class="mb-0 text-muted" dir="auto" style="white-space: pre-line">@p.Description</p>
+                }
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header d-flex justify-content-between">
+                <h2 class="card-title">@L["Stock by warehouse"]</h2>
+                <span class="fw-semibold num @(p.IsLowStock ? "text-danger" : null)">@Fmt.Number(p.TotalStock) @p.Unit</span>
+            </div>
+            <div class="card-body py-2">
+                @if (p.Stock.Count == 0)
+                {
+                    <div class="text-muted small py-2">@L["No stock recorded yet."]</div>
+                }
+
+                @foreach (var level in p.Stock)
+                {
+                    <div class="list-row">
+                        <div class="grow"><i class="bi bi-houses text-muted me-1"></i>@level.WarehouseName</div>
+                        <span class="num fw-medium">@Fmt.Number(level.Quantity)</span>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-7">
+        @if (Model.RecentMovements.Count != 0)
+        {
+            <div class="card table-card mb-4">
+                <div class="card-header d-flex justify-content-between">
+                    <h2 class="card-title">@L["Recent stock movements"]</h2>
+                    <a class="small fw-medium" href="/Inventory?productId=@p.Id">@L["View all"]</a>
+                </div>
+                <div class="table-responsive">
+                    <table class="table table-hover">
+                        <tbody>
+                            @foreach (var movement in Model.RecentMovements)
+                            {
+                                <tr>
+                                    <td><a class="cell-title" href="/Inventory/Details/@movement.Id" dir="ltr">@movement.Number</a></td>
+                                    <td><partial name="_MovementTypePartial" model="movement.Type" /></td>
+                                    <td class="cell-sub">@(movement.FromWarehouse ?? "—") → @(movement.ToWarehouse ?? "—")</td>
+                                    <td class="text-end num fw-semibold">@Fmt.Number(movement.Quantity)</td>
+                                    <td class="cell-sub"><time-display value="movement.OccurredAt" /></td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        }
+
+        <vc:activity-timeline type="Product" id="p.Id" />
+    </div>
+</div>

@@ -1,0 +1,80 @@
+@model Crm.WebUI.Pages.Reports.IndexModel
+@* Result of a report run: optional grouped chart + summary, then the data table. *@
+@{
+    var result = Model.Result!;
+}
+@if (result.GroupColumn is not null && result.Groups.Count != 0)
+{
+    <div class="card mb-4">
+        <div class="card-header d-flex justify-content-between">
+            <h2 class="card-title">@Model.AggregateLabel(result) · @L["by"] @Model.ColumnLabel(result.GroupColumn)</h2>
+        </div>
+        <div class="card-body">
+            <div class="row g-4 align-items-center">
+                <div class="col-lg-7"><div style="block-size: 280px"><canvas data-chart="@Model.ChartJson(result)" role="img" aria-label="@L["Chart"]"></canvas></div></div>
+                <div class="col-lg-5">
+                    <table class="table table-sm">
+                        <thead><tr><th>@Model.ColumnLabel(result.GroupColumn)</th><th class="text-end">@Model.AggregateLabel(result)</th><th class="text-end">@L["Rows"]</th></tr></thead>
+                        <tbody>
+                            @foreach (var group in result.Groups)
+                            {
+                                <tr>
+                                    <td>@Model.FormatGroupKey(result.GroupColumn, group.Key)</td>
+                                    <td class="text-end num fw-semibold">@Fmt.Number(group.Value)</td>
+                                    <td class="text-end num text-muted">@Fmt.Number(group.Count)</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+<div class="card table-card">
+    <div class="card-header d-flex justify-content-between align-items-center">
+        <h2 class="card-title">@Model.SourceLabel(result.Source)</h2>
+        <span class="cell-sub">
+            @L["{0} items", Fmt.Number(result.Rows.Count)]
+            @if (result.Truncated)
+            {
+                <span class="pill pill-warning ms-1">@L["Limited to the first {0} rows", Fmt.Number(result.Rows.Count)]</span>
+            }
+        </span>
+    </div>
+    @if (result.Rows.Count == 0)
+    {
+        <div class="empty-state"><i class="bi bi-inbox"></i>@L["No data matches the filters."]</div>
+    }
+    else
+    {
+        <div class="table-responsive" style="max-block-size: 520px">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        @foreach (var column in result.Columns)
+                        {
+                            <th class="@(column.IsNumeric ? "text-end" : null)">@Model.ColumnLabel(column)</th>
+                        }
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var row in result.Rows.Take(Model.PreviewLimit))
+                    {
+                        <tr>
+                            @for (var i = 0; i < row.Length; i++)
+                            {
+                                <td class="@(result.Columns[i].IsNumeric ? "text-end num" : null)" dir="auto">@Model.Format(result.Columns[i], row[i])</td>
+                            }
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+        @if (result.Rows.Count > Model.PreviewLimit)
+        {
+            <div class="px-3 py-2 border-top cell-sub">@L["Showing the first {0} rows - export to get everything.", Fmt.Number(Model.PreviewLimit)]</div>
+        }
+    }
+</div>

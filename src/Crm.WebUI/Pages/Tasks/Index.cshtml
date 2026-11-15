@@ -1,0 +1,49 @@
+@page
+@using Crm.Application.Features.Collaboration
+@model Crm.WebUI.Pages.Tasks.IndexModel
+@{
+    ViewData["Title"] = L["Tasks"];
+}
+<div class="page-header">
+    <div>
+        <h1>@L["Tasks"]</h1>
+        <p class="page-subtitle">@L["Work assigned to you, your roles, or created by you."]</p>
+    </div>
+    <div class="page-actions">
+        <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#newTask" asp-permission="Tasks.Create">
+            <i class="bi bi-plus-lg me-1"></i>@L["New task"]
+        </button>
+    </div>
+</div>
+
+<div class="collapse mb-4" id="newTask">
+    <form class="card" style="max-inline-size: 760px" hx-post="/Tasks?handler=Create" hx-target="#list"
+          hx-on::after-request="if (event.detail.successful) { this.reset(); bootstrap.Collapse.getOrCreateInstance('#newTask').hide(); }">
+        <div class="card-body">
+            <partial name="_TaskFormFieldsPartial" model="Model.Form" />
+            <div class="text-end"><button type="submit" class="btn btn-primary"><i class="bi bi-plus-lg me-1"></i>@L["Add task"]</button></div>
+        </div>
+    </form>
+</div>
+
+<div class="card table-card">
+    <form class="d-flex flex-wrap align-items-center gap-2 p-3 border-bottom" method="get"
+          hx-get="/Tasks" hx-target="#list" hx-push-url="true"
+          hx-trigger="input changed delay:300ms from:find input[type=search], change from:find select, submit">
+        <div class="search-box flex-grow-1">
+            <i class="bi bi-search"></i>
+            <input type="search" class="form-control" name="q" value="@Model.Q" placeholder="@L["Search tasks…"]" aria-label="@L["Search"]" />
+        </div>
+        <select class="form-select w-auto" name="scope" aria-label="@L["Scope"]">
+            <option value="@TaskScope.Mine" selected="@(Model.Scope == TaskScope.Mine)">@L["My tasks"]</option>
+            <option value="@TaskScope.All" selected="@(Model.Scope == TaskScope.All)">@L["All tasks"]</option>
+        </select>
+        <select class="form-select w-auto" name="openOnly" aria-label="@L["Status"]">
+            <option value="true" selected="@Model.OpenOnly">@L["Open only"]</option>
+            <option value="false" selected="@(!Model.OpenOnly)">@L["All statuses"]</option>
+        </select>
+    </form>
+    <div id="list">
+        <partial name="_ListPartial" model="Model" />
+    </div>
+</div>

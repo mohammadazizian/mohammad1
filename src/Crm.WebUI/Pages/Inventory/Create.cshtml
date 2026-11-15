@@ -1,0 +1,99 @@
+@page
+@using Crm.Domain.Inventory
+@model Crm.WebUI.Pages.Inventory.CreateModel
+@{
+    ViewData["Title"] = L["New movement"];
+}
+<div class="page-header">
+    <div>
+        <a class="cell-sub" href="/Inventory"><i class="bi bi-chevron-@(Culture.IsRtl ? "right" : "left")"></i> @L["Stock movements"]</a>
+        <h1 class="mt-1">@L["New movement"]</h1>
+    </div>
+</div>
+
+<form method="post" class="card" style="max-inline-size: 760px" data-movement-form>
+    <div class="card-body">
+        <div asp-validation-summary="ModelOnly"></div>
+        <div class="row g-3">
+            <div class="col-12">
+                <label class="form-label d-block">@L["Type"]</label>
+                <div class="btn-group" role="group">
+                    @foreach (var type in Enum.GetValues<StockMovementType>())
+                    {
+                        <input type="radio" class="btn-check" asp-for="Input.Type" value="@type" id="type-@type" autocomplete="off" />
+                        <label class="btn btn-outline-primary" for="type-@type">@L.Enum(type)</label>
+                    }
+                </div>
+            </div>
+            <div class="col-md-8 required">
+                <label class="form-label" asp-for="Input.ProductId">@L["Product"]</label>
+                <select class="form-select" asp-for="Input.ProductId">
+                    <option value="@Guid.Empty">—</option>
+                    @foreach (var product in Model.Products)
+                    {
+                        <option value="@product.Value">@product.Label</option>
+                    }
+                </select>
+                <span asp-validation-for="Input.ProductId"></span>
+            </div>
+            <div class="col-md-4 required">
+                <label class="form-label" asp-for="Input.Quantity">@L["Quantity"]</label>
+                <input class="form-control" asp-for="Input.Quantity" type="number" min="0.01" step="0.01" dir="ltr" />
+                <span asp-validation-for="Input.Quantity"></span>
+            </div>
+            <div class="col-md-6" data-show-for="Out Transfer">
+                <label class="form-label" asp-for="Input.FromWarehouseId">@L["From warehouse"]</label>
+                <select class="form-select" asp-for="Input.FromWarehouseId">
+                    <option value="">—</option>
+                    @foreach (var warehouse in Model.Warehouses)
+                    {
+                        <option value="@warehouse.Id">@warehouse.Name</option>
+                    }
+                </select>
+                <span asp-validation-for="Input.FromWarehouseId"></span>
+            </div>
+            <div class="col-md-6" data-show-for="In Transfer">
+                <label class="form-label" asp-for="Input.ToWarehouseId">@L["To warehouse"]</label>
+                <select class="form-select" asp-for="Input.ToWarehouseId">
+                    <option value="">—</option>
+                    @foreach (var warehouse in Model.Warehouses)
+                    {
+                        <option value="@warehouse.Id">@warehouse.Name</option>
+                    }
+                </select>
+                <span asp-validation-for="Input.ToWarehouseId"></span>
+            </div>
+            <div class="col-md-6">
+                <label class="form-label" asp-for="Input.Reference">@L["Reference"]</label>
+                <input class="form-control" asp-for="Input.Reference" dir="auto" placeholder="PO-1024" />
+            </div>
+            <div class="col-md-6">
+                <label class="form-label" asp-for="Input.Note">@L["Note"]</label>
+                <input class="form-control" asp-for="Input.Note" dir="auto" />
+            </div>
+        </div>
+    </div>
+    <div class="card-footer bg-transparent d-flex gap-2 justify-content-end">
+        <a class="btn btn-light" href="/Inventory">@L["Cancel"]</a>
+        <button type="submit" class="btn btn-primary">@L["Save"]</button>
+    </div>
+</form>
+
+@section Scripts {
+    <script>
+        // Show only the warehouse fields that apply to the chosen movement type.
+        (function () {
+            const form = document.querySelector('[data-movement-form]');
+            const sync = () => {
+                const type = form.querySelector('input[name="Input.Type"]:checked')?.value;
+                form.querySelectorAll('[data-show-for]').forEach((el) => {
+                    const visible = el.dataset.showFor.split(' ').includes(type);
+                    el.classList.toggle('d-none', !visible);
+                    if (!visible) el.querySelector('select').value = '';
+                });
+            };
+            form.addEventListener('change', (e) => e.target.name === 'Input.Type' && sync());
+            sync();
+        })();
+    </script>
+}

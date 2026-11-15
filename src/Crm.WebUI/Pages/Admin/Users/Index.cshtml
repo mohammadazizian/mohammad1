@@ -1,0 +1,23 @@
+@page
+@model Crm.WebUI.Pages.Admin.Users.IndexModel
+@{
+    ViewData["Title"] = L["Users"];
+}
+<div class="page-header">
+    <div>
+        <h1>@L["Users"]</h1>
+        <p class="page-subtitle">@L["People who can sign in, and the roles they hold."]</p>
+    </div>
+    <div class="page-actions">
+        <a class="btn btn-primary" href="/Admin/Users/Edit" asp-permission="Users.Create"><i class="bi bi-plus-lg me-1"></i>@L["New user"]</a>
+    </div>
+</div>
+<div class="card table-card">
+    <form class="p-3 border-bottom" method="get" hx-get="/Admin/Users" hx-target="#list" hx-push-url="true" hx-trigger="input changed delay:300ms from:find input, submit">
+        <div class="search-box">
+            <i class="bi bi-search"></i>
+            <input type="search" class="form-control" name="q" value="@Model.Q" placeholder="@L["Search…"]" aria-label="@L["Search"]" />
+        </div>
+    </form>
+    <div id="list"><partial name="_ListPartial" model="Model" /></div>
+</div>

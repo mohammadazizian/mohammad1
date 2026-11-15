@@ -39,7 +39,7 @@ internal sealed class ReportSource<TRow>(
     {
         var rows = query(db, persian);
 
-        foreach (var filter in definition.Filters.Where(f => !string.IsNullOrWhiteSpace(f.Value)))
+        foreach (var filter in definition.Filters.Where(f => !string.IsNullOrWhiteSpace(f.Column) && !string.IsNullOrWhiteSpace(f.Value)))
         {
             rows = rows.Where(BuildPredicate(filter));
         }

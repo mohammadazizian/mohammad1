@@ -1,0 +1,31 @@
+@page "{code}"
+@model Crm.WebUI.Pages.Forms.SubmissionsModel
+@{
+    ViewData["Title"] = Model.Form.Title.Get(Culture.CultureName);
+}
+<div class="page-header">
+    <div>
+        <h1>@ViewData["Title"]</h1>
+        <p class="page-subtitle">@Model.Form.Description.Get(Culture.CultureName)</p>
+    </div>
+    <div class="page-actions">
+        @if (Model.CanCreate)
+        {
+            <a class="btn btn-primary" href="/Forms/Fill/@Model.Form.Code"><i class="bi bi-plus-lg me-1"></i>@L["New entry"]</a>
+        }
+    </div>
+</div>
+
+<div class="card table-card">
+    <form class="d-flex flex-wrap gap-2 p-3 border-bottom" method="get"
+          hx-get="/Forms/Submissions/@Model.Form.Code" hx-target="#list" hx-push-url="true"
+          hx-trigger="input changed delay:300ms from:find input, submit">
+        <div class="search-box flex-grow-1">
+            <i class="bi bi-search"></i>
+            <input type="search" class="form-control" name="q" value="@Model.Q" placeholder="@L["Search…"]" aria-label="@L["Search"]" />
+        </div>
+    </form>
+    <div id="list">
+        <partial name="_SubmissionListPartial" model="Model" />
+    </div>
+</div>
