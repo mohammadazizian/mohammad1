@@ -1,0 +1,12 @@
+# keep only the minified distributables of vendored libraries
+*.map
+bootstrap/dist/css/*.css
+!bootstrap/dist/css/bootstrap.min.css
+!bootstrap/dist/css/bootstrap.rtl.min.css
+bootstrap/dist/js/*.js
+!bootstrap/dist/js/bootstrap.bundle.min.js
+jquery/dist/jquery.js
+jquery/dist/jquery.slim*
+jquery-validation/dist/additional-methods*
+jquery-validation/dist/jquery.validate.js
+jquery-validation-unobtrusive/dist/jquery.validate.unobtrusive.js

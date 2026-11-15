@@ -1,0 +1,60 @@
+@page "{id:guid?}"
+@model Crm.WebUI.Pages.Deals.EditModel
+@{
+    ViewData["Title"] = L[Model.IsNew ? "New deal" : "Edit deal"];
+    var backUrl = Model.IsNew ? "/Deals" : $"/Deals/Details/{Model.Input.Id}";
+}
+<div class="page-header">
+    <div><h1>@ViewData["Title"]</h1></div>
+</div>
+
+<form method="post" class="card" style="max-inline-size: 760px">
+    <div class="card-body">
+        <div asp-validation-summary="ModelOnly"></div>
+        <input type="hidden" asp-for="Input.Id" />
+        <div class="row g-3">
+            <div class="col-12 required">
+                <label class="form-label" asp-for="Input.Title">@L["Title"]</label>
+                <input class="form-control" asp-for="Input.Title" dir="auto" />
+                <span asp-validation-for="Input.Title"></span>
+            </div>
+            <div class="col-md-6 required">
+                <label class="form-label" asp-for="Input.CustomerId">@L["Customer"]</label>
+                <select class="form-select" asp-for="Input.CustomerId">
+                    <option value="@Guid.Empty">—</option>
+                    @foreach (var customer in Model.Customers)
+                    {
+                        <option value="@customer.Value">@customer.Label</option>
+                    }
+                </select>
+                <span asp-validation-for="Input.CustomerId"></span>
+            </div>
+            <div class="col-md-6 required">
+                <label class="form-label" asp-for="Input.StageId">@L["Stage"]</label>
+                <select class="form-select" asp-for="Input.StageId">
+                    @foreach (var stage in Model.Stages)
+                    {
+                        <option value="@stage.Id">@stage.Name.Get(Culture.CultureName)</option>
+                    }
+                </select>
+            </div>
+            <div class="col-md-6">
+                <label class="form-label" asp-for="Input.Amount">@L["Amount"]</label>
+                <input class="form-control" asp-for="Input.Amount" type="number" min="0" step="0.01" dir="ltr" />
+                <span asp-validation-for="Input.Amount"></span>
+            </div>
+            <div class="col-md-6">
+                <label class="form-label" asp-for="Input.ExpectedCloseDate">@L["Expected close date"]</label>
+                <input class="form-control" asp-for="Input.ExpectedCloseDate" type="date" asp-format="{0:yyyy-MM-dd}" />
+            </div>
+            <div class="col-12">
+                <label class="form-label" asp-for="Input.Notes">@L["Notes"]</label>
+                <textarea class="form-control" asp-for="Input.Notes" rows="3" dir="auto"></textarea>
+            </div>
+        </div>
+    </div>
+    <div class="card-footer bg-transparent d-flex gap-2 justify-content-end">
+        <a class="btn btn-light" href="@backUrl">@L["Cancel"]</a>
+        <button type="submit" class="btn btn-primary">@L["Save"]</button>
+    </div>
+</form>

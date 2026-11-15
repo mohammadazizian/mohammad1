@@ -1,0 +1,73 @@
+@page "{id:guid?}"
+@using Crm.Domain.Sales
+@model Crm.WebUI.Pages.Customers.EditModel
+@{
+    ViewData["Title"] = L[Model.IsNew ? "New customer" : "Edit customer"];
+    var backUrl = Model.IsNew ? "/Customers" : $"/Customers/Details/{Model.Input.Id}";
+}
+<div class="page-header">
+    <div>
+        <h1>@ViewData["Title"]</h1>
+    </div>
+</div>
+
+<form method="post" class="card" style="max-inline-size: 860px">
+    <div class="card-body">
+        <div asp-validation-summary="ModelOnly"></div>
+        <input type="hidden" asp-for="Input.Id" />
+        <div class="row g-3">
+            <div class="col-md-8 required">
+                <label class="form-label" asp-for="Input.Name">@L["Name"]</label>
+                <input class="form-control" asp-for="Input.Name" dir="auto" />
+                <span asp-validation-for="Input.Name"></span>
+            </div>
+            <div class="col-md-4">
+                <label class="form-label" asp-for="Input.Type">@L["Type"]</label>
+                <select class="form-select" asp-for="Input.Type">
+                    @foreach (var type in Enum.GetValues<CustomerType>())
+                    {
+                        <option value="@type">@L.Enum(type)</option>
+                    }
+                </select>
+            </div>
+            <div class="col-md-4">
+                <label class="form-label" asp-for="Input.Email">@L["Email"]</label>
+                <input class="form-control" asp-for="Input.Email" type="email" dir="ltr" />
+                <span asp-validation-for="Input.Email"></span>
+            </div>
+            <div class="col-md-4">
+                <label class="form-label" asp-for="Input.Phone">@L["Phone"]</label>
+                <input class="form-control" asp-for="Input.Phone" dir="ltr" />
+                <span asp-validation-for="Input.Phone"></span>
+            </div>
+            <div class="col-md-4">
+                <label class="form-label" asp-for="Input.TaxId">@L["Tax ID"]</label>
+                <input class="form-control" asp-for="Input.TaxId" dir="ltr" />
+            </div>
+            <div class="col-md-6">
+                <label class="form-label" asp-for="Input.Street">@L["Street"]</label>
+                <input class="form-control" asp-for="Input.Street" dir="auto" />
+            </div>
+            <div class="col-md-2">
+                <label class="form-label" asp-for="Input.City">@L["City"]</label>
+                <input class="form-control" asp-for="Input.City" dir="auto" />
+            </div>
+            <div class="col-md-2">
+                <label class="form-label" asp-for="Input.Country">@L["Country"]</label>
+                <input class="form-control" asp-for="Input.Country" dir="auto" />
+            </div>
+            <div class="col-md-2">
+                <label class="form-label" asp-for="Input.PostalCode">@L["Postal code"]</label>
+                <input class="form-control" asp-for="Input.PostalCode" dir="ltr" />
+            </div>
+            <div class="col-12">
+                <label class="form-label" asp-for="Input.Notes">@L["Notes"]</label>
+                <textarea class="form-control" asp-for="Input.Notes" rows="3" dir="auto"></textarea>
+            </div>
+        </div>
+    </div>
+    <div class="card-footer bg-transparent d-flex gap-2 justify-content-end">
+        <a class="btn btn-light" href="@backUrl">@L["Cancel"]</a>
+        <button type="submit" class="btn btn-primary">@L["Save"]</button>
+    </div>
+</form>

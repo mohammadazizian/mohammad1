@@ -1,0 +1,58 @@
+@using Crm.Domain.Sales
+@model Crm.WebUI.Pages.Customers.DetailsModel
+@{
+    var c = Model.Customer;
+    string IconFor(InteractionType type) => type switch
+    {
+        InteractionType.Call => "bi-telephone",
+        InteractionType.Email => "bi-envelope",
+        InteractionType.Meeting => "bi-people",
+        _ => "bi-journal-text",
+    };
+}
+<div class="card">
+    <div class="card-header"><h2 class="card-title">@L["Interaction history"]</h2></div>
+    @if (Model.CanEdit)
+    {
+        <form class="card-body border-bottom" hx-post="/Customers/Details/@c.Id?handler=AddInteraction" hx-target="#interactions">
+            <div class="row g-2">
+                <div class="col-sm-3">
+                    <select class="form-select" name="Type" aria-label="@L["Type"]">
+                        @foreach (var type in Enum.GetValues<InteractionType>())
+                        {
+                            <option value="@type">@L.Enum(type)</option>
+                        }
+                    </select>
+                </div>
+                <div class="col-sm-9"><input class="form-control" name="Subject" placeholder="@L["Subject"]" required maxlength="200" dir="auto" /></div>
+                <div class="col-12"><textarea class="form-control" name="Notes" rows="2" placeholder="@L["Notes"]" maxlength="4000" dir="auto"></textarea></div>
+                <div class="col-12 text-end"><button type="submit" class="btn btn-sm btn-outline-primary"><i class="bi bi-plus-lg me-1"></i>@L["Log interaction"]</button></div>
+            </div>
+        </form>
+    }
+    <div class="card-body">
+        @if (c.Interactions.Count == 0)
+        {
+            <div class="text-muted small">@L["No interactions logged yet."]</div>
+        }
+        else
+        {
+            <ul class="timeline">
+                @foreach (var item in c.Interactions)
+                {
+                    <li>
+                        <span class="timeline-icon"><i class="bi @IconFor(item.Type)"></i></span>
+                        <div class="timeline-body">
+                            <div><span class="fw-semibold" dir="auto">@item.Subject</span> <span class="pill ms-1">@L.Enum(item.Type)</span></div>
+                            @if (!string.IsNullOrWhiteSpace(item.Notes))
+                            {
+                                <div class="text-muted" dir="auto" style="white-space: pre-line">@item.Notes</div>
+                            }
+                            <div class="timeline-meta">@item.UserName · <time-display value="item.OccurredAt" mode="DateTime" /></div>
+                        </div>
+                    </li>
+                }
+            </ul>
+        }
+    </div>
+</div>

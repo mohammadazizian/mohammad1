@@ -1,0 +1,39 @@
+@model Crm.WebUI.Pages.Leads.IndexModel
+@if (Model.Leads.Items.Count == 0)
+{
+    <div class="empty-state"><i class="bi bi-person-plus"></i>@L["No leads found."]</div>
+}
+else
+{
+    <div class="table-responsive">
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th>@L["Name"]</th>
+                    <th>@L["Company"]</th>
+                    <th>@L["Source"]</th>
+                    <th>@L["Status"]</th>
+                    <th class="text-end">@L["Estimated value"]</th>
+                    <th>@L["Created"]</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var lead in Model.Leads.Items)
+                {
+                    <tr>
+                        <td>
+                            <a class="cell-title" href="/Leads/Details/@lead.Id">@lead.Name</a>
+                            <div class="cell-sub text-start" dir="ltr">@lead.Email</div>
+                        </td>
+                        <td>@lead.Company</td>
+                        <td>@L.Enum(lead.Source)</td>
+                        <td><partial name="_StatusPartial" model="lead.Status" /></td>
+                        <td class="text-end num">@Fmt.Currency(lead.EstimatedValue)</td>
+                        <td class="cell-sub"><time-display value="lead.CreatedAt" /></td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+    <partial name="_PagerPartial" model="PagerViewModel.For(Model.Leads, Context.Request)" />
+}

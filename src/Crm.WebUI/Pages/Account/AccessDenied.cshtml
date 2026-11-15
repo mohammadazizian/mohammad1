@@ -1,0 +1,10 @@
+@page
+@{
+    ViewData["Title"] = L["Access denied"];
+}
+<div class="empty-state">
+    <i class="bi bi-shield-lock"></i>
+    <h1 class="h4 text-body">@L["Access denied"]</h1>
+    <p>@L["You do not have permission to do this."]</p>
+    <a class="btn btn-primary" href="/">@L["Back to dashboard"]</a>
+</div>

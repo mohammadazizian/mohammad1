@@ -1,0 +1,48 @@
+@model Crm.WebUI.Pages.Customers.DetailsModel
+@{
+    var c = Model.Customer;
+}
+<div class="card">
+    <div class="card-header"><h2 class="card-title">@L["Contacts"]</h2></div>
+    <div class="card-body py-2">
+        @if (c.Contacts.Count == 0)
+        {
+            <div class="text-muted small py-2">@L["No contacts yet."]</div>
+        }
+
+        @foreach (var contact in c.Contacts)
+        {
+            <div class="list-row">
+                <span class="avatar avatar-sm">@contact.FullName[..1]</span>
+                <div class="grow">
+                    <div class="fw-medium">@contact.FullName @if (contact.IsPrimary) { <span class="pill pill-success ms-1">@L["Primary"]</span> }</div>
+                    <div class="cell-sub">@contact.Position</div>
+                    <div class="cell-sub text-start" dir="ltr">@contact.Email @contact.Phone</div>
+                </div>
+                @if (Model.CanEdit)
+                {
+                    <button type="button" class="btn btn-sm btn-link text-muted p-0" title="@L["Delete"]"
+                            hx-post="/Customers/Details/@c.Id?handler=DeleteContact&contactId=@contact.Id" hx-target="#contacts" hx-confirm="@L["Are you sure?"]">
+                        <i class="bi bi-x-lg"></i>
+                    </button>
+                }
+            </div>
+        }
+    </div>
+    @if (Model.CanEdit)
+    {
+        <form class="card-footer bg-transparent" hx-post="/Customers/Details/@c.Id?handler=AddContact" hx-target="#contacts">
+            <div class="row g-2">
+                <div class="col-6"><input class="form-control form-control-sm" name="FirstName" placeholder="@L["First name"]" required maxlength="100" dir="auto" /></div>
+                <div class="col-6"><input class="form-control form-control-sm" name="LastName" placeholder="@L["Last name"]" maxlength="100" dir="auto" /></div>
+                <div class="col-6"><input class="form-control form-control-sm" name="Email" type="email" placeholder="@L["Email"]" dir="ltr" /></div>
+                <div class="col-6"><input class="form-control form-control-sm" name="Phone" placeholder="@L["Phone"]" dir="ltr" /></div>
+                <div class="col-12"><input class="form-control form-control-sm" name="Position" placeholder="@L["Position"]" dir="auto" /></div>
+                <div class="col-12 d-flex align-items-center justify-content-between">
+                    <label class="form-check mb-0"><input class="form-check-input" type="checkbox" name="IsPrimary" value="true" /> <span class="form-check-label small">@L["Primary"]</span></label>
+                    <button type="submit" class="btn btn-sm btn-outline-primary"><i class="bi bi-plus-lg me-1"></i>@L["Add contact"]</button>
+                </div>
+            </div>
+        </form>
+    }
+</div>

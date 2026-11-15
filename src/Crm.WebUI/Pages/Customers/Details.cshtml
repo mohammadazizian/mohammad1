@@ -1,0 +1,78 @@
+@page "{id:guid}"
+@model Crm.WebUI.Pages.Customers.DetailsModel
+@{
+    var c = Model.Customer;
+    ViewData["Title"] = c.Name;
+}
+<div class="page-header">
+    <div>
+        <a class="cell-sub" href="/Customers"><i class="bi bi-chevron-@(Culture.IsRtl ? "right" : "left")"></i> @L["Customers"]</a>
+        <h1 class="mt-1">@c.Name <span class="pill pill-primary align-middle ms-1">@L.Enum(c.Type)</span></h1>
+    </div>
+    <div class="page-actions">
+        @* Polymorphic collaboration: the same component works on every trackable entity page. *@
+        <vc:entity-collaboration type="Customer" id="c.Id" />
+        <a class="btn btn-light" href="/Customers/Edit/@c.Id" asp-permission="Customers.Edit"><i class="bi bi-pencil me-1"></i>@L["Edit"]</a>
+        <form method="post" asp-page-handler="Delete" asp-route-id="@c.Id" data-confirm="@L["Are you sure?"]" asp-permission="Customers.Delete">
+            <button type="submit" class="btn btn-light text-danger" title="@L["Delete"]"><i class="bi bi-trash"></i></button>
+        </form>
+    </div>
+</div>
+
+<div class="row g-4">
+    <div class="col-lg-4">
+        <div class="card mb-4">
+            <div class="card-header"><h2 class="card-title">@L["Details"]</h2></div>
+            <div class="card-body">
+                <dl class="detail-list">
+                    <dt>@L["Email"]</dt><dd dir="ltr" class="text-start">@(c.Email ?? "—")</dd>
+                    <dt>@L["Phone"]</dt><dd dir="ltr" class="text-start">@(c.Phone ?? "—")</dd>
+                    <dt>@L["Tax ID"]</dt><dd dir="ltr" class="text-start">@(c.TaxId ?? "—")</dd>
+                    <dt>@L["Address"]</dt>
+                    <dd dir="auto">@string.Join(Culture.IsPersian ? "، " : ", ", new[] { c.Address.Street, c.Address.City, c.Address.Country, c.Address.PostalCode }.Where(p => !string.IsNullOrWhiteSpace(p)).DefaultIfEmpty("—"))</dd>
+                    <dt>@L["Created"]</dt><dd><time-display value="c.CreatedAt" /></dd>
+                </dl>
+                @if (!string.IsNullOrWhiteSpace(c.Notes))
+                {
+                    <hr />
+                    <p class="mb-0 text-muted" dir="auto" style="white-space: pre-line">@c.Notes</p>
+                }
+            </div>
+        </div>
+        <div id="contacts"><partial name="_ContactsPartial" model="Model" /></div>
+    </div>
+
+    <div class="col-lg-8">
+        <div class="card mb-4">
+            <div class="card-header d-flex align-items-center justify-content-between">
+                <h2 class="card-title">@L["Deals"]</h2>
+                <a class="btn btn-sm btn-light" href="/Deals/Edit?customerId=@c.Id" asp-permission="Deals.Create"><i class="bi bi-plus-lg me-1"></i>@L["New deal"]</a>
+            </div>
+            @if (c.Deals.Count == 0)
+            {
+                <div class="card-body text-muted small">@L["No deals yet."]</div>
+            }
+            else
+            {
+                <div class="table-responsive">
+                    <table class="table table-hover">
+                        <tbody>
+                            @foreach (var deal in c.Deals)
+                            {
+                                <tr>
+                                    <td><a class="cell-title" href="/Deals/Details/@deal.Id">@deal.Title</a></td>
+                                    <td><span class="pill @(deal.IsWon ? "pill-success" : deal.IsLost ? null : "pill-primary")">@deal.Stage.Get(Culture.CultureName)</span></td>
+                                    <td class="text-end num fw-semibold">@Fmt.Currency(deal.Amount)</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            }
+        </div>
+
+        <div id="interactions" class="mb-4"><partial name="_InteractionsPartial" model="Model" /></div>
+
+        <vc:activity-timeline type="Customer" id="c.Id" />
+    </div>
+</div>

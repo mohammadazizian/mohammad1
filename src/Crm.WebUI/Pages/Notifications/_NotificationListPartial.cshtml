@@ -1,0 +1,26 @@
+@model Crm.Application.Features.Collaboration.NotificationListDto
+@* Notification rows; used by the full page and (with compact markup) by the bell dropdown. *@
+@if (Model.Items.Count == 0)
+{
+    <div class="empty-state"><i class="bi bi-bell-slash"></i>@L["You're all caught up."]</div>
+}
+
+@foreach (var item in Model.Items)
+{
+    var target = item is { EntityType: { } type, EntityId: { } id } ? EntityRoutes.Url(type, id) : "/Tasks";
+    <a class="d-flex gap-3 px-3 py-3 border-bottom text-body @(item.IsRead ? "opacity-75" : "bg-white")"
+       href="/Notifications?handler=Open&id=@item.Id&target=@Uri.EscapeDataString(target)">
+        <span class="timeline-icon @(item.IsRead ? null : "text-primary")"><i class="bi @StatusStyles.Icon(item.Type)"></i></span>
+        <span class="flex-grow-1" style="min-inline-size: 0">
+            <span class="d-flex justify-content-between gap-2">
+                <span class="@(item.IsRead ? "fw-medium" : "fw-semibold")">@L.Enum(item.Type)</span>
+                <span class="timeline-meta text-nowrap"><time-display value="item.CreatedAt" mode="Relative" /></span>
+            </span>
+            <span class="d-block text-muted small" dir="auto">@item.Message</span>
+        </span>
+        @if (!item.IsRead)
+        {
+            <span class="align-self-center rounded-circle bg-primary" style="inline-size: 8px; block-size: 8px"></span>
+        }
+    </a>
+}

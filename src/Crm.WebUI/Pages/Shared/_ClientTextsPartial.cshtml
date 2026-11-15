@@ -1,0 +1,22 @@
+@using System.Text.Json
+@using Crm.Domain.Collaboration
+@{
+    // Localized texts and settings needed by the client-side scripts.
+    var texts = new Dictionary<string, string>
+    {
+        ["error"] = L["Something went wrong. Please try again."],
+        ["confirm"] = L["Are you sure?"],
+        ["typing"] = L["{0} is typing…"],
+        ["replyingTo"] = L["Replying to {0}"],
+        ["chat"] = L["Chat"],
+        ["tasks"] = L["Tasks & reminders"],
+        ["open"] = L["Open"],
+        ["noResults"] = L["No results"],
+    };
+
+    foreach (var type in Enum.GetValues<NotificationType>())
+    {
+        texts["notification." + type] = L.Enum(type);
+    }
+}
+<script id="clientTexts" type="application/json">@Html.Raw(JsonSerializer.Serialize(texts))</script>

@@ -1,0 +1,12 @@
+@using Crm.Domain.Sales
+@model LeadStatus
+@{
+    var style = Model switch
+    {
+        LeadStatus.New => "pill-primary",
+        LeadStatus.Contacted => "pill-warning",
+        LeadStatus.Qualified or LeadStatus.Converted => "pill-success",
+        _ => string.Empty,
+    };
+}
+<span class="pill @style">@L.Enum(Model)</span>

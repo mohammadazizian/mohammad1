@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="@Culture.CultureName" dir="@(Culture.IsRtl ? "rtl" : "ltr")">
+<head>
+    <partial name="_HeadPartial" />
+</head>
+<body>
+    <div class="auth-page">
+        <div class="auth-card">
+            <div class="d-flex align-items-center justify-content-between mb-4">
+                <span class="app-brand p-0">
+                    <span class="app-brand-mark"><i class="bi bi-hexagon-fill"></i></span>
+                    <span>@L["Atlas CRM"]</span>
+                </span>
+                <partial name="_LanguageSwitcherPartial" />
+            </div>
+            @RenderBody()
+        </div>
+    </div>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

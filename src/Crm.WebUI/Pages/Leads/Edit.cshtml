@@ -1,0 +1,69 @@
+@page "{id:guid?}"
+@using Crm.Domain.Sales
+@model Crm.WebUI.Pages.Leads.EditModel
+@{
+    ViewData["Title"] = L[Model.IsNew ? "New lead" : "Edit lead"];
+    var backUrl = Model.IsNew ? "/Leads" : $"/Leads/Details/{Model.Input.Id}";
+}
+<div class="page-header">
+    <div><h1>@ViewData["Title"]</h1></div>
+</div>
+
+<form method="post" class="card" style="max-inline-size: 860px">
+    <div class="card-body">
+        <div asp-validation-summary="ModelOnly"></div>
+        <input type="hidden" asp-for="Input.Id" />
+        <div class="row g-3">
+            <div class="col-md-6 required">
+                <label class="form-label" asp-for="Input.Name">@L["Name"]</label>
+                <input class="form-control" asp-for="Input.Name" dir="auto" />
+                <span asp-validation-for="Input.Name"></span>
+            </div>
+            <div class="col-md-6">
+                <label class="form-label" asp-for="Input.Company">@L["Company"]</label>
+                <input class="form-control" asp-for="Input.Company" dir="auto" />
+            </div>
+            <div class="col-md-6">
+                <label class="form-label" asp-for="Input.Email">@L["Email"]</label>
+                <input class="form-control" asp-for="Input.Email" type="email" dir="ltr" />
+                <span asp-validation-for="Input.Email"></span>
+            </div>
+            <div class="col-md-6">
+                <label class="form-label" asp-for="Input.Phone">@L["Phone"]</label>
+                <input class="form-control" asp-for="Input.Phone" dir="ltr" />
+            </div>
+            <div class="col-md-4">
+                <label class="form-label" asp-for="Input.Source">@L["Source"]</label>
+                <select class="form-select" asp-for="Input.Source">
+                    @foreach (var source in Enum.GetValues<LeadSource>())
+                    {
+                        <option value="@source">@L.Enum(source)</option>
+                    }
+                </select>
+            </div>
+            <div class="col-md-4">
+                <label class="form-label" asp-for="Input.Status">@L["Status"]</label>
+                <select class="form-select" asp-for="Input.Status">
+                    @foreach (var status in Enum.GetValues<LeadStatus>().Where(s => s != LeadStatus.Converted))
+                    {
+                        <option value="@status">@L.Enum(status)</option>
+                    }
+                </select>
+                <span asp-validation-for="Input.Status"></span>
+            </div>
+            <div class="col-md-4">
+                <label class="form-label" asp-for="Input.EstimatedValue">@L["Estimated value"]</label>
+                <input class="form-control" asp-for="Input.EstimatedValue" type="number" min="0" step="0.01" dir="ltr" />
+                <span asp-validation-for="Input.EstimatedValue"></span>
+            </div>
+            <div class="col-12">
+                <label class="form-label" asp-for="Input.Notes">@L["Notes"]</label>
+                <textarea class="form-control" asp-for="Input.Notes" rows="3" dir="auto"></textarea>
+            </div>
+        </div>
+    </div>
+    <div class="card-footer bg-transparent d-flex gap-2 justify-content-end">
+        <a class="btn btn-light" href="@backUrl">@L["Cancel"]</a>
+        <button type="submit" class="btn btn-primary">@L["Save"]</button>
+    </div>
+</form>

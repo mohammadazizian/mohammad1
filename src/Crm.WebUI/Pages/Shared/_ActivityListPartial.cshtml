@@ -1,0 +1,32 @@
+@model (IReadOnlyList<Crm.Application.Features.Collaboration.ActivityDto> Items, bool ShowEntity)
+@* Activity timeline. ShowEntity adds a link to the object (used on the dashboard). *@
+@if (Model.Items.Count == 0)
+{
+    <div class="text-muted small">@L["No activity yet."]</div>
+}
+else
+{
+    <ul class="timeline">
+        @foreach (var item in Model.Items)
+        {
+            <li>
+                <span class="timeline-icon"><i class="bi @StatusStyles.Icon(item.Action)"></i></span>
+                <div class="timeline-body">
+                    <div>
+                        <span class="fw-semibold">@(item.UserName ?? L["System"])</span>
+                        <span class="text-muted">@L.Enum(item.Action)</span>
+                        @if (Model.ShowEntity)
+                        {
+                            <a href="@EntityRoutes.Url(item.EntityType, item.EntityId)"><i class="bi @EntityRoutes.Icon(item.EntityType)"></i> @item.EntityDisplayName</a>
+                        }
+                    </div>
+                    @if (!string.IsNullOrEmpty(item.Details))
+                    {
+                        <div class="text-muted text-truncate" dir="auto">@item.Details</div>
+                    }
+                    <div class="timeline-meta"><time-display value="item.OccurredAt" mode="Relative" /></div>
+                </div>
+            </li>
+        }
+    </ul>
+}

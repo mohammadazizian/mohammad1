@@ -1,0 +1,15 @@
+@using Crm.WebUI
+@using Crm.WebUI.Support
+@using Crm.WebUI.TagHelpers
+@using Crm.WebUI.ViewComponents
+@using Crm.Application.Common.Interfaces
+@using Crm.Application.Common.Models
+@using Crm.Application.Common.Security
+@using Crm.Domain.Common
+@using Microsoft.Extensions.Localization
+@namespace Crm.WebUI.Pages
+@inject IStringLocalizer<SharedResource> L
+@inject ILocalizedFormatter Fmt
+@inject ICultureContext Culture
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@addTagHelper *, Crm.WebUI

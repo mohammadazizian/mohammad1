@@ -1,0 +1,19 @@
+@page
+@model Crm.WebUI.Pages.Notifications.IndexModel
+@{
+    ViewData["Title"] = L["Notifications"];
+}
+<div class="page-header">
+    <div>
+        <h1>@L["Notifications"]</h1>
+        <p class="page-subtitle">@L["Mentions, task assignments, reminders and stock alerts."]</p>
+    </div>
+    <div class="page-actions">
+        <button class="btn btn-light" hx-post="/Notifications?handler=Read" hx-target="#notificationList">
+            <i class="bi bi-check2-all me-1"></i>@L["Mark all as read"]
+        </button>
+    </div>
+</div>
+<div class="card table-card" id="notificationList">
+    <partial name="_NotificationListPartial" model="Model.Notifications" />
+</div>

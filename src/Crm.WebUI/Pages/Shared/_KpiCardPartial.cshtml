@@ -1,0 +1,9 @@
+@model KpiCard
+@* High-level KPI card of the executive dashboard. *@
+<a class="card text-body h-100" href="@Model.Url">
+    <div class="kpi">
+        <span class="kpi-label"><span class="kpi-icon"><i class="bi @Model.Icon"></i></span>@L[Model.Label]</span>
+        <span class="kpi-value num">@Model.Value</span>
+        <span class="kpi-hint @(Model.Alert ? "text-danger fw-semibold" : null)">@Model.Hint</span>
+    </div>
+</a>

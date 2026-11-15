@@ -1,0 +1,25 @@
+@using Microsoft.AspNetCore.Builder
+@using Microsoft.Extensions.Options
+@inject IOptions<RequestLocalizationOptions> LocalizationOptions
+@{
+    // Language switcher: posts the chosen culture to /Account/Language, which stores it in a cookie.
+    var cultures = LocalizationOptions.Value.SupportedUICultures ?? [];
+    var returnUrl = Context.Request.Path + Context.Request.QueryString;
+}
+<div class="dropdown">
+    <button class="icon-btn" type="button" data-bs-toggle="dropdown" aria-expanded="false" title="@L["Language"]" aria-label="@L["Language"]">
+        <i class="bi bi-translate"></i>
+    </button>
+    <form method="post" action="/Account/Language" class="dropdown-menu dropdown-menu-end">
+        @Html.AntiForgeryToken()
+        <input type="hidden" name="returnUrl" value="@returnUrl" />
+        @foreach (var culture in cultures)
+        {
+            <button type="submit" name="culture" value="@culture.Name" lang="@culture.Name"
+                    class="dropdown-item d-flex align-items-center justify-content-between gap-3 @(culture.Name == Culture.CultureName ? "active" : null)">
+                <span>@culture.NativeName.Split('(')[0].Trim()</span>
+                <small class="text-uppercase opacity-75">@culture.TwoLetterISOLanguageName</small>
+            </button>
+        }
+    </form>
+</div>

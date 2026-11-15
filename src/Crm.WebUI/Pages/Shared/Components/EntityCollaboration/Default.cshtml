@@ -1,0 +1,16 @@
+@model EntityCollaborationViewModel
+@* Collaboration toolbar: opens the entity's chat and task widgets in the slide-over drawer. *@
+@if (Model.CanChat)
+{
+    <button type="button" class="btn btn-light" data-drawer-url="/Collab/Chat?entity=@Model.Entity" data-drawer-title="@L["Chat"]">
+        <i class="bi bi-chat-left-text me-1"></i>@L["Chat"]
+        <span class="pill pill-primary ms-1" data-chat-count="@Model.Entity">@Fmt.Number(Model.Summary.MessageCount)</span>
+    </button>
+}
+@if (Model.CanSeeTasks)
+{
+    <button type="button" class="btn btn-light" data-drawer-url="/Collab/Tasks?entity=@Model.Entity" data-drawer-title="@L["Tasks & reminders"]">
+        <i class="bi bi-check2-square me-1"></i>@L["Tasks"]
+        <span class="pill @(Model.Summary.OpenTaskCount > 0 ? "pill-warning" : null) ms-1" data-task-count="@Model.Entity">@Fmt.Number(Model.Summary.OpenTaskCount)</span>
+    </button>
+}

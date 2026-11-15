@@ -1,0 +1,111 @@
+@model TaskWidgetViewModel
+@using Crm.Domain.Collaboration
+@*
+    Task & reminder widget of one trackable entity. Every action posts with htmx and swaps the
+    whole widget, so the drawer never needs a full page reload.
+*@
+@{
+    var entity = Model.Entity;
+    var now = DateTime.UtcNow;
+    var openCount = Model.Tasks.Count(t => t.IsOpen);
+}
+<div id="taskWidget" data-task-widget data-entity="@entity.Ref" data-open-count="@openCount">
+    <div class="px-4 pt-3 drawer-context">
+        <i class="bi @EntityRoutes.Icon(entity.Type)"></i>
+        <a href="@EntityRoutes.Url(entity.Ref)">@entity.DisplayName</a>
+        · @L.Enum(entity.Type)
+    </div>
+
+    <div class="drawer-section">
+        <div class="drawer-section-title">@L["Tasks"]</div>
+        @if (Model.Tasks.Count == 0)
+        {
+            <div class="text-muted small">@L["No tasks for this item yet."]</div>
+        }
+
+        @foreach (var task in Model.Tasks)
+        {
+            <div class="task-row @(task.Status == TaskItemStatus.Done ? "done" : null)">
+                @if (Model.CanEdit)
+                {
+                    <button type="button" class="task-check" title="@L[task.IsOpen ? "Mark as done" : "Reopen"]"
+                            hx-post="/Collab/Tasks?handler=Status&entity=@entity.Ref&id=@task.Id&status=@(task.IsOpen ? TaskItemStatus.Done : TaskItemStatus.Open)"
+                            hx-target="#taskWidget" hx-swap="outerHTML">
+                        <i class="bi bi-check-lg"></i>
+                    </button>
+                }
+                <div class="flex-grow-1" style="min-inline-size: 0">
+                    <div class="task-title" dir="auto">@task.Title</div>
+                    <div class="task-meta">
+                        <span class="pill @StatusStyles.For(task.Priority)">@L.Enum(task.Priority)</span>
+                        @if (task.AssignedToUserName is not null)
+                        {
+                            <span><i class="bi bi-person"></i> @task.AssignedToUserName</span>
+                        }
+                        @if (task.AssignedToRole is not null)
+                        {
+                            <span><i class="bi bi-people"></i> @task.AssignedToRole</span>
+                        }
+                        @if (task.DueAt is not null)
+                        {
+                            <span class="@(task.IsOverdue(now) ? "overdue" : null)"><i class="bi bi-calendar-event"></i> <time-display value="task.DueAt" mode="DateTime" /></span>
+                        }
+                    </div>
+                </div>
+                @if (Model.CanDelete)
+                {
+                    <button type="button" class="btn btn-sm btn-link text-muted p-0" title="@L["Delete"]"
+                            hx-post="/Collab/Tasks?handler=Delete&entity=@entity.Ref&id=@task.Id"
+                            hx-target="#taskWidget" hx-swap="outerHTML" hx-confirm="@L["Are you sure?"]">
+                        <i class="bi bi-trash"></i>
+                    </button>
+                }
+            </div>
+        }
+    </div>
+
+    @if (Model.CanCreate)
+    {
+        <div class="drawer-section">
+            <div class="drawer-section-title">@L["New task"]</div>
+            <form hx-post="/Collab/Tasks?handler=Create&entity=@entity.Ref" hx-target="#taskWidget" hx-swap="outerHTML">
+                <partial name="_TaskFormFieldsPartial" model='new TaskFormViewModel(Model.Users, Model.Roles, "tw")' />
+                <button type="submit" class="btn btn-primary btn-sm"><i class="bi bi-plus-lg me-1"></i>@L["Add task"]</button>
+            </form>
+        </div>
+    }
+
+    <div class="drawer-section">
+        <div class="drawer-section-title">@L["My reminders"]</div>
+        @foreach (var reminder in Model.Reminders)
+        {
+            <div class="task-row">
+                <i class="bi @(reminder.IsSent ? "bi-bell-slash text-muted" : "bi-alarm text-warning") mt-1"></i>
+                <div class="flex-grow-1">
+                    <div class="@(reminder.IsSent ? "text-muted" : null)" dir="auto">@reminder.Message</div>
+                    <div class="task-meta"><time-display value="reminder.RemindAt" mode="DateTime" /></div>
+                </div>
+                @if (!reminder.IsSent)
+                {
+                    <button type="button" class="btn btn-sm btn-link text-muted p-0" title="@L["Delete"]"
+                            hx-post="/Collab/Tasks?handler=DeleteReminder&entity=@entity.Ref&id=@reminder.Id"
+                            hx-target="#taskWidget" hx-swap="outerHTML">
+                        <i class="bi bi-x-lg"></i>
+                    </button>
+                }
+            </div>
+        }
+
+        <form class="row g-2 mt-1" hx-post="/Collab/Tasks?handler=Reminder&entity=@entity.Ref" hx-target="#taskWidget" hx-swap="outerHTML">
+            <div class="col-12">
+                <input class="form-control" name="Message" maxlength="500" required dir="auto" placeholder="@L["Remind me to…"]" aria-label="@L["Reminder"]" />
+            </div>
+            <div class="col">
+                <input type="datetime-local" class="form-control" name="RemindAt" required aria-label="@L["Remind at"]" />
+            </div>
+            <div class="col-auto">
+                <button type="submit" class="btn btn-outline-primary"><i class="bi bi-alarm me-1"></i>@L["Set reminder"]</button>
+            </div>
+        </form>
+    </div>
+</div>

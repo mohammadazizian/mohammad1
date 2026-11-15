@@ -1,0 +1,36 @@
+@page
+@using Crm.Domain.Sales
+@model Crm.WebUI.Pages.Customers.IndexModel
+@{
+    ViewData["Title"] = L["Customers"];
+}
+<div class="page-header">
+    <div>
+        <h1>@L["Customers"]</h1>
+        <p class="page-subtitle">@L["Companies and individuals you do business with."]</p>
+    </div>
+    <div class="page-actions">
+        <a class="btn btn-primary" href="/Customers/Edit" asp-permission="Customers.Create"><i class="bi bi-plus-lg me-1"></i>@L["New customer"]</a>
+    </div>
+</div>
+
+<div class="card table-card">
+    <form class="d-flex flex-wrap gap-2 p-3 border-bottom" method="get"
+          hx-get="/Customers" hx-target="#list" hx-push-url="true"
+          hx-trigger="input changed delay:300ms from:find input, change from:find select, submit">
+        <div class="search-box flex-grow-1">
+            <i class="bi bi-search"></i>
+            <input type="search" class="form-control" name="q" value="@Model.Q" placeholder="@L["Search by name, email or phone…"]" aria-label="@L["Search"]" />
+        </div>
+        <select class="form-select w-auto" name="type" aria-label="@L["Type"]">
+            <option value="">@L["All types"]</option>
+            @foreach (var type in Enum.GetValues<CustomerType>())
+            {
+                <option value="@type" selected="@(Model.Type == type)">@L.Enum(type)</option>
+            }
+        </select>
+    </form>
+    <div id="list">
+        <partial name="_ListPartial" model="Model" />
+    </div>
+</div>

@@ -1,0 +1,41 @@
+@page
+@using Microsoft.AspNetCore.Mvc.Localization
+@model Crm.WebUI.Pages.Account.LoginModel
+@inject IViewLocalizer ViewL
+@{
+    // This page demonstrates view-specific resources (Resources/Pages/Account/Login.{culture}.resx)
+    // through IViewLocalizer, next to the shared resources used everywhere else.
+    Layout = "_AuthLayout";
+    ViewData["Title"] = ViewL["Sign in"];
+}
+<div class="card">
+    <div class="card-body p-4">
+        <h1 class="h4 mb-1">@ViewL["Welcome back"]</h1>
+        <p class="text-muted mb-4">@ViewL["Sign in to your workspace to continue."]</p>
+
+        <form method="post" novalidate>
+            <div asp-validation-summary="ModelOnly" class="alert alert-danger py-2 small" role="alert"></div>
+            <input type="hidden" asp-for="ReturnUrl" />
+            <div class="mb-3">
+                <label asp-for="Input.UserName" class="form-label"></label>
+                <input asp-for="Input.UserName" class="form-control" autocomplete="username" autofocus dir="ltr" />
+                <span asp-validation-for="Input.UserName"></span>
+            </div>
+            <div class="mb-3">
+                <label asp-for="Input.Password" class="form-label"></label>
+                <input asp-for="Input.Password" class="form-control" autocomplete="current-password" dir="ltr" />
+                <span asp-validation-for="Input.Password"></span>
+            </div>
+            <div class="form-check mb-4">
+                <input asp-for="Input.RememberMe" class="form-check-input" />
+                <label asp-for="Input.RememberMe" class="form-check-label"></label>
+            </div>
+            <button type="submit" class="btn btn-primary w-100 py-2">@ViewL["Sign in"]</button>
+        </form>
+    </div>
+</div>
+<p class="text-center text-muted small mt-3 mb-0">@ViewL["Demo sign-in: admin / Admin@12345"]</p>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

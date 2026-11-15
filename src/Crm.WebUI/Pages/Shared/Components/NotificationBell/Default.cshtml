@@ -1,0 +1,13 @@
+@model int
+@* Bell with unread badge; the dropdown content is lazy-loaded with htmx when opened. *@
+<div class="dropdown" id="notificationBell">
+    <button class="icon-btn" type="button" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false"
+            title="@L["Notifications"]" aria-label="@L["Notifications"]"
+            hx-get="/Notifications?handler=Dropdown" hx-target="#notificationDropdown" hx-trigger="click, refresh from:body">
+        <i class="bi bi-bell"></i>
+        <span class="badge-dot @(Model == 0 ? "d-none" : null)" id="notificationBadge" data-count="@Model">@(Model > 99 ? "99+" : Fmt.Number(Model))</span>
+    </button>
+    <div class="dropdown-menu dropdown-menu-end p-0" style="inline-size: min(380px, 92vw);" id="notificationDropdown">
+        <div class="p-4 text-center text-muted"><span class="spinner-border spinner-border-sm"></span></div>
+    </div>
+</div>

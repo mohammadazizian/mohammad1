@@ -1,0 +1,52 @@
+@model TaskFormViewModel
+@using Crm.Domain.Collaboration
+@* Input fields of a task - shared by the drawer widget and the Tasks page. *@
+<div class="mb-2 required">
+    <label class="form-label" for="@(Model.IdPrefix)Title">@L["Title"]</label>
+    <input class="form-control" id="@(Model.IdPrefix)Title" name="Title" maxlength="200" required dir="auto" />
+</div>
+<div class="row g-2 mb-2">
+    <div class="col-6">
+        <label class="form-label" for="@(Model.IdPrefix)User">@L["Assign to user"]</label>
+        <select class="form-select" id="@(Model.IdPrefix)User" name="AssignedToUserId">
+            <option value="">—</option>
+            @foreach (var user in Model.Users)
+            {
+                <option value="@user.Value">@user.Label</option>
+            }
+        </select>
+    </div>
+    <div class="col-6">
+        <label class="form-label" for="@(Model.IdPrefix)Role">@L["Assign to role"]</label>
+        <select class="form-select" id="@(Model.IdPrefix)Role" name="AssignedToRole">
+            <option value="">—</option>
+            @foreach (var role in Model.Roles)
+            {
+                <option value="@role.Value">@role.Label</option>
+            }
+        </select>
+    </div>
+</div>
+<div class="row g-2 mb-2">
+    <div class="col-4">
+        <label class="form-label" for="@(Model.IdPrefix)Priority">@L["Priority"]</label>
+        <select class="form-select" id="@(Model.IdPrefix)Priority" name="Priority">
+            @foreach (var priority in Enum.GetValues<TaskPriority>())
+            {
+                <option value="@priority" selected="@(priority == TaskPriority.Normal)">@L.Enum(priority)</option>
+            }
+        </select>
+    </div>
+    <div class="col-4">
+        <label class="form-label" for="@(Model.IdPrefix)Due">@L["Due"]</label>
+        <input type="datetime-local" class="form-control" id="@(Model.IdPrefix)Due" name="DueAt" />
+    </div>
+    <div class="col-4">
+        <label class="form-label" for="@(Model.IdPrefix)Remind">@L["Remind at"]</label>
+        <input type="datetime-local" class="form-control" id="@(Model.IdPrefix)Remind" name="RemindAt" />
+    </div>
+</div>
+<div class="mb-2">
+    <label class="form-label" for="@(Model.IdPrefix)Description">@L["Description"]</label>
+    <textarea class="form-control" id="@(Model.IdPrefix)Description" name="Description" rows="2" maxlength="4000" dir="auto"></textarea>
+</div>

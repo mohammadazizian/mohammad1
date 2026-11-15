@@ -1,0 +1,16 @@
+@page
+@model Crm.WebUI.Pages.ErrorModel
+@{
+    ViewData["Title"] = L["Error"];
+    Layout = User.Identity?.IsAuthenticated == true ? "_Layout" : "_AuthLayout";
+}
+<div class="empty-state">
+    <i class="bi @(Model.Status == 404 ? "bi-signpost-split" : Model.Status == 403 ? "bi-shield-lock" : "bi-bug")"></i>
+    <h1 class="display-6 fw-bold text-body mb-1">@Fmt.Number(Model.Status)</h1>
+    <p class="mb-3">@L[Model.Message]</p>
+    <a class="btn btn-primary" href="/">@L["Back to dashboard"]</a>
+    @if (Model.Status >= 500)
+    {
+        <p class="small mt-3 mb-0">@L["Request id"]: <code dir="ltr">@Model.RequestId</code></p>
+    }
+</div>

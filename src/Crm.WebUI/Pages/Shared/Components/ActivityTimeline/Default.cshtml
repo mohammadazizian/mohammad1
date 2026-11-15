@@ -1,0 +1,7 @@
+@model IReadOnlyList<Crm.Application.Features.Collaboration.ActivityDto>
+<div class="card">
+    <div class="card-header"><h2 class="card-title"><i class="bi bi-clock-history me-2 text-muted"></i>@L["Activity"]</h2></div>
+    <div class="card-body">
+        <partial name="_ActivityListPartial" model="(Model, false)" />
+    </div>
+</div>

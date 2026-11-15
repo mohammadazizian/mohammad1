@@ -1,0 +1,18 @@
+@model IReadOnlyList<NavSection>
+<nav class="app-nav">
+    @foreach (var section in Model)
+    {
+        @if (section.Title is not null)
+        {
+            <div class="app-nav-title">@L[section.Title]</div>
+        }
+
+        @foreach (var item in section.Items)
+        {
+            <a class="app-nav-link" href="@item.Url" nav-active="@item.ActivePrefix">
+                <i class="bi @item.Icon"></i>
+                <span class="text-truncate">@(item.Localize ? L[item.Text] : item.Text)</span>
+            </a>
+        }
+    }
+</nav>

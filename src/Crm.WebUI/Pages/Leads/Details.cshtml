@@ -1,0 +1,57 @@
+@page "{id:guid}"
+@using Crm.Domain.Sales
+@model Crm.WebUI.Pages.Leads.DetailsModel
+@{
+    var lead = Model.Lead;
+    var converted = lead.Status == LeadStatus.Converted;
+    ViewData["Title"] = lead.DisplayName;
+}
+<div class="page-header">
+    <div>
+        <a class="cell-sub" href="/Leads"><i class="bi bi-chevron-@(Culture.IsRtl ? "right" : "left")"></i> @L["Leads"]</a>
+        <h1 class="mt-1">@lead.Name <span class="align-middle ms-1"><partial name="_StatusPartial" model="lead.Status" /></span></h1>
+    </div>
+    <div class="page-actions">
+        <vc:entity-collaboration type="Lead" id="lead.Id" />
+        @if (!converted)
+        {
+            <form method="post" asp-page-handler="Convert" asp-route-id="@lead.Id" data-confirm="@L["Convert this lead to a customer?"]" asp-permission="Customers.Create">
+                <button type="submit" class="btn btn-primary"><i class="bi bi-arrow-repeat me-1"></i>@L["Convert to customer"]</button>
+            </form>
+            <a class="btn btn-light" href="/Leads/Edit/@lead.Id" asp-permission="Leads.Edit"><i class="bi bi-pencil me-1"></i>@L["Edit"]</a>
+        }
+        <form method="post" asp-page-handler="Delete" asp-route-id="@lead.Id" data-confirm="@L["Are you sure?"]" asp-permission="Leads.Delete">
+            <button type="submit" class="btn btn-light text-danger" title="@L["Delete"]"><i class="bi bi-trash"></i></button>
+        </form>
+    </div>
+</div>
+
+<div class="row g-4">
+    <div class="col-lg-5">
+        <div class="card">
+            <div class="card-header"><h2 class="card-title">@L["Details"]</h2></div>
+            <div class="card-body">
+                <dl class="detail-list">
+                    <dt>@L["Company"]</dt><dd dir="auto">@(lead.Company ?? "—")</dd>
+                    <dt>@L["Email"]</dt><dd dir="ltr" class="text-start">@(lead.Email ?? "—")</dd>
+                    <dt>@L["Phone"]</dt><dd dir="ltr" class="text-start">@(lead.Phone ?? "—")</dd>
+                    <dt>@L["Source"]</dt><dd>@L.Enum(lead.Source)</dd>
+                    <dt>@L["Estimated value"]</dt><dd class="num fw-semibold">@Fmt.Currency(lead.EstimatedValue)</dd>
+                    <dt>@L["Created"]</dt><dd><time-display value="lead.CreatedAt" /></dd>
+                    @if (lead.ConvertedCustomerId is { } customerId)
+                    {
+                        <dt>@L["Customer"]</dt><dd><a href="/Customers/Details/@customerId"><i class="bi bi-building"></i> @L["Open customer"]</a></dd>
+                    }
+                </dl>
+                @if (!string.IsNullOrWhiteSpace(lead.Notes))
+                {
+                    <hr />
+                    <p class="mb-0 text-muted" dir="auto" style="white-space: pre-line">@lead.Notes</p>
+                }
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-7">
+        <vc:activity-timeline type="Lead" id="lead.Id" />
+    </div>
+</div>

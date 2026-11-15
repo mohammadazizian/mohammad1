@@ -1,0 +1,22 @@
+@page
+@model Crm.WebUI.Pages.Deals.IndexModel
+@{
+    ViewData["Title"] = L["Deals"];
+}
+<div class="page-header">
+    <div>
+        <h1>@L["Deals"]</h1>
+        <p class="page-subtitle">@L["Drag a card to move the deal through the pipeline."]</p>
+    </div>
+    <div class="page-actions">
+        <a class="btn btn-primary" href="/Deals/Edit" asp-permission="Deals.Create"><i class="bi bi-plus-lg me-1"></i>@L["New deal"]</a>
+    </div>
+</div>
+
+<div id="board">
+    <partial name="_BoardPartial" model="Model" />
+</div>
+
+@section Scripts {
+    <script src="~/js/kanban.js" asp-append-version="true"></script>
+}

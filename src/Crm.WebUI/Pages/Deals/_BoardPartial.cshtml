@@ -1,0 +1,29 @@
+@model Crm.WebUI.Pages.Deals.IndexModel
+@* Kanban board. Re-rendered as a whole after each move, so totals always match the server. *@
+<div class="kanban" data-kanban data-move-url="/Deals?handler=Move" data-can-move="@Model.CanMove.ToString().ToLowerInvariant()">
+    @foreach (var column in Model.Board.Columns)
+    {
+        <section class="kanban-column @(column.IsWon ? "won" : column.IsLost ? "lost" : null)">
+            <header class="kanban-column-header">
+                <span>@column.Name.Get(Culture.CultureName) <span class="pill ms-1">@Fmt.Number(column.Deals.Count)</span></span>
+                <span class="kanban-column-total num">@Fmt.Currency(column.Total)</span>
+            </header>
+            <div class="kanban-cards" data-stage-id="@column.StageId">
+                @foreach (var deal in column.Deals)
+                {
+                    <article class="kanban-card" draggable="@Model.CanMove.ToString().ToLowerInvariant()" data-deal-id="@deal.Id">
+                        <a class="kanban-card-title" href="/Deals/Details/@deal.Id" draggable="false" dir="auto">@deal.Title</a>
+                        <div class="cell-sub"><i class="bi bi-building"></i> @deal.CustomerName</div>
+                        <div class="d-flex justify-content-between align-items-center mt-2">
+                            <span class="fw-semibold num">@Fmt.Currency(deal.Amount)</span>
+                            @if (deal.ExpectedCloseDate is not null)
+                            {
+                                <span class="cell-sub"><i class="bi bi-calendar-event"></i> <time-display value="deal.ExpectedCloseDate" /></span>
+                            }
+                        </div>
+                    </article>
+                }
+            </div>
+        </section>
+    }
+</div>

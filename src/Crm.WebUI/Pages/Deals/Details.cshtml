@@ -1,0 +1,45 @@
+@page "{id:guid}"
+@model Crm.WebUI.Pages.Deals.DetailsModel
+@{
+    var deal = Model.Deal;
+    ViewData["Title"] = deal.Title;
+}
+<div class="page-header">
+    <div>
+        <a class="cell-sub" href="/Deals"><i class="bi bi-chevron-@(Culture.IsRtl ? "right" : "left")"></i> @L["Deals"]</a>
+        <h1 class="mt-1" dir="auto">@deal.Title <span class="pill @(deal.IsWon ? "pill-success" : deal.IsLost ? null : "pill-primary") align-middle ms-1">@deal.StageName.Get(Culture.CultureName)</span></h1>
+    </div>
+    <div class="page-actions">
+        <vc:entity-collaboration type="Deal" id="deal.Id" />
+        <a class="btn btn-light" href="/Deals/Edit/@deal.Id" asp-permission="Deals.Edit"><i class="bi bi-pencil me-1"></i>@L["Edit"]</a>
+        <form method="post" asp-page-handler="Delete" asp-route-id="@deal.Id" data-confirm="@L["Are you sure?"]" asp-permission="Deals.Delete">
+            <button type="submit" class="btn btn-light text-danger" title="@L["Delete"]"><i class="bi bi-trash"></i></button>
+        </form>
+    </div>
+</div>
+
+<div class="row g-4">
+    <div class="col-lg-5">
+        <div class="card">
+            <div class="card-header"><h2 class="card-title">@L["Details"]</h2></div>
+            <div class="card-body">
+                <dl class="detail-list">
+                    <dt>@L["Customer"]</dt><dd><a href="/Customers/Details/@deal.CustomerId"><i class="bi bi-building"></i> @deal.CustomerName</a></dd>
+                    <dt>@L["Amount"]</dt><dd class="num fw-semibold">@Fmt.Currency(deal.Amount)</dd>
+                    <dt>@L["Stage"]</dt><dd>@deal.StageName.Get(Culture.CultureName)</dd>
+                    <dt>@L["Expected close date"]</dt><dd><time-display value="deal.ExpectedCloseDate" /></dd>
+                    <dt>@L["Closed"]</dt><dd><time-display value="deal.ClosedAt" /></dd>
+                    <dt>@L["Created"]</dt><dd><time-display value="deal.CreatedAt" /></dd>
+                </dl>
+                @if (!string.IsNullOrWhiteSpace(deal.Notes))
+                {
+                    <hr />
+                    <p class="mb-0 text-muted" dir="auto" style="white-space: pre-line">@deal.Notes</p>
+                }
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-7">
+        <vc:activity-timeline type="Deal" id="deal.Id" />
+    </div>
+</div>

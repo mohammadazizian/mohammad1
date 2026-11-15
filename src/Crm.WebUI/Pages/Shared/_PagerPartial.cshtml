@@ -1,0 +1,19 @@
+@model PagerViewModel
+@* Reusable htmx pager: swaps only the list container, keeps the URL in sync. *@
+@if (Model.TotalPages > 1)
+{
+    <div class="d-flex align-items-center justify-content-between px-3 py-2 border-top">
+        <span class="cell-sub">@L["{0} items", Fmt.Number(Model.TotalCount)]</span>
+        <nav aria-label="@L["Pages"]">
+            <ul class="pagination pagination-sm mb-0">
+                <li class="page-item @(Model.Page <= 1 ? "disabled" : null)">
+                    <a class="page-link" href="@Model.Url(Model.Page - 1)" hx-get="@Model.Url(Model.Page - 1)" hx-target="@Model.Target" hx-push-url="true">@L["Previous"]</a>
+                </li>
+                <li class="page-item disabled"><span class="page-link">@Fmt.Number(Model.Page) / @Fmt.Number(Model.TotalPages)</span></li>
+                <li class="page-item @(Model.Page >= Model.TotalPages ? "disabled" : null)">
+                    <a class="page-link" href="@Model.Url(Model.Page + 1)" hx-get="@Model.Url(Model.Page + 1)" hx-target="@Model.Target" hx-push-url="true">@L["Next"]</a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+}

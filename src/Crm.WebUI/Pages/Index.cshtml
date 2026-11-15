@@ -1,0 +1,126 @@
+﻿@page
+@model Crm.WebUI.Pages.IndexModel
+@inject ICurrentUser CurrentUser
+@{
+    ViewData["Title"] = L["Dashboard"];
+    var d = Model.Dashboard;
+    var maxFunnel = Math.Max(1, d.Funnel.Count == 0 ? 1 : d.Funnel.Max(s => s.Amount));
+    var now = DateTime.UtcNow;
+}
+<div class="page-header">
+    <div>
+        <h1>@L["Hello, {0}", CurrentUser.DisplayName ?? string.Empty]</h1>
+        <p class="page-subtitle">@L["Here is what is happening in your business today."] · @Fmt.Date(now)</p>
+    </div>
+</div>
+
+@* ---- KPI cards ---- *@
+<div class="row g-3 mb-4">
+    <div class="col-6 col-xl-3">
+        <partial name="_KpiCardPartial" model='new KpiCard("Open pipeline", Fmt.Currency(d.OpenDealAmount), L["{0} open deals", Fmt.Number(d.OpenDealCount)], "bi-briefcase", "/Deals")' />
+    </div>
+    <div class="col-6 col-xl-3">
+        <partial name="_KpiCardPartial" model='new KpiCard("Weighted forecast", Fmt.Currency(d.WeightedForecast), L["Won this month: {0}", Fmt.Currency(d.WonThisMonth)], "bi-graph-up-arrow", "/Reports")' />
+    </div>
+    <div class="col-6 col-xl-3">
+        <partial name="_KpiCardPartial" model='new KpiCard("Customers", Fmt.Number(d.CustomerCount), L["{0} active leads", Fmt.Number(d.NewLeadCount)], "bi-building", "/Customers")' />
+    </div>
+    <div class="col-6 col-xl-3">
+        <partial name="_KpiCardPartial" model='new KpiCard("Open tasks", Fmt.Number(d.OpenTaskCount), L["{0} overdue", Fmt.Number(d.OverdueTaskCount)], "bi-check2-square", "/Tasks", d.OverdueTaskCount > 0)' />
+    </div>
+</div>
+
+<div class="row g-4">
+    <div class="col-xl-8">
+        @* ---- Sales funnel ---- *@
+        <div class="card mb-4">
+            <div class="card-header d-flex align-items-center justify-content-between">
+                <h2 class="card-title">@L["Sales funnel"]</h2>
+                <a class="small fw-medium" href="/Deals">@L["Open board"]</a>
+            </div>
+            <div class="card-body">
+                @foreach (var stage in d.Funnel)
+                {
+                    var width = (int)Math.Round(stage.Amount / maxFunnel * 100);
+                    <div class="funnel-row">
+                        <span class="fw-medium text-truncate">@stage.Name.Get(Culture.CultureName)</span>
+                        <div><div class="funnel-bar @(stage.IsWon ? "won" : stage.IsLost ? "lost" : null)" style="inline-size: @(Math.Max(1, width))%"></div></div>
+                        <span class="num text-nowrap"><span class="fw-semibold">@Fmt.Currency(stage.Amount)</span> <span class="text-muted">· @Fmt.Number(stage.Count)</span></span>
+                    </div>
+                }
+            </div>
+        </div>
+
+        @* ---- Recent activity ---- *@
+        <div class="card">
+            <div class="card-header"><h2 class="card-title">@L["Recent activity"]</h2></div>
+            <div class="card-body">
+                <partial name="_ActivityListPartial" model="(d.RecentActivity, true)" />
+            </div>
+        </div>
+    </div>
+
+    <div class="col-xl-4">
+        @* ---- My pending tasks ---- *@
+        <div class="card mb-4">
+            <div class="card-header d-flex align-items-center justify-content-between">
+                <h2 class="card-title">@L["My pending tasks"]</h2>
+                <a class="small fw-medium" href="/Tasks">@L["View all"]</a>
+            </div>
+            <div class="card-body py-2">
+                @if (d.MyTasks.Count == 0)
+                {
+                    <div class="text-muted small py-2">@L["Nothing to do - enjoy your day."]</div>
+                }
+
+                @foreach (var task in d.MyTasks)
+                {
+                    <div class="list-row">
+                        <span class="pill @StatusStyles.For(task.Priority)">@L.Enum(task.Priority)</span>
+                        <div class="grow">
+                            <div class="fw-medium" dir="auto">@task.Title</div>
+                            <div class="task-meta">
+                                @if (task is { EntityType: { } type, EntityId: { } id })
+                                {
+                                    <a href="@EntityRoutes.Url(type, id)"><i class="bi @EntityRoutes.Icon(type)"></i> @task.EntityDisplayName</a>
+                                }
+                                @if (task.DueAt is not null)
+                                {
+                                    <span class="@(task.IsOverdue(now) ? "overdue" : null)"><i class="bi bi-calendar-event"></i> <time-display value="task.DueAt" /></span>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+
+        @* ---- Low stock ---- *@
+        <div class="card">
+            <div class="card-header d-flex align-items-center justify-content-between">
+                <h2 class="card-title">@L["Low stock"] <span class="pill @(d.LowStockCount > 0 ? "pill-danger" : null) ms-1">@Fmt.Number(d.LowStockCount)</span></h2>
+                <a class="small fw-medium" href="/Products?lowStock=true">@L["View all"]</a>
+            </div>
+            <div class="card-body py-2">
+                @if (d.LowStock.Count == 0)
+                {
+                    <div class="text-muted small py-2">@L["All products are sufficiently stocked."]</div>
+                }
+
+                @foreach (var product in d.LowStock)
+                {
+                    <div class="list-row">
+                        <div class="grow">
+                            <a class="cell-title" href="/Products/Details/@product.Id">@product.Name</a>
+                            <div class="cell-sub" dir="ltr">@product.Sku</div>
+                        </div>
+                        <div class="text-end">
+                            <div class="fw-semibold text-danger num">@Fmt.Number(product.Quantity) @product.Unit</div>
+                            <div class="cell-sub">@L["Threshold"]: @Fmt.Number(product.Threshold)</div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>

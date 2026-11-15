@@ -1,0 +1,15 @@
+@* Shared <head> content of the application and the sign-in layouts. *@
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>@(ViewData["Title"] is string title ? $"{title} · " : string.Empty)@L["Atlas CRM"]</title>
+<link rel="icon" href="~/favicon.ico" />
+@if (Culture.IsRtl)
+{
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.rtl.min.css" />
+}
+else
+{
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+}
+<link rel="stylesheet" href="~/lib/bootstrap-icons/bootstrap-icons.min.css" />
+<link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />

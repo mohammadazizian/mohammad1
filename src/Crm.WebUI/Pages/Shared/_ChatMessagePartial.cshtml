@@ -1,0 +1,35 @@
+@model Crm.Application.Features.Collaboration.ChatMessageDto
+@* One chat message. Also fetched on its own when SignalR announces a new message. *@
+@{
+    var initials = string.Concat(Model.AuthorName.Split(' ', StringSplitOptions.RemoveEmptyEntries).Take(2).Select(p => p[0]));
+    var isReply = Model.ParentMessageId is not null;
+}
+<div class="chat-message" id="msg-@Model.Id" data-message-id="@Model.Id" data-parent-id="@Model.ParentMessageId">
+    <span class="avatar @(isReply ? "avatar-sm" : null)">@initials</span>
+    <div class="chat-bubble">
+        <div>
+            <span class="chat-author">@Model.AuthorName</span>
+            <span class="chat-time"><time-display value="Model.CreatedAt" mode="Relative" /></span>
+        </div>
+        <div class="chat-text" dir="auto">@ChatMarkup.Render(Model.Body)</div>
+
+        @foreach (var attachment in Model.Attachments)
+        {
+            <a class="chat-attachment" href="/Files/@attachment.StoredName?name=@Uri.EscapeDataString(attachment.FileName)">
+                <i class="bi bi-paperclip"></i>
+                <span>@attachment.FileName</span>
+                <small class="text-muted">@Fmt.Number(Math.Max(1, attachment.Size / 1024)) KB</small>
+            </a>
+        }
+
+        @if (!isReply)
+        {
+            <div class="chat-actions">
+                <button type="button" data-chat-reply-to="@Model.Id" data-author="@Model.AuthorName">
+                    <i class="bi bi-reply"></i> @L["Reply"]
+                </button>
+            </div>
+            <div class="chat-replies" id="replies-@Model.Id">@foreach (var reply in Model.Replies){<partial name="_ChatMessagePartial" model="reply" />}</div>
+        }
+    </div>
+</div>

@@ -1,0 +1,79 @@
+﻿@using Microsoft.AspNetCore.Antiforgery
+@inject IAntiforgery Antiforgery
+@inject ICurrentUser CurrentUser
+@{
+    var displayName = CurrentUser.DisplayName ?? string.Empty;
+    var initials = string.Concat(displayName.Split(' ', StringSplitOptions.RemoveEmptyEntries).Take(2).Select(p => p[0]));
+}
+<!DOCTYPE html>
+<html lang="@Culture.CultureName" dir="@(Culture.IsRtl ? "rtl" : "ltr")">
+<head>
+    <partial name="_HeadPartial" />
+    <meta name="csrf-token" content="@Antiforgery.GetAndStoreTokens(Context).RequestToken" />
+</head>
+<body data-toast="@TempData[AppPageModel.ToastKey]">
+    <div class="app-shell">
+        <aside class="app-sidebar offcanvas-lg offcanvas-start" tabindex="-1" id="appSidebar" aria-label="@L["Navigation"]">
+            <a class="app-brand" href="/">
+                <span class="app-brand-mark"><i class="bi bi-hexagon-fill"></i></span>
+                <span>@L["Atlas CRM"]</span>
+            </a>
+            <vc:nav-menu />
+        </aside>
+
+        <div class="app-main">
+            <header class="app-topbar">
+                <button class="icon-btn d-lg-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#appSidebar" aria-label="@L["Navigation"]">
+                    <i class="bi bi-list"></i>
+                </button>
+                <div class="ms-auto d-flex align-items-center gap-1">
+                    <partial name="_LanguageSwitcherPartial" />
+                    <vc:notification-bell />
+                    <div class="dropdown ms-1">
+                        <button class="btn btn-light d-flex align-items-center gap-2 py-1 px-2" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <span class="avatar avatar-sm">@initials</span>
+                            <span class="d-none d-sm-inline">@displayName</span>
+                            <i class="bi bi-chevron-down small text-muted"></i>
+                        </button>
+                        <div class="dropdown-menu dropdown-menu-end">
+                            <div class="px-3 py-2">
+                                <div class="fw-semibold">@displayName</div>
+                                <div class="cell-sub">@string.Join(Culture.IsPersian ? "، " : ", ", CurrentUser.Roles)</div>
+                            </div>
+                            <div class="dropdown-divider"></div>
+                            <form method="post" action="/Account/Logout">
+                                @Html.AntiForgeryToken()
+                                <button type="submit" class="dropdown-item"><i class="bi bi-box-arrow-right me-2"></i>@L["Sign out"]</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            <main class="app-content">
+                @RenderBody()
+            </main>
+        </div>
+    </div>
+
+    @* Slide-over drawer shared by the chat and the task widgets. *@
+    <div class="offcanvas offcanvas-end app-drawer" tabindex="-1" id="appDrawer" aria-labelledby="appDrawerTitle">
+        <div class="offcanvas-header">
+            <h2 class="offcanvas-title h6 mb-0" id="appDrawerTitle"></h2>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="@L["Close"]"></button>
+        </div>
+        <div class="offcanvas-body" id="appDrawerBody"></div>
+    </div>
+
+    <div class="toast-container position-fixed bottom-0 end-0 p-3" id="toastContainer"></div>
+
+    <partial name="_ClientTextsPartial" />
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/lib/htmx/htmx.min.js"></script>
+    <script src="~/lib/signalr/signalr.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="~/js/chat.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

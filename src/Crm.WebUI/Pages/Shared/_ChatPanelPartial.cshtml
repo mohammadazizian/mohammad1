@@ -1,0 +1,57 @@
+@model ChatPanelViewModel
+@*
+    Contextual chat widget. Reusable for ANY trackable entity: it only needs the polymorphic
+    (type, id) pair. Loaded into the drawer by htmx and wired to SignalR by wwwroot/js/chat.js.
+*@
+@{
+    var entity = Model.Thread.Entity;
+}
+<div class="chat-panel" data-chat data-entity-type="@entity.Type" data-entity-id="@entity.Id" data-entity="@entity.Ref">
+    <div class="px-4 pt-3 drawer-context">
+        <i class="bi @EntityRoutes.Icon(entity.Type)"></i>
+        <a href="@EntityRoutes.Url(entity.Ref)">@entity.DisplayName</a>
+        · @L.Enum(entity.Type)
+    </div>
+
+    <div class="chat-messages" data-chat-messages>
+        @if (Model.Thread.Messages.Count == 0)
+        {
+            <div class="empty-state" data-chat-empty>
+                <i class="bi bi-chat-square-dots"></i>
+                @L["No messages yet. Start the conversation."]
+            </div>
+        }
+
+        @foreach (var message in Model.Thread.Messages)
+        {
+            <partial name="_ChatMessagePartial" model="message" />
+        }
+    </div>
+
+    <div class="chat-typing" data-chat-typing></div>
+
+    @if (Model.CanPost)
+    {
+        <form class="chat-composer" data-chat-form enctype="multipart/form-data" autocomplete="off">
+            <div class="chat-suggestions" data-chat-suggestions role="listbox"></div>
+            <div class="chat-reply-to" data-chat-reply>
+                <span data-chat-reply-label></span>
+                <button type="button" class="btn-close" style="font-size: .6rem" data-chat-reply-cancel aria-label="@L["Cancel"]"></button>
+            </div>
+            <input type="hidden" name="entity" value="@entity.Ref" />
+            <input type="hidden" name="parentId" data-chat-parent />
+            <textarea class="form-control" name="body" rows="2" maxlength="4000" dir="auto" data-chat-input
+                      placeholder="@L["Write a message… use @ to mention a colleague, # to link an object"]"></textarea>
+            <div class="d-flex align-items-center gap-2 mt-2">
+                <label class="btn btn-light btn-sm mb-0" title="@L["Attach files"]">
+                    <i class="bi bi-paperclip"></i>
+                    <input type="file" name="files" multiple hidden data-chat-files />
+                </label>
+                <span class="chat-files flex-grow-1 text-truncate" data-chat-file-names></span>
+                <button type="submit" class="btn btn-primary btn-sm px-3">
+                    <i class="bi bi-send me-1"></i>@L["Send"]
+                </button>
+            </div>
+        </form>
+    }
+</div>

@@ -1,0 +1,39 @@
+@model Crm.WebUI.Pages.Customers.IndexModel
+@if (Model.Customers.Items.Count == 0)
+{
+    <div class="empty-state"><i class="bi bi-building"></i>@L["No customers found."]</div>
+}
+else
+{
+    <div class="table-responsive">
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th>@L["Name"]</th>
+                    <th>@L["Type"]</th>
+                    <th>@L["Contact"]</th>
+                    <th>@L["City"]</th>
+                    <th class="text-end">@L["Open deals"]</th>
+                    <th>@L["Created"]</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var customer in Model.Customers.Items)
+                {
+                    <tr>
+                        <td><a class="cell-title" href="/Customers/Details/@customer.Id">@customer.Name</a></td>
+                        <td><span class="pill @(customer.Type == Crm.Domain.Sales.CustomerType.B2B ? "pill-primary" : null)">@L.Enum(customer.Type)</span></td>
+                        <td>
+                            <div dir="ltr" class="text-start">@customer.Email</div>
+                            <div class="cell-sub text-start" dir="ltr">@customer.Phone</div>
+                        </td>
+                        <td>@customer.City</td>
+                        <td class="text-end num">@Fmt.Number(customer.OpenDeals)</td>
+                        <td class="cell-sub"><time-display value="customer.CreatedAt" /></td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+    <partial name="_PagerPartial" model="PagerViewModel.For(Model.Customers, Context.Request)" />
+}
