@@ -8,10 +8,4 @@
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
   </ItemGroup>
-  <ItemGroup>
-    <!-- Leftovers of the `dotnet new webapp` template that are not part of the app. -->
-    <Content Remove="Pages\Privacy.cshtml" />
-    <Compile Remove="Pages\Privacy.cshtml.cs" />
-    <None Remove="Pages\Shared\_Layout.cshtml.css" />
-  </ItemGroup>
 </Project>
