@@ -43,6 +43,31 @@ dotnet build
 dotnet run --project src/Crm.WebUI --urls http://localhost:5080
 ```
 
+`localhost` only accepts connections from the same machine. To open the app from other computers, listen on all
+interfaces instead and browse to `http://<server-ip>:5080`:
+
+```bash
+dotnet run --project src/Crm.WebUI --urls http://0.0.0.0:5080
+# or: dotnet run --project src/Crm.WebUI --launch-profile lan    (port 5059)
+```
+
+### Access from other machines (both options)
+
+* The server's firewall must allow the port: Windows → *Windows Defender Firewall → Inbound rule → TCP 8080 / 5080*;
+  Linux → `sudo ufw allow 8080/tcp`; cloud VMs → open the port in the security group / network firewall.
+* Use the server's LAN or public IP, e.g. `http://192.168.1.20:8080` — not `localhost`, which on the other computer
+  means that computer itself.
+* Docker already publishes port 8080 on all interfaces (`APP_PORT` in `.env`). With Docker Desktop on Windows/macOS
+  the host firewall still applies.
+* **Docker inside WSL2:** WSL2 sits behind a NAT, so Windows forwards its ports to `localhost` only. Either enable
+  mirrored networking (Windows 11 22H2+) — `networkingMode=mirrored` under `[wsl2]` in `%USERPROFILE%\.wslconfig`,
+  then in an elevated PowerShell
+  `Set-NetFirewallHyperVVMSetting -Name '{40E0AC32-46A5-438A-A0B2-2B479E8F2E90}' -DefaultInboundAction Allow`
+  and `wsl --shutdown` — or forward the port:
+  `netsh interface portproxy add v4tov4 listenport=8080 listenaddress=0.0.0.0 connectport=8080 connectaddress=<WSL IP>`
+  (`wsl hostname -I`; the WSL IP changes after a reboot). In both cases add an inbound firewall rule for TCP 8080 and
+  browse to the Windows IP from `ipconfig`.
+
 The connection string lives in `src/Crm.WebUI/appsettings.json` (`ConnectionStrings:DefaultConnection`); override it
 with the `ConnectionStrings__DefaultConnection` environment variable or user secrets.
 
