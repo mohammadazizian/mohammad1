@@ -1,0 +1,1731 @@
+{
+  "seeded": true,
+  "seen": {
+    "binance:289917": {
+      "first_seen_utc": "2026-11-13T00:24:56Z",
+      "title": "Binance Futures Will Launch Multiple TradFi USDⓈ-Margined Perpetual Contracts (2026-11-12)",
+      "seeded": true
+    },
+    "binance:289715": {
+      "first_seen_utc": "2026-11-13T00:24:56Z",
+      "title": "Binance Futures Will Launch USDⓈ-Margined HYPEUSDC and TRXUSDC Perpetual Contracts (2026-11-16)",
+      "seeded": true
+    },
+    "binance:288627": {
+      "first_seen_utc": "2026-11-13T00:24:56Z",
+      "title": "Binance Will List Predict (PREDICT) with Seed Tag Applied",
+      "seeded": true
+    },
+    "binance:288602": {
+      "first_seen_utc": "2026-11-13T00:24:56Z",
+      "title": "Binance Futures Will Launch Multiple TradFi USDⓈ-Margined Perpetual Contracts (2026-10-29)",
+      "seeded": true
+    },
+    "binance:288501": {
+      "first_seen_utc": "2026-11-13T00:24:56Z",
+      "title": "Binance Will Add 5 bStocks Tokenized Securities as Collateral Asset - 2026-10-28",
+      "seeded": true
+    },
+    "binance:288498": {
+      "first_seen_utc": "2026-11-13T00:24:56Z",
+      "title": "Binance Exchange Adds Applovin Corp (APPB), Bending Spoons (BSPB), GE Vernova Inc (GEVB), GraniteShares 2x Short SK Hynix Daily ETF (SKDDB) and GraniteShares 2x Long SK Hynix Daily ETF (SKUUB) bStocks Trading Pairs on Binance Spot/Convert and Extends Zero Maker Fee Promotion - 2026-10-28",
+      "seeded": true
+    },
+    "binance:288334": {
+      "first_seen_utc": "2026-11-13T00:24:56Z",
+      "title": "Binance Futures Will Launch Multiple TradFi USDⓈ-Margined Perpetual Contracts (2026-10-26)",
+      "seeded": true
+    },
+    "binance:288295": {
+      "first_seen_utc": "2026-11-13T00:24:56Z",
+      "title": "Binance Futures Will Launch USDⓈ-Margined PREDICTUSDT Perpetual Contract Pre-Market Trading (2026-10-25)",
+      "seeded": true
+    },
+    "binance:288076": {
+      "first_seen_utc": "2026-11-13T00:24:56Z",
+      "title": "Binance Will Add 5 bStocks Tokenized Securities as Collateral Asset - 2026-10-21",
+      "seeded": true
+    },
+    "binance:288073": {
+      "first_seen_utc": "2026-11-13T00:24:56Z",
+      "title": "Binance Exchange Adds RoboStrategy Inc (BOTB), Berkshire Hathaway (BRKBB), KraneShares STAR Market 50 ETF (KSTRB), Direxion Daily 20 Year Treasury Bull 3X ETF (TMFB) and Vistra Corp (VSTB) bStocks Trading Pairs on Binance Spot/Convert - 2026-10-21",
+      "seeded": true
+    },
+    "binance:288046": {
+      "first_seen_utc": "2026-11-13T00:24:56Z",
+      "title": "Binance Futures Will Launch Multiple TradFi USDⓈ-Margined Perpetual Contracts (2026-10-21)",
+      "seeded": true
+    },
+    "binance:287560": {
+      "first_seen_utc": "2026-11-13T00:24:56Z",
+      "title": "Binance Will Add 4 bStocks Tokenized Securities as Collateral Asset - 2026-10-14",
+      "seeded": true
+    },
+    "binance:287541": {
+      "first_seen_utc": "2026-11-13T00:24:56Z",
+      "title": "Binance Exchange Adds Blackberry (BBB), Mongodb Inc (MDBB), Penguin Solutions Inc (PENGB) and ProShares Ultra VIX Short-Term Futures ETF (UVXYB) bStocks Trading Pairs on Binance Spot/Convert - 2026-10-14",
+      "seeded": true
+    },
+    "binance:286557": {
+      "first_seen_utc": "2026-11-13T00:24:56Z",
+      "title": "Binance Will List RWUSD and Introduce RWUSD Zero Trading Fee Promotion",
+      "seeded": true
+    },
+    "binance:286480": {
+      "first_seen_utc": "2026-11-13T00:24:56Z",
+      "title": "Binance Futures Will Launch Multiple TradFi USDⓈ-Margined Perpetual Contracts (2026-10-12)",
+      "seeded": true
+    },
+    "binance:286228": {
+      "first_seen_utc": "2026-11-13T00:24:56Z",
+      "title": "Binance Will Add 4 bStocks Tokenized Securities as Collateral Asset - 2026-10-07",
+      "seeded": true
+    },
+    "binance:286225": {
+      "first_seen_utc": "2026-11-13T00:24:56Z",
+      "title": "Binance Exchange Adds JPMorgan Chase (JPMB), Eli Lilly (LLYB), Securitize Corp (SECZB) and StablecoinX Inc (USDEB) bStocks Trading Pairs on Binance Spot/Convert - 2026-10-07",
+      "seeded": true
+    },
+    "binance:286171": {
+      "first_seen_utc": "2026-11-13T00:24:56Z",
+      "title": "Binance Futures Will Launch Multiple TradFi USDⓈ-Margined Perpetual Contracts (2026-10-06)",
+      "seeded": true
+    },
+    "binance:286040": {
+      "first_seen_utc": "2026-11-13T00:24:56Z",
+      "title": "Binance Futures Will Launch USDⓈ-Margined CTUSDT Perpetual Contract (2026-10-01)",
+      "seeded": true
+    },
+    "binance:285916": {
+      "first_seen_utc": "2026-11-13T00:24:56Z",
+      "title": "Binance Will Add 7 bStocks Tokenized Securities as Collateral Asset - 2026-09-30",
+      "seeded": true
+    },
+    "binance:290149": {
+      "first_seen_utc": "2026-11-13T00:24:56Z",
+      "title": "Binance Completes Coverage of Assets Impacted in Security Incident; New Proof of Reserves Published",
+      "seeded": true
+    },
+    "binance:289935": {
+      "first_seen_utc": "2026-11-13T00:24:56Z",
+      "title": "Introducing Binance Square Leaderboards: Discover Top Traders and Share Your Achievements",
+      "seeded": true
+    },
+    "binance:290125": {
+      "first_seen_utc": "2026-11-13T00:24:56Z",
+      "title": "Notice on ADR Fees for US Stocks on Binance Stock Trading - October 2026",
+      "seeded": true
+    },
+    "binance:290072": {
+      "first_seen_utc": "2026-11-13T00:24:56Z",
+      "title": "Binance Earn: Dual Investment Supports HYPE",
+      "seeded": true
+    },
+    "binance:290069": {
+      "first_seen_utc": "2026-11-13T00:24:56Z",
+      "title": "Binance Updates Commodity Options Settlement Price Rule",
+      "seeded": true
+    },
+    "binance:290037": {
+      "first_seen_utc": "2026-11-13T00:24:56Z",
+      "title": "Updates on Step Size for Spot Trading Pairs (2026-11-19)",
+      "seeded": true
+    },
+    "binance:289731": {
+      "first_seen_utc": "2026-11-13T00:24:56Z",
+      "title": "Binance Convert and Buy/Sell Now Support Fiat Purchases of bStocks",
+      "seeded": true
+    },
+    "binance:289677": {
+      "first_seen_utc": "2026-11-13T00:24:56Z",
+      "title": "Binance Earn Yield Arena: Earn Up to 20% APR With This Week’s New Limited-Time Offers! (2026-11-11)",
+      "seeded": true
+    },
+    "binance:289695": {
+      "first_seen_utc": "2026-11-13T00:24:56Z",
+      "title": "Binance Will Support Sandisk Corporation (SNDK) 8-for-1 Forward Stock Split via bStocks",
+      "seeded": true
+    },
+    "binance:289680": {
+      "first_seen_utc": "2026-11-13T00:24:56Z",
+      "title": "Binance Futures Will Adjust The Contract Size of USDⓈ-Margined SNDKUSDT Perpetual Contract (2026-11-20)",
+      "seeded": true
+    },
+    "binance:289616": {
+      "first_seen_utc": "2026-11-13T00:24:56Z",
+      "title": "Binance Futures Will End Last Price Protected Period on USDⓈ-Margined BULLAUSDT Perpetual Contract (2026-11-10)",
+      "seeded": true
+    },
+    "binance:289611": {
+      "first_seen_utc": "2026-11-13T00:24:56Z",
+      "title": "Update on the Collateral Ratio Under Cross Margin and Portfolio Margin (2026-11-13)",
+      "seeded": true
+    },
+    "binance:289589": {
+      "first_seen_utc": "2026-11-13T00:24:56Z",
+      "title": "Important: Transactions with Certain Crypto Platforms (2026-11-10)",
+      "seeded": true
+    },
+    "binance:289547": {
+      "first_seen_utc": "2026-11-13T00:24:56Z",
+      "title": "Updates on Tick Size for Multiple USDⓈ-M Perpetual Futures Contracts (2026-11-11)",
+      "seeded": true
+    },
+    "binance:289544": {
+      "first_seen_utc": "2026-11-13T00:24:56Z",
+      "title": "Binance Futures Will Adjust The Contract Size of USDⓈ-Margined BITOUSDT Perpetual Contract (2026-11-19)",
+      "seeded": true
+    },
+    "binance:289447": {
+      "first_seen_utc": "2026-11-13T00:24:56Z",
+      "title": "Introducing Sub-Affiliate: Flexible Commission Sharing on Binance",
+      "seeded": true
+    },
+    "binance:289385": {
+      "first_seen_utc": "2026-11-13T00:24:56Z",
+      "title": "Recovery Update #9: Withdrawals for More Assets to Reopen (2026-11-06)",
+      "seeded": true
+    },
+    "binance:289116": {
+      "first_seen_utc": "2026-11-13T00:24:56Z",
+      "title": "Binance Will Support the International Business Machines Corporation (IBM), Apple Inc. (AAPL), Corning Incorporated (GLW), and Eli Lilly and Company (LLY) Cash Dividend Distribution via bStocks",
+      "seeded": true
+    },
+    "binance:289067": {
+      "first_seen_utc": "2026-11-13T00:24:56Z",
+      "title": "Important Updates on Dividend Adjustment Process of SAMSUNGUSDT TradFi Perpetual Contract (2026-11-06)",
+      "seeded": true
+    },
+    "binance:289045": {
+      "first_seen_utc": "2026-11-13T00:24:56Z",
+      "title": "Security Incident | Recovery Update #8: Withdrawals for More Assets to Reopen (2026-11-05)",
+      "seeded": true
+    },
+    "binance:290148": {
+      "first_seen_utc": "2026-11-13T00:24:56Z",
+      "title": "Binance Stocks University: Trade bStocks to Share 2,000 USDC!",
+      "seeded": true
+    },
+    "binance:290052": {
+      "first_seen_utc": "2026-11-13T00:24:56Z",
+      "title": "Binance Alpha Trading Competition: Trade LAB (LAB) and Share $200K Worth of Rewards (2026-11-12)",
+      "seeded": true
+    },
+    "binance:290090": {
+      "first_seen_utc": "2026-11-13T00:24:56Z",
+      "title": "Binance Lite Loan Promotion Extended: Enjoy Simple Borrowing with 50% Off Service Fee! (2026-11-13)",
+      "seeded": true
+    },
+    "binance:290079": {
+      "first_seen_utc": "2026-11-13T00:24:56Z",
+      "title": "Binance Button Game: Play to Win $30,000 in Anthropic bStocks or USDC!",
+      "seeded": true
+    },
+    "binance:289730": {
+      "first_seen_utc": "2026-11-13T00:24:56Z",
+      "title": "Fund Your First Recurring Buy - Deposit USD and Earn Rewards",
+      "seeded": true
+    },
+    "binance:289673": {
+      "first_seen_utc": "2026-11-13T00:24:56Z",
+      "title": "Binance Academy Bitcoin Page: Complete Quiz to Earn BTC Rewards This November 2026!",
+      "seeded": true
+    },
+    "binance:289579": {
+      "first_seen_utc": "2026-11-13T00:24:56Z",
+      "title": "Binance Launches Limited-Time Futures Taker Program Promotion (2026-11-10)",
+      "seeded": true
+    },
+    "binance:289576": {
+      "first_seen_utc": "2026-11-13T00:24:56Z",
+      "title": "Celebrating the New Year: Become A Binance VIP To Unlock Exclusive Gifts",
+      "seeded": true
+    },
+    "binance:289538": {
+      "first_seen_utc": "2026-11-13T00:24:56Z",
+      "title": "Binance’s Community 3rd Appreciation Campaign",
+      "seeded": true
+    },
+    "binance:289425": {
+      "first_seen_utc": "2026-11-13T00:24:56Z",
+      "title": "Word of the Day: Test Your Knowledge on “Choose Your Binance AI” to Unlock BNB Rewards!",
+      "seeded": true
+    },
+    "binance:289407": {
+      "first_seen_utc": "2026-11-13T00:24:56Z",
+      "title": "Binance Launches Limited-Time Spot Taker Program Promotion (2026-11-09)",
+      "seeded": true
+    },
+    "binance:289105": {
+      "first_seen_utc": "2026-11-13T00:24:56Z",
+      "title": "November Affiliate Dual-Star Program: Affiliate Rewards Up to 12,000 USDC & New Referral Rewards Up to 10 USDC!",
+      "seeded": true
+    },
+    "binance:289100": {
+      "first_seen_utc": "2026-11-13T00:24:56Z",
+      "title": "November Referral Tournament: Invite Friends, Climb the Dual Leaderboards & Earn Up to 3,000 USDC",
+      "seeded": true
+    },
+    "binance:289064": {
+      "first_seen_utc": "2026-11-13T00:24:56Z",
+      "title": "Binance’s Community Appreciation 2nd Earn Campaign",
+      "seeded": true
+    },
+    "binance:288833": {
+      "first_seen_utc": "2026-11-13T00:24:56Z",
+      "title": "Binance VIP Level Protection Program",
+      "seeded": true
+    },
+    "binance:288832": {
+      "first_seen_utc": "2026-11-13T00:24:56Z",
+      "title": "Binance’s Community Appreciation Campaign",
+      "seeded": true
+    },
+    "binance:288658": {
+      "first_seen_utc": "2026-11-13T00:24:56Z",
+      "title": "Join the Virtual Pumpkin Fun to Share $5,000 in Token Voucher Rewards",
+      "seeded": true
+    },
+    "binance:288655": {
+      "first_seen_utc": "2026-11-13T00:24:56Z",
+      "title": "Hold USD1 to Share 120 Million WLFI Tokens, Plus Up to 2.5 Million USD1 for New Holdings (2026-10-30)",
+      "seeded": true
+    },
+    "binance:288622": {
+      "first_seen_utc": "2026-11-13T00:24:56Z",
+      "title": "CIS & CEE Exclusive: Binance P2P Launches Merchant Referral Program",
+      "seeded": true
+    },
+    "binance:288583": {
+      "first_seen_utc": "2026-11-13T00:24:56Z",
+      "title": "Region-Exclusive: Invite Friends to Binance and Share a 30,000 USDT Prize Pool",
+      "seeded": true
+    },
+    "binance:288429": {
+      "first_seen_utc": "2026-11-13T00:24:56Z",
+      "title": "Notice of Removal of Spot Trading Pairs - 2026-10-30",
+      "seeded": true
+    },
+    "binance:288467": {
+      "first_seen_utc": "2026-11-13T00:24:56Z",
+      "title": "Notice of Removal of Margin Trading Pairs - 2026-10-30",
+      "seeded": true
+    },
+    "binance:288285": {
+      "first_seen_utc": "2026-11-13T00:24:56Z",
+      "title": "Binance Alpha Will Remove PTB, AA, OWL, DORA, ELIZAOS, MEMES, 哭哭马  (2026-10-23)",
+      "seeded": true
+    },
+    "binance:288155": {
+      "first_seen_utc": "2026-11-13T00:24:56Z",
+      "title": "Binance Futures Will Delist PTBUSDT and MITOUSDT USDⓈ-M Perpetual Contracts (2026-10-23)",
+      "seeded": true
+    },
+    "binance:287933": {
+      "first_seen_utc": "2026-11-13T00:24:56Z",
+      "title": "Notice of Removal of Spot Trading Pairs - 2026-10-23",
+      "seeded": true
+    },
+    "binance:287557": {
+      "first_seen_utc": "2026-11-13T00:24:56Z",
+      "title": "Binance Will Delist EPIC, QUICK on 2026-10-28",
+      "seeded": true
+    },
+    "binance:286390": {
+      "first_seen_utc": "2026-11-13T00:24:56Z",
+      "title": "Binance Alpha Will Remove SUP, CUDIS, PYTHIA, BLUM, KIN, DN, GAIA, STRIKE, CDL, KO, VRA, EPT, SLX (SLIMEX), CAI (2026-10-09)",
+      "seeded": true
+    },
+    "binance:286016": {
+      "first_seen_utc": "2026-11-13T00:24:56Z",
+      "title": "Binance Futures Will Delist Multiple USDⓈ-M Perpetual Contracts (2026-10-05)",
+      "seeded": true
+    },
+    "binance:285827": {
+      "first_seen_utc": "2026-11-13T00:24:56Z",
+      "title": "Notice of Removal of Spot Trading Pairs - 2026-10-02",
+      "seeded": true
+    },
+    "binance:285823": {
+      "first_seen_utc": "2026-11-13T00:24:56Z",
+      "title": "Binance Margin And Loans Token Delist on 2026-10-02",
+      "seeded": true
+    },
+    "binance:285338": {
+      "first_seen_utc": "2026-11-13T00:24:56Z",
+      "title": "Binance Will Close UAH Deposits and Withdrawals via Fiat Trade UAH and Delist USDT/UAH Spot Trading Pair",
+      "seeded": true
+    },
+    "binance:285188": {
+      "first_seen_utc": "2026-11-13T00:24:56Z",
+      "title": "Notice of Removal of Margin Trading Pairs - 2026-09-25",
+      "seeded": true
+    },
+    "binance:285157": {
+      "first_seen_utc": "2026-11-13T00:24:56Z",
+      "title": "Notice of Removal of Spot Trading Pairs - 2026-09-25",
+      "seeded": true
+    },
+    "binance:284618": {
+      "first_seen_utc": "2026-11-13T00:24:56Z",
+      "title": "Notice of Removal of Spot Trading Pairs - 2026-09-18",
+      "seeded": true
+    },
+    "binance:284587": {
+      "first_seen_utc": "2026-11-13T00:24:56Z",
+      "title": "Notice of Removal of Margin Trading Pairs - 2026-09-18",
+      "seeded": true
+    },
+    "binance:284259": {
+      "first_seen_utc": "2026-11-13T00:24:56Z",
+      "title": "Binance Will Delist USDP on 2026-09-24",
+      "seeded": true
+    },
+    "binance:284062": {
+      "first_seen_utc": "2026-11-13T00:24:56Z",
+      "title": "Notice of Removal of Margin Trading Pairs and Collateral - 2026-09-11",
+      "seeded": true
+    },
+    "binance:284032": {
+      "first_seen_utc": "2026-11-13T00:24:56Z",
+      "title": "Notice of Removal of Spot Trading Pairs - 2026-09-11",
+      "seeded": true
+    },
+    "binance:283832": {
+      "first_seen_utc": "2026-11-13T00:24:56Z",
+      "title": "Binance Alpha Will Remove MTP, BDXN, TALE, BOS, MAIGA, TIMI, SAROS, U (Union), SERAPH, RVV, AIAV, PENGUIN, ODOS, SN3 (2026-09-04)",
+      "seeded": true
+    },
+    "binance:283430": {
+      "first_seen_utc": "2026-11-13T00:24:56Z",
+      "title": "Notice of Removal of Margin Trading Pairs - 2026-09-03",
+      "seeded": true
+    },
+    "binance:290034": {
+      "first_seen_utc": "2026-11-13T00:24:56Z",
+      "title": "Binance Wallet to Discontinue Support for Blast",
+      "seeded": true
+    },
+    "binance:288577": {
+      "first_seen_utc": "2026-11-13T00:24:56Z",
+      "title": "Binance Will Support Scheduled Upgrade for Stock Trading Services - 2026-10-31",
+      "seeded": true
+    },
+    "binance:288395": {
+      "first_seen_utc": "2026-11-13T00:24:56Z",
+      "title": "Wallet Maintenance for Ethereum Network (ETH) - 2026-10-28",
+      "seeded": true
+    },
+    "binance:287757": {
+      "first_seen_utc": "2026-11-13T00:24:56Z",
+      "title": "Binance Will Support the Velodrome Finance (VELODROME) Token Merge to Aerodrome (AERO) and the AERO Contract Swap",
+      "seeded": true
+    },
+    "binance:287652": {
+      "first_seen_utc": "2026-11-13T00:24:56Z",
+      "title": "Binance Will Support the Filecoin (FIL) Network Upgrade & Hard Fork - 2026-10-19",
+      "seeded": true
+    },
+    "binance:287593": {
+      "first_seen_utc": "2026-11-13T00:24:56Z",
+      "title": "Wallet Maintenance for Ethereum Network (ETH) - 2026-10-15",
+      "seeded": true
+    },
+    "binance:286764": {
+      "first_seen_utc": "2026-11-13T00:24:56Z",
+      "title": "Binance Will Support the IoTeX (IOTX) Network Upgrade & Hard Fork - 2026-10-19",
+      "seeded": true
+    },
+    "binance:286428": {
+      "first_seen_utc": "2026-11-13T00:24:56Z",
+      "title": "Binance Will Support Micron Technology (MU) Cash Dividend Distribution via bStocks",
+      "seeded": true
+    },
+    "binance:286285": {
+      "first_seen_utc": "2026-11-13T00:24:56Z",
+      "title": "Binance Will Support Scheduled Upgrade for Stock Trading Services - 2026-10-10",
+      "seeded": true
+    },
+    "binance:286259": {
+      "first_seen_utc": "2026-11-13T00:24:56Z",
+      "title": "Binance Has Completed the Stargate Finance (STG) Token Merge to LayerZero (ZRO)",
+      "seeded": true
+    },
+    "binance:286096": {
+      "first_seen_utc": "2026-11-13T00:24:56Z",
+      "title": "Binance Will Support Scheduled Upgrade for Stock Trading Services - 2026-10-03",
+      "seeded": true
+    },
+    "binance:285796": {
+      "first_seen_utc": "2026-11-13T00:24:56Z",
+      "title": "Binance Will Support the Ronin (RONIN) Network Upgrade & Hard Fork - 2026-10-07",
+      "seeded": true
+    },
+    "binance:285644": {
+      "first_seen_utc": "2026-11-13T00:24:56Z",
+      "title": "Binance Will Support the Base Network Upgrade & Hard Fork - 2026-09-30",
+      "seeded": true
+    },
+    "binance:285480": {
+      "first_seen_utc": "2026-11-13T00:24:56Z",
+      "title": "Binance Will Support Scheduled Upgrade for Stock Trading Services - 2026-09-26",
+      "seeded": true
+    },
+    "binance:285442": {
+      "first_seen_utc": "2026-11-13T00:24:56Z",
+      "title": "Binance Will Support the Injective (INJ) Network Upgrade & Hard Fork - 2026-09-24",
+      "seeded": true
+    },
+    "binance:285426": {
+      "first_seen_utc": "2026-11-13T00:24:56Z",
+      "title": "Binance Will Support the Zilliqa (ZIL) Network Migration",
+      "seeded": true
+    },
+    "binance:285028": {
+      "first_seen_utc": "2026-11-13T00:24:56Z",
+      "title": "Binance Will Support the Terra (LUNA) Network Upgrade - 2026-09-21",
+      "seeded": true
+    },
+    "binance:284966": {
+      "first_seen_utc": "2026-11-13T00:24:56Z",
+      "title": "Binance Completes the USDT Contract Swap on Optimism Network - 2026-09-18",
+      "seeded": true
+    },
+    "binance:284926": {
+      "first_seen_utc": "2026-11-13T00:24:56Z",
+      "title": "Binance Will Support the Stargate Finance (STG) Token Merge to LayerZero (ZRO)",
+      "seeded": true
+    },
+    "binance:284785": {
+      "first_seen_utc": "2026-11-13T00:24:56Z",
+      "title": "Binance Wallet System Upgrade Notice (2026-09-22)",
+      "seeded": true
+    },
+    "binance:278116": {
+      "first_seen_utc": "2026-11-13T00:24:56Z",
+      "title": "Notice on Binance Spot API Update (2026-06-25)",
+      "seeded": true
+    },
+    "binance:257054": {
+      "first_seen_utc": "2026-11-13T00:24:56Z",
+      "title": "Notice on Binance Spot API Update (2025-11-18)",
+      "seeded": true
+    },
+    "binance:252060": {
+      "first_seen_utc": "2026-11-13T00:24:56Z",
+      "title": "Binance Futures API Updates (2025-10-09)",
+      "seeded": true
+    },
+    "binance:242625": {
+      "first_seen_utc": "2026-11-13T00:24:56Z",
+      "title": "Introducing Binance Announcements WebSocket: Subscribe to Get Real-Time Updates and Promotions",
+      "seeded": true
+    },
+    "binance:215285": {
+      "first_seen_utc": "2026-11-13T00:24:56Z",
+      "title": "Binance Futures API Updates (2024-10-30)",
+      "seeded": true
+    },
+    "binance:214867": {
+      "first_seen_utc": "2026-11-13T00:24:56Z",
+      "title": "Binance Earn Enables API Functionality for SOL Staking",
+      "seeded": true
+    },
+    "binance:214547": {
+      "first_seen_utc": "2026-11-13T00:24:56Z",
+      "title": "Binance USDⓈ-M Futures WebSocket System Upgrade Notice (2024-10-17)",
+      "seeded": true
+    },
+    "binance:214125": {
+      "first_seen_utc": "2026-11-13T00:24:56Z",
+      "title": "Binance COIN-M Futures WebSocket System Upgrade Notice (2024-10-10)",
+      "seeded": true
+    },
+    "binance:212461": {
+      "first_seen_utc": "2026-11-13T00:24:56Z",
+      "title": "Binance COIN-M Futures WebSocket System Upgrade Notice (2024-09-26)",
+      "seeded": true
+    },
+    "binance:209364": {
+      "first_seen_utc": "2026-11-13T00:24:56Z",
+      "title": "Introducing TRADE_LITE for USDⓈ-M Futures Websocket (2024-09-03)",
+      "seeded": true
+    },
+    "binance:208133": {
+      "first_seen_utc": "2026-11-13T00:24:56Z",
+      "title": "Binance Futures API Service Upgrade (2024-08-21)",
+      "seeded": true
+    },
+    "binance:208110": {
+      "first_seen_utc": "2026-11-13T00:24:56Z",
+      "title": "Binance API Key System Upgrade Notice (2024-08-19)",
+      "seeded": true
+    },
+    "binance:207266": {
+      "first_seen_utc": "2026-11-13T00:24:56Z",
+      "title": "Binance Spot API Service Upgrade (2024-08-08)",
+      "seeded": true
+    },
+    "binance:202791": {
+      "first_seen_utc": "2026-11-13T00:24:56Z",
+      "title": "Binance Spot API Service Upgrade (2024-06-18)",
+      "seeded": true
+    },
+    "binance:202232": {
+      "first_seen_utc": "2026-11-13T00:24:56Z",
+      "title": "Binance Spot API Service Upgrade (2024-06-06)",
+      "seeded": true
+    },
+    "binance:198254": {
+      "first_seen_utc": "2026-11-13T00:24:56Z",
+      "title": "Binance USDⓈ-M Futures WebSocket System Upgrade Notice (2024-04-23)",
+      "seeded": true
+    },
+    "binance:196380": {
+      "first_seen_utc": "2026-11-13T00:24:56Z",
+      "title": "Binance Spot API to Increase Request Weight Limits (2024-04-04)",
+      "seeded": true
+    },
+    "binance:195155": {
+      "first_seen_utc": "2026-11-13T00:24:56Z",
+      "title": "Binance Spot API Service Upgrade (2024-03-20)",
+      "seeded": true
+    },
+    "binance:192788": {
+      "first_seen_utc": "2026-11-13T00:24:56Z",
+      "title": "Updates on Binance Loans SAPI Endpoints (2024-02-27)",
+      "seeded": true
+    },
+    "binance:192700": {
+      "first_seen_utc": "2026-11-13T00:24:56Z",
+      "title": "Binance Dual Investment Enables API Functionality",
+      "seeded": true
+    },
+    "binance:249268": {
+      "first_seen_utc": "2026-11-13T00:24:56Z",
+      "title": "Solayer (LAYER) Airdrop Continues: Fourth Binance HODLer Airdrops Announced – Earn LAYER With Retroactive BNB Simple Earn Subscriptions (2025-09-19)",
+      "seeded": true
+    },
+    "binance:248527": {
+      "first_seen_utc": "2026-11-13T00:24:56Z",
+      "title": "Introducing Avantis (AVNT) on Binance HODLer Airdrops! Earn AVNT With Retroactive BNB Simple Earn Subscriptions",
+      "seeded": true
+    },
+    "binance:245906": {
+      "first_seen_utc": "2026-11-13T00:24:56Z",
+      "title": "MyShell (SHELL) Airdrop Continues: Second Binance HODLer Airdrops Announced – Earn SHELL With Retroactive BNB Simple Earn Subscriptions and Enjoy Up to 29.9% APR with SHELL Locked Products (2025-08-27)",
+      "seeded": true
+    },
+    "binance:245082": {
+      "first_seen_utc": "2026-11-13T00:24:56Z",
+      "title": "Solayer (LAYER) Airdrop Continues: Third Binance HODLer Airdrops Announced – Earn LAYER With Retroactive BNB Simple Earn Subscriptions (2025-08-18)",
+      "seeded": true
+    },
+    "binance:238891": {
+      "first_seen_utc": "2026-11-13T00:24:56Z",
+      "title": "Solayer (LAYER) Airdrop Continues: Second Binance HODLer Airdrops Announced – Earn LAYER With Retroactive BNB Simple Earn Subscriptions (2025-06-16)",
+      "seeded": true
+    },
+    "binance:236019": {
+      "first_seen_utc": "2026-11-13T00:24:56Z",
+      "title": "Binance Will Support the Doodles (DOOD) Airdrop for MUBARAK, BROCCOLI714, TST, 1MBABYDOGE, and KOMA Holders",
+      "seeded": true
+    },
+    "binance:221366": {
+      "first_seen_utc": "2026-11-13T00:24:56Z",
+      "title": "Binance Has Completed the Wise Monkey (MONKY) Airdrop Distribution to FLOKI (FLOKI) and ApeCoin (APE)",
+      "seeded": true
+    },
+    "binance:218791": {
+      "first_seen_utc": "2026-11-13T00:24:56Z",
+      "title": "Binance Will Support the Wise Monkey (MONKY) Airdrop for FLOKI and APE Holders",
+      "seeded": true
+    },
+    "binance:216337": {
+      "first_seen_utc": "2026-11-13T00:24:56Z",
+      "title": "Binance Has Completed the Pepper (1000PEPPER) Airdrop Distribution to Chiliz (CHZ) Holders",
+      "seeded": true
+    },
+    "binance:215983": {
+      "first_seen_utc": "2026-11-13T00:24:56Z",
+      "title": "Update on Pepper (1000PEPPER) Airdrop for Chiliz (CHZ) Holders",
+      "seeded": true
+    },
+    "binance:192014": {
+      "first_seen_utc": "2026-11-13T00:24:56Z",
+      "title": "Binance Earn Will Support the Starknet (STRK) Distribution Plan for Binance ETH Staking Users",
+      "seeded": true
+    },
+    "binance:156203": {
+      "first_seen_utc": "2026-11-13T00:24:56Z",
+      "title": "The APENFT (NFT) Airdrop Program Has Now Concluded",
+      "seeded": true
+    },
+    "binance:147742": {
+      "first_seen_utc": "2026-11-13T00:24:56Z",
+      "title": "Binance Completes 17th Round of APENFT (NFT) Airdrop Distribution to TRON (TRX), BitTorrent OLD (BTTOLD), BitTorrent (BTTC), JUST (JST), and WINkLink (WIN) Holders",
+      "seeded": true
+    },
+    "binance:146503": {
+      "first_seen_utc": "2026-11-13T00:24:56Z",
+      "title": "Binance Completes the Flare (FLR) Airdrop Distribution to XRP (XRP) Holders",
+      "seeded": true
+    },
+    "binance:146239": {
+      "first_seen_utc": "2026-11-13T00:24:56Z",
+      "title": "Binance Completes 16th Round of APENFT (NFT) Airdrop Distribution to TRON (TRX), BitTorrent OLD (BTTOLD), BitTorrent (BTTC), JUST (JST), and WINkLink (WIN) Holders",
+      "seeded": true
+    },
+    "binance:145471": {
+      "first_seen_utc": "2026-11-13T00:24:56Z",
+      "title": "Binance Completes Second Round of Terra (LUNA) Airdrop Distribution to Terra Classic (LUNC) and TerraClassicUSD (USTC) Holders",
+      "seeded": true
+    },
+    "binance:142704": {
+      "first_seen_utc": "2026-11-13T00:24:56Z",
+      "title": "Binance Completes 15th Round of APENFT (NFT) Airdrop Distribution to TRON (TRX), BitTorrent OLD (BTTOLD), BitTorrent (BTTC), JUST (JST), and WINkLink (WIN) Holders",
+      "seeded": true
+    },
+    "binance:140963": {
+      "first_seen_utc": "2026-11-13T00:24:56Z",
+      "title": "Binance Will Support the pNetwork (PNT) Recovery Plan to Airdrop BNB (BEP20) to pGALA (BEP20) Holders",
+      "seeded": true
+    },
+    "binance:123377": {
+      "first_seen_utc": "2026-11-13T00:24:56Z",
+      "title": "Binance Completes 14th Round of APENFT (NFT) Airdrop Distribution to TRON (TRX), BitTorrent OLD (BTTOLD), BitTorrent (BTTC), JUST (JST), and WINkLink (WIN) Holders",
+      "seeded": true
+    },
+    "binance:101289": {
+      "first_seen_utc": "2026-11-13T00:24:56Z",
+      "title": "Binance Completes 13th Round of APENFT (NFT) Airdrop Distribution to TRON (TRX), BitTorrent OLD (BTTOLD), BitTorrent (BTTC), JUST (JST), and WINkLink (WIN) Holders",
+      "seeded": true
+    },
+    "coinbase:blog:VaoxFlCGStAfREDYpSwKL": {
+      "first_seen_utc": "2026-11-13T00:24:56Z",
+      "title": "System Update: Take Control of Your Money with Coinbase",
+      "seeded": true
+    },
+    "coinbase:blog:1L8Xbhx7zykcQw3gBTJtOb": {
+      "first_seen_utc": "2026-11-13T00:24:56Z",
+      "title": "How Coinbase protects customer assets",
+      "seeded": true
+    },
+    "coinbase:blog:1eRSpRmTp7wTeNnCYJi9BX": {
+      "first_seen_utc": "2026-11-13T00:24:56Z",
+      "title": "You can now participate in IPOs on Coinbase",
+      "seeded": true
+    },
+    "coinbase:blog:4IJOnDNv4pzHGeWRByHCoD": {
+      "first_seen_utc": "2026-11-13T00:24:56Z",
+      "title": "Getting paid in crypto just got a lot more powerful with Coinbase Business",
+      "seeded": true
+    },
+    "coinbase:blog:2aESpWrDAxKyW1xzf7Jud5": {
+      "first_seen_utc": "2026-11-13T00:24:56Z",
+      "title": "Coinbase Q2 Earnings: Everything Exchange Drives 3rd Consecutive Quarter of Record Crypto Trading Volume Market Share, Revenue Diversification, and Resilience",
+      "seeded": true
+    },
+    "coinbase:blog:68ZMkBgSxUtUtHftOSFZFr": {
+      "first_seen_utc": "2026-11-13T00:24:56Z",
+      "title": "Pre-IPOs Are Launching on Coinbase, Starting with SpaceX",
+      "seeded": true
+    },
+    "coinbase:blog:g2FhWNmZCiLFJwz2y660V": {
+      "first_seen_utc": "2026-11-13T00:24:56Z",
+      "title": "Coinbase Brings Global Crypto Derivatives to US Market",
+      "seeded": true
+    },
+    "coinbase:blog:3WrQgJHYB0kJGeGhvPzrMP": {
+      "first_seen_utc": "2026-11-13T00:24:56Z",
+      "title": "Coming June 14: Perpetual-Style Equity Index Futures",
+      "seeded": true
+    },
+    "coinbase:blog:20bCJm3yZwM1sOsHrQP9Rk": {
+      "first_seen_utc": "2026-11-13T00:24:56Z",
+      "title": "Coinbase Q1 Financial Results Show Resilient Financial Performance Driven by New All-Time High Crypto Trading Volume Market Share",
+      "seeded": true
+    },
+    "coinbase:blog:5D08MtA3iEYPZy5kEWxqgU": {
+      "first_seen_utc": "2026-11-13T00:24:56Z",
+      "title": "Coinbase Receives Conditional OCC Approval: Building the Future of Finance",
+      "seeded": true
+    },
+    "coinbase:blog:3u1XkBYu3Yp36I2c6PED9l": {
+      "first_seen_utc": "2026-11-13T00:24:56Z",
+      "title": "Coinbase Powers the First Crypto-Backed, Conforming Mortgages by Better",
+      "seeded": true
+    },
+    "coinbase:blog:5W20Tpd4glf9iRY5EGYQeo": {
+      "first_seen_utc": "2026-11-13T00:24:56Z",
+      "title": "Coinbase Australia Receives AFSL Licence: A New Chapter for Crypto in Australia",
+      "seeded": true
+    },
+    "coinbase:blog:1We1lNKBFSnayAsaAuZ0mB": {
+      "first_seen_utc": "2026-11-13T00:24:56Z",
+      "title": "2026 EY-Parthenon and Coinbase survey: Volatility sharpens institutional approach to crypto but doesn’t dampen enthusiasm",
+      "seeded": true
+    },
+    "coinbase:blog:31oxcAoU6PJf31O9qtQs8W": {
+      "first_seen_utc": "2026-11-13T00:24:56Z",
+      "title": "Coinbase to acquire The Clearing Company: Powering the future of prediction markets",
+      "seeded": true
+    },
+    "coinbase:blog:1HPqcXCljKlivHIlfm191P": {
+      "first_seen_utc": "2026-11-13T00:24:56Z",
+      "title": "Working with the Brooklyn DA to support victims and help bring an alleged scammer to justice",
+      "seeded": true
+    },
+    "coinbase:blog:6qfohOwoTXwxDdkwwnTK9h": {
+      "first_seen_utc": "2026-11-13T00:24:56Z",
+      "title": "Building enterprise AI agents at Coinbase: engineering for trust, scale, and repeatability",
+      "seeded": true
+    },
+    "coinbase:blog:5Gi7tJqXtQnmEeJpd5JlMb": {
+      "first_seen_utc": "2026-11-13T00:24:56Z",
+      "title": "Create your own stablecoin with Coinbase",
+      "seeded": true
+    },
+    "coinbase:blog:2Qm46GEG9IDDECbxar9hfm": {
+      "first_seen_utc": "2026-11-13T00:24:56Z",
+      "title": "An Evolution of Leadership at the Coinbase Global Advisory Council: George Osborne to Chair",
+      "seeded": true
+    },
+    "coinbase:blog:3ux9EAunAS4cnXdyRwnpKq": {
+      "first_seen_utc": "2026-11-13T00:24:56Z",
+      "title": "State of Crypto Q4 2025: Younger investors are rewriting the investing playbook",
+      "seeded": true
+    },
+    "coinbase:blog:4V5GirVFCh2MPVxVMV64cw": {
+      "first_seen_utc": "2026-11-13T00:24:56Z",
+      "title": "No Compromises: The case for Coinbase as the best place for institutions",
+      "seeded": true
+    },
+    "coinbase:blog:2zpiW6HJjoNgm9OsUjfde5": {
+      "first_seen_utc": "2026-11-13T00:24:56Z",
+      "title": "Coinbase for Agents introduces new Agent Controls",
+      "seeded": true
+    },
+    "coinbase:blog:1v32VxhtrkNl1tFWvTHjKY": {
+      "first_seen_utc": "2026-11-13T00:24:56Z",
+      "title": "Consumer Protection Tuesday: Announcing Security Checkup - your account's security score",
+      "seeded": true
+    },
+    "coinbase:blog:1uUyqPDQX7slUpN9Yyr4Hn": {
+      "first_seen_utc": "2026-11-13T00:24:56Z",
+      "title": "Coinbase launches National Trust Company with federally regulated, institutional-grade custody offering",
+      "seeded": true
+    },
+    "coinbase:blog:5gIxUE2eEkbRTspnJa84zF": {
+      "first_seen_utc": "2026-11-13T00:24:56Z",
+      "title": "Coinbase and PNC expand partnership to bring stablecoin payment acceptance to corporate clients",
+      "seeded": true
+    },
+    "coinbase:blog:6veILVlfvNN6NQiy0kITrn": {
+      "first_seen_utc": "2026-11-13T00:24:56Z",
+      "title": "Coinbase: The Complete Lifecycle Platform for Blockchain Protocols",
+      "seeded": true
+    },
+    "coinbase:blog:cqR7TdC1LINniHa9ppaRA": {
+      "first_seen_utc": "2026-11-13T00:24:56Z",
+      "title": "Q3 2026 Earnings Show All-time-high Coinbase One Subscribers and Prediction Markets Surpassing $200 Million in Annualized Revenue",
+      "seeded": true
+    },
+    "coinbase:blog:6exNnY0TTxfKSvyfvw75Td": {
+      "first_seen_utc": "2026-11-13T00:24:56Z",
+      "title": "Making Coinbase multi-user",
+      "seeded": true
+    },
+    "coinbase:blog:4fPMdfzuXbn3sLSsp4DlHx": {
+      "first_seen_utc": "2026-11-13T00:24:56Z",
+      "title": "The Coinbase Champions Cup is Here: Compete for a Share of $2M",
+      "seeded": true
+    },
+    "coinbase:status:https://status.coinbase.com/incidents/tltp32653vj8": {
+      "first_seen_utc": "2026-11-13T00:24:56Z",
+      "title": "Scheduled System Maintenance — November 14",
+      "seeded": true
+    },
+    "coinbase:status:https://status.coinbase.com/incidents/jx3xg1gddhbm": {
+      "first_seen_utc": "2026-11-13T00:24:56Z",
+      "title": "Osmosis (OSMO) - Delayed Sends and Receives",
+      "seeded": true
+    },
+    "coinbase:status:https://status.coinbase.com/incidents/5pgqt8s63hkf": {
+      "first_seen_utc": "2026-11-13T00:24:56Z",
+      "title": "Disabled Sends / Receives - EVMSEI",
+      "seeded": true
+    },
+    "coinbase:status:https://status.coinbase.com/incidents/f11qs65jgf7q": {
+      "first_seen_utc": "2026-11-13T00:24:56Z",
+      "title": "Delayed Transactions - Stacks Network",
+      "seeded": true
+    },
+    "coinbase:status:https://status.coinbase.com/incidents/tyvr2ggx7bvh": {
+      "first_seen_utc": "2026-11-13T00:24:56Z",
+      "title": "Delayed Transactions - ETH/ERC20",
+      "seeded": true
+    },
+    "coinbase:status:https://status.coinbase.com/incidents/fh746rkklsz7": {
+      "first_seen_utc": "2026-11-13T00:24:56Z",
+      "title": "Degraded Performance - Coinbase Payments",
+      "seeded": true
+    },
+    "coinbase:status:https://status.coinbase.com/incidents/wt72fdzhq79h": {
+      "first_seen_utc": "2026-11-13T00:24:56Z",
+      "title": "Delayed Sends - DASH",
+      "seeded": true
+    },
+    "coinbase:status:https://status.coinbase.com/incidents/fz4d10rvry23": {
+      "first_seen_utc": "2026-11-13T00:24:56Z",
+      "title": "Delayed Transactions - DOT Network",
+      "seeded": true
+    },
+    "coinbase:status:https://status.coinbase.com/incidents/0tlgts8cn5y8": {
+      "first_seen_utc": "2026-11-13T00:24:56Z",
+      "title": "Bank Payments Unavailable - INR (India)",
+      "seeded": true
+    },
+    "coinbase:status:https://status.coinbase.com/incidents/3fy9f7rzjwf6": {
+      "first_seen_utc": "2026-11-13T00:24:56Z",
+      "title": "Hedera - Delayed Sends",
+      "seeded": true
+    },
+    "coinbase:status:https://status.coinbase.com/incidents/t4x0q0rjmq25": {
+      "first_seen_utc": "2026-11-13T00:24:56Z",
+      "title": "Dfinity (ICP) - Delayed Sends",
+      "seeded": true
+    },
+    "coinbase:status:https://status.coinbase.com/incidents/dcx1v2c47h3g": {
+      "first_seen_utc": "2026-11-13T00:24:56Z",
+      "title": "Scheduled Maintenance — Aerodrome Finance (AERO) and Velodrome Finance (VELO) Migration",
+      "seeded": true
+    },
+    "coinbase:status:https://status.coinbase.com/incidents/1bss81mzl4kf": {
+      "first_seen_utc": "2026-11-13T00:24:56Z",
+      "title": "Aerodrome Finance (AERO) and Velodrome Finance (VELO) migration",
+      "seeded": true
+    },
+    "coinbase:status:https://status.coinbase.com/incidents/sgsgw21dz2jb": {
+      "first_seen_utc": "2026-11-13T00:24:56Z",
+      "title": "Delayed Sends and Receives - Sonic Network",
+      "seeded": true
+    },
+    "coinbase:status:https://status.coinbase.com/incidents/4ztg89fsdw4s": {
+      "first_seen_utc": "2026-11-13T00:24:56Z",
+      "title": "Delayed Transactions - BTC",
+      "seeded": true
+    },
+    "coinbase:status:https://status.coinbase.com/incidents/gtbbshmr3k4r": {
+      "first_seen_utc": "2026-11-13T00:24:56Z",
+      "title": "Degraded Performance - DEX, Borrow and Lend",
+      "seeded": true
+    },
+    "coinbase:status:https://status.coinbase.com/incidents/dv0206bqq8qt": {
+      "first_seen_utc": "2026-11-13T00:24:56Z",
+      "title": "Delayed Sends & Receives - DATA",
+      "seeded": true
+    },
+    "coinbase:status:https://status.coinbase.com/incidents/0zfln0bkpc8f": {
+      "first_seen_utc": "2026-11-13T00:24:56Z",
+      "title": "Delayed Sends and Receives - Solana",
+      "seeded": true
+    },
+    "coinbase:status:https://status.coinbase.com/incidents/8zxv6r3bq07y": {
+      "first_seen_utc": "2026-11-13T00:24:56Z",
+      "title": "Delayed Sends & Receives - Zcash Network",
+      "seeded": true
+    },
+    "coinbase:status:https://status.coinbase.com/incidents/j1136zv051kg": {
+      "first_seen_utc": "2026-11-13T00:24:56Z",
+      "title": "GYEN conversion to USDC",
+      "seeded": true
+    },
+    "coinbase:status:https://status.coinbase.com/incidents/41ywx5zyyzpt": {
+      "first_seen_utc": "2026-11-13T00:24:56Z",
+      "title": "Delayed Sends - TON Network",
+      "seeded": true
+    },
+    "coinbase:status:https://status.coinbase.com/incidents/j4tjnbxsw12l": {
+      "first_seen_utc": "2026-11-13T00:24:56Z",
+      "title": "Delayed Withdrawals - Interac e-Transfer",
+      "seeded": true
+    },
+    "coinbase:status:https://status.coinbase.com/incidents/20gxz4rj9mnk": {
+      "first_seen_utc": "2026-11-13T00:24:56Z",
+      "title": "Blast (BLAST) Network Shutdown",
+      "seeded": true
+    },
+    "coinbase:status:https://status.coinbase.com/incidents/80x2khv56phc": {
+      "first_seen_utc": "2026-11-13T00:24:56Z",
+      "title": "Scheduled Bank Maintenance - Interac (Canada)",
+      "seeded": true
+    },
+    "coinbase:status:https://status.coinbase.com/incidents/sx636qyd11b9": {
+      "first_seen_utc": "2026-11-13T00:24:56Z",
+      "title": "Delayed Sends/Receives - TON Network",
+      "seeded": true
+    },
+    "upbit:6773": {
+      "first_seen_utc": "2026-11-13T08:01:58Z",
+      "title": "만트라(MANTRA) 거래지원 종료 안내 (12/14 15:00)"
+    },
+    "upbit:6771": {
+      "first_seen_utc": "2026-11-13T08:01:58Z",
+      "title": "Market Support for Sanctum(SANC) (KRW, BTC, USDT Market)"
+    },
+    "upbit:6762": {
+      "first_seen_utc": "2026-11-13T08:01:58Z",
+      "title": "Investment Warning (WAVES)"
+    },
+    "upbit:6758": {
+      "first_seen_utc": "2026-11-13T08:01:58Z",
+      "title": "Market Support for Hyperliquid(HYPE) (KRW, BTC, USDT Market)"
+    },
+    "upbit:6744": {
+      "first_seen_utc": "2026-11-13T08:01:58Z",
+      "title": "하이브달러(HBD) 거래지원 종료 안내 (12/7 15:00)"
+    },
+    "upbit:6743": {
+      "first_seen_utc": "2026-11-13T08:01:58Z",
+      "title": "디스트릭트0x(DNT) 거래지원 종료 안내 (12/7 15:00)"
+    },
+    "upbit:6739": {
+      "first_seen_utc": "2026-11-13T08:01:58Z",
+      "title": "Market Support for Collector Crypt(CARDS) (KRW, BTC, USDT Market)"
+    },
+    "upbit:6721": {
+      "first_seen_utc": "2026-11-13T08:01:58Z",
+      "title": "블러(BLUR) 거래지원 종료 안내 (11/30 15:00)"
+    },
+    "upbit:6714": {
+      "first_seen_utc": "2026-11-13T08:01:58Z",
+      "title": "Market Support for Nillion(NIL) (KRW Market)"
+    },
+    "upbit:6708": {
+      "first_seen_utc": "2026-11-13T08:01:58Z",
+      "title": "Investment Warning(INIT)"
+    },
+    "upbit:6700": {
+      "first_seen_utc": "2026-11-13T08:01:58Z",
+      "title": "Market Support for Bubblemaps(BMT) (KRW Market)"
+    },
+    "upbit:6699": {
+      "first_seen_utc": "2026-11-13T08:01:58Z",
+      "title": "이니시아(INIT) 유의 촉구 안내"
+    },
+    "upbit:6696": {
+      "first_seen_utc": "2026-11-13T08:01:58Z",
+      "title": "Extension of the Investment Warning Designation Period (EGLD)"
+    },
+    "upbit:6694": {
+      "first_seen_utc": "2026-11-13T08:01:58Z",
+      "title": "왁스(WAXP) 유의 촉구 안내"
+    },
+    "upbit:6687": {
+      "first_seen_utc": "2026-11-13T08:01:58Z",
+      "title": "Market Support for Axis Robotics(AXIS) (KRW, BTC, USDT Market) (Update on Trading Support)"
+    },
+    "upbit:6680": {
+      "first_seen_utc": "2026-11-13T08:01:58Z",
+      "title": "Market Support for Metaplex(MPLX) (KRW Market)"
+    },
+    "upbit:6675": {
+      "first_seen_utc": "2026-11-13T08:01:58Z",
+      "title": "Market Support for Concrete(CT) (KRW, BTC, USDT Market)"
+    },
+    "upbit:6669": {
+      "first_seen_utc": "2026-11-13T08:01:58Z",
+      "title": "질리카(ZIL) 거래지원 종료 안내 (11/16 15:00)"
+    },
+    "upbit:6668": {
+      "first_seen_utc": "2026-11-13T08:01:58Z",
+      "title": "만트라(MANTRA) 거래 유의 종목 지정 기간 연장 안내"
+    },
+    "upbit:6667": {
+      "first_seen_utc": "2026-11-13T08:01:58Z",
+      "title": "Investment Warning (HBD)"
+    },
+    "bithumb:1655647": {
+      "first_seen_utc": "2026-11-13T08:01:59Z",
+      "title": "만트라(MANTRA), 리콜(RECALL) 거래지원 종료"
+    },
+    "bithumb:1655643": {
+      "first_seen_utc": "2026-11-13T08:01:59Z",
+      "title": "네오소울(DNA) 원화 마켓 추가"
+    },
+    "bithumb:1655642": {
+      "first_seen_utc": "2026-11-13T08:01:59Z",
+      "title": "오스모시스(OSMO) 입출금 일시 중지 안내"
+    },
+    "bithumb:1655641": {
+      "first_seen_utc": "2026-11-13T08:01:59Z",
+      "title": "특별 입금왕 : 빗썸으로 가상자산 입금만해도 최대 2억원 상당 리워드 드립니다."
+    },
+    "bithumb:1655640": {
+      "first_seen_utc": "2026-11-13T08:01:59Z",
+      "title": "코스모스(ATOM) 입출금 일시 중지 안내 (11/18 오후 6시~)"
+    },
+    "bithumb:1655638": {
+      "first_seen_utc": "2026-11-13T08:01:59Z",
+      "title": "포켓네트워크(POKT) 입출금 일시 중지 안내 (11/13 재개)"
+    },
+    "bithumb:1655621": {
+      "first_seen_utc": "2026-11-13T08:01:59Z",
+      "title": "11월 1주차 가스(GAS) 에어드랍 지급 안내"
+    },
+    "bithumb:1655620": {
+      "first_seen_utc": "2026-11-13T08:01:59Z",
+      "title": "이오스트(IOST) 에어드랍 20차 지급 안내"
+    },
+    "bithumb:1655614": {
+      "first_seen_utc": "2026-11-13T08:01:59Z",
+      "title": "플레어(FLR) 입출금 일시 중지 안내 (11/12 재개)"
+    },
+    "bithumb:1655613": {
+      "first_seen_utc": "2026-11-13T08:01:59Z",
+      "title": "인젝티브(INJ) 입출금 일시 중지 안내 (11/12 재개)"
+    },
+    "bithumb:1655612": {
+      "first_seen_utc": "2026-11-13T08:01:59Z",
+      "title": "송버드(SGB) 출금 일시 중지 안내 (11/12 재개)"
+    },
+    "bithumb:1655611": {
+      "first_seen_utc": "2026-11-13T08:01:59Z",
+      "title": "테더(USDT) Tron 네트워크 출금 일시 중단 안내"
+    },
+    "bithumb:1655610": {
+      "first_seen_utc": "2026-11-13T08:01:59Z",
+      "title": "웨이브(WAVES) 거래유의종목 지정"
+    },
+    "bithumb:1655608": {
+      "first_seen_utc": "2026-11-13T08:01:59Z",
+      "title": "만트라(MANTRA) 출금 일시 중지 안내 (11/11 출금 재개)"
+    },
+    "bithumb:1655609": {
+      "first_seen_utc": "2026-11-13T08:01:59Z",
+      "title": "홈페이지 접속 시 안내 문구 오류 및 정상화 안내"
+    },
+    "bithumb:1655589": {
+      "first_seen_utc": "2026-11-13T08:01:59Z",
+      "title": "이니시아(INIT) 출금 일시 중지 안내"
+    },
+    "bithumb:1655588": {
+      "first_seen_utc": "2026-11-13T08:01:59Z",
+      "title": "총 1억원 상당, 하이퍼리퀴드(HYPE) 원화마켓 추가 기념 에어드랍 이벤트 (*거래 수수료 무료)"
+    },
+    "bithumb:1655585": {
+      "first_seen_utc": "2026-11-13T08:01:59Z",
+      "title": "하이퍼리퀴드(HYPE), 콜렉터크립트(CARDS) 원화 마켓 추가 (HYPE 거래 오픈 오후 4시 30분 예정)"
+    },
+    "bithumb:1655570": {
+      "first_seen_utc": "2026-11-13T08:01:59Z",
+      "title": "해외 가상자산거래소(Darvish Exchange 등 6곳) 입출금 거래 제한 안내"
+    },
+    "bithumb:1655568": {
+      "first_seen_utc": "2026-11-13T08:01:59Z",
+      "title": "인젝티브(INJ) 입출금 일시 중지 안내 (11/10 재개 )"
+    },
+    "upbit:6775": {
+      "first_seen_utc": "2026-11-13T08:06:40Z",
+      "title": "실물 운전면허증 진위 여부 확인 일시 중단 안내 (11/13 19:00 ~)",
+      "seeded": true
+    },
+    "upbit:6774": {
+      "first_seen_utc": "2026-11-13T08:06:40Z",
+      "title": "코박토큰(CBK) 토큰 스왑 및 마이그레이션에 따른 입출금 일시 중단 안내 (11/17 11:00 ~)",
+      "seeded": true
+    },
+    "upbit:6768": {
+      "first_seen_utc": "2026-11-13T08:06:40Z",
+      "title": "Temporary Suspension of POKT Deposits and Withdrawals (Completed)",
+      "seeded": true
+    },
+    "upbit:6772": {
+      "first_seen_utc": "2026-11-13T08:06:40Z",
+      "title": "폴리곤에코시스템토큰(POL) 스테이킹 회원 대상 카타나(KAT) 에어드랍 지급 안내",
+      "seeded": true
+    },
+    "upbit:6770": {
+      "first_seen_utc": "2026-11-13T08:06:40Z",
+      "title": "오스모시스(OSMO) 입출금 일시 중단 안내",
+      "seeded": true
+    },
+    "upbit:6754": {
+      "first_seen_utc": "2026-11-13T08:06:40Z",
+      "title": "업비트 라운지 운영 일시 중단 안내 (11/19)",
+      "seeded": true
+    },
+    "upbit:6764": {
+      "first_seen_utc": "2026-11-13T08:06:40Z",
+      "title": "Temporary Suspension of FLR Withdrawals (Completed)",
+      "seeded": true
+    },
+    "upbit:6763": {
+      "first_seen_utc": "2026-11-13T08:06:40Z",
+      "title": "Temporary Suspension of INJ Deposits and Withdrawals (Completed)",
+      "seeded": true
+    },
+    "upbit:6765": {
+      "first_seen_utc": "2026-11-13T08:06:40Z",
+      "title": "Temporary Suspension of ATOM Deposits and Withdrawals (11/18 20:00 ~)",
+      "seeded": true
+    },
+    "upbit:6745": {
+      "first_seen_utc": "2026-11-13T08:06:40Z",
+      "title": "Temporary Suspension of IOST Network Digital Assets Deposits and Withdrawals (Completed)",
+      "seeded": true
+    },
+    "upbit:6761": {
+      "first_seen_utc": "2026-11-13T08:06:40Z",
+      "title": "Temporary Suspension of MANTRA Withdrawals (Completed)",
+      "seeded": true
+    },
+    "upbit:6742": {
+      "first_seen_utc": "2026-11-13T08:06:40Z",
+      "title": "Temporary Suspension of ENJ Deposits and Withdrawals (Completed)",
+      "seeded": true
+    },
+    "upbit:6755": {
+      "first_seen_utc": "2026-11-13T08:06:40Z",
+      "title": "Temporary Suspension of INJ Deposits and Withdrawals (Completed)",
+      "seeded": true
+    },
+    "upbit:6652": {
+      "first_seen_utc": "2026-11-13T08:06:40Z",
+      "title": "업비트 복수 계정 로그인 방식 변경 안내 (11/24 적용 예정)",
+      "seeded": true
+    },
+    "upbit:6760": {
+      "first_seen_utc": "2026-11-13T08:06:40Z",
+      "title": "Temporary Suspension of INIT Withdrawal",
+      "seeded": true
+    },
+    "upbit:6759": {
+      "first_seen_utc": "2026-11-13T08:06:40Z",
+      "title": "Temporary Suspension of ELF Deposits and Withdrawals (11/17 22:00 ~)",
+      "seeded": true
+    },
+    "upbit:2895": {
+      "first_seen_utc": "2026-11-13T08:06:40Z",
+      "title": "Restrictions and Precautions for Deposits/Withdrawals with Unreported VASPs According to Act on Reporting and Using Specified Financial Transaction Information (Added on 2026.10.30)",
+      "seeded": true
+    },
+    "upbit:5696": {
+      "first_seen_utc": "2026-11-13T08:06:40Z",
+      "title": "불공정거래 예방조치 제도 안내",
+      "seeded": true
+    },
+    "bithumb:1655646": {
+      "first_seen_utc": "2026-11-13T08:09:34Z",
+      "title": "총 1억 3천만원 상당, 네오소울(DNA) 원화마켓 추가 기념 에어드랍 이벤트 (*거래 수수료 무료)"
+    },
+    "coinbase:status:jx3xg1gddhbm": {
+      "first_seen_utc": "2026-11-13T10:26:52Z",
+      "title": "Osmosis (OSMO) - Delayed Sends and Receives"
+    },
+    "coinbase:status:5pgqt8s63hkf": {
+      "first_seen_utc": "2026-11-13T10:26:52Z",
+      "title": "Disabled Sends / Receives - EVMSEI"
+    },
+    "coinbase:status:f11qs65jgf7q": {
+      "first_seen_utc": "2026-11-13T10:26:52Z",
+      "title": "Delayed Transactions - Stacks Network"
+    },
+    "coinbase:status:tyvr2ggx7bvh": {
+      "first_seen_utc": "2026-11-13T10:26:52Z",
+      "title": "Delayed Transactions - ETH/ERC20"
+    },
+    "coinbase:status:fh746rkklsz7": {
+      "first_seen_utc": "2026-11-13T10:26:52Z",
+      "title": "Degraded Performance - Coinbase Payments"
+    },
+    "coinbase:status:wt72fdzhq79h": {
+      "first_seen_utc": "2026-11-13T10:26:52Z",
+      "title": "Delayed Sends - DASH"
+    },
+    "coinbase:status:fz4d10rvry23": {
+      "first_seen_utc": "2026-11-13T10:26:52Z",
+      "title": "Delayed Transactions - DOT Network"
+    },
+    "coinbase:status:0tlgts8cn5y8": {
+      "first_seen_utc": "2026-11-13T10:26:52Z",
+      "title": "Bank Payments Unavailable - INR (India)"
+    },
+    "coinbase:status:3fy9f7rzjwf6": {
+      "first_seen_utc": "2026-11-13T10:26:52Z",
+      "title": "Hedera - Delayed Sends"
+    },
+    "coinbase:status:t4x0q0rjmq25": {
+      "first_seen_utc": "2026-11-13T10:26:52Z",
+      "title": "Dfinity (ICP) - Delayed Sends"
+    },
+    "coinbase:status:dcx1v2c47h3g": {
+      "first_seen_utc": "2026-11-13T10:26:52Z",
+      "title": "Scheduled Maintenance — Aerodrome Finance (AERO) and Velodrome Finance (VELO) Migration"
+    },
+    "coinbase:status:sgsgw21dz2jb": {
+      "first_seen_utc": "2026-11-13T10:26:52Z",
+      "title": "Delayed Sends and Receives - Sonic Network"
+    },
+    "coinbase:status:4ztg89fsdw4s": {
+      "first_seen_utc": "2026-11-13T10:26:52Z",
+      "title": "Delayed Transactions - BTC"
+    },
+    "coinbase:status:gtbbshmr3k4r": {
+      "first_seen_utc": "2026-11-13T10:26:52Z",
+      "title": "Degraded Performance - DEX, Borrow and Lend"
+    },
+    "coinbase:status:dv0206bqq8qt": {
+      "first_seen_utc": "2026-11-13T10:26:52Z",
+      "title": "Delayed Sends & Receives - DATA"
+    },
+    "coinbase:status:0zfln0bkpc8f": {
+      "first_seen_utc": "2026-11-13T10:26:52Z",
+      "title": "Delayed Sends and Receives - Solana"
+    },
+    "coinbase:status:8zxv6r3bq07y": {
+      "first_seen_utc": "2026-11-13T10:26:52Z",
+      "title": "Delayed Sends & Receives - Zcash Network"
+    },
+    "coinbase:status:j1136zv051kg": {
+      "first_seen_utc": "2026-11-13T10:26:52Z",
+      "title": "GYEN conversion to USDC"
+    },
+    "coinbase:status:41ywx5zyyzpt": {
+      "first_seen_utc": "2026-11-13T10:26:52Z",
+      "title": "Delayed Sends - TON Network"
+    },
+    "coinbase:status:j4tjnbxsw12l": {
+      "first_seen_utc": "2026-11-13T10:26:52Z",
+      "title": "Delayed Withdrawals - Interac e-Transfer"
+    },
+    "coinbase:status:sx636qyd11b9": {
+      "first_seen_utc": "2026-11-13T10:26:52Z",
+      "title": "Delayed Sends/Receives - TON Network"
+    },
+    "coinbase:status:vvcvx7fq295v": {
+      "first_seen_utc": "2026-11-13T10:26:52Z",
+      "title": "Site Performance - Converts"
+    },
+    "coinbase:status:cy0pxx4l461q": {
+      "first_seen_utc": "2026-11-13T10:26:52Z",
+      "title": "Mina - Delayed Sends & Receives"
+    },
+    "coinbase:status:gw8cscnx8q9m": {
+      "first_seen_utc": "2026-11-13T10:26:52Z",
+      "title": "Card Payment Unavailable (US) - Try Another"
+    },
+    "coinbase:status:m31h0hry5slb": {
+      "first_seen_utc": "2026-11-13T10:26:52Z",
+      "title": "Degraded Performance - Derivatives Portfolio Transfers"
+    },
+    "coinbase:status:sw5f0snq6p83": {
+      "first_seen_utc": "2026-11-13T10:26:52Z",
+      "title": "Delayed Sends/Receives - TON Network"
+    },
+    "coinbase:status:sps4gk7wpgt3": {
+      "first_seen_utc": "2026-11-13T10:26:52Z",
+      "title": "Delayed Sends and Receives - Solana"
+    },
+    "coinbase:status:0zkp7jyg3dqf": {
+      "first_seen_utc": "2026-11-13T10:26:52Z",
+      "title": "Celestia - Delayed Sends and Receives"
+    },
+    "coinbase:status:kjp5db2vnt2p": {
+      "first_seen_utc": "2026-11-13T10:26:52Z",
+      "title": "Osmosis (OSMO) - Delayed Sends and Receives"
+    },
+    "coinbase:status:mh155vzgn2wc": {
+      "first_seen_utc": "2026-11-13T10:26:52Z",
+      "title": "Delayed Sends and Receives - Kusama (KSM) Network"
+    },
+    "coinbase:status:pzclk21qln2c": {
+      "first_seen_utc": "2026-11-13T10:26:52Z",
+      "title": "Delayed Sends and Receives - Flare Network"
+    },
+    "coinbase:status:h3hy5pvqp26c": {
+      "first_seen_utc": "2026-11-13T10:26:52Z",
+      "title": "NEAR - Delayed Sends/Receives"
+    },
+    "coinbase:status:ty983bvb4xh4": {
+      "first_seen_utc": "2026-11-13T10:26:52Z",
+      "title": "Delayed Sends/Receives - Kusama Network"
+    },
+    "coinbase:status:mh5hq2r1ccls": {
+      "first_seen_utc": "2026-11-13T10:26:52Z",
+      "title": "Delayed Fiat Deposits — India"
+    },
+    "coinbase:status:27ptqxypnlf4": {
+      "first_seen_utc": "2026-11-13T10:26:52Z",
+      "title": "Site Performance - Coinbase Website"
+    },
+    "coinbase:status:0sldycvpmwz6": {
+      "first_seen_utc": "2026-11-13T10:26:52Z",
+      "title": "Delayed Transactions - ALEO"
+    },
+    "coinbase:status:k5x6wlf8ws8b": {
+      "first_seen_utc": "2026-11-13T10:26:52Z",
+      "title": "Delayed Sends and Receives - EGLD (MultiversX)"
+    },
+    "coinbase:status:37j7kxfz2y99": {
+      "first_seen_utc": "2026-11-13T10:26:52Z",
+      "title": "Delayed Sends - APT"
+    },
+    "coinbase:status:m1jgvww0zjr6": {
+      "first_seen_utc": "2026-11-13T10:26:52Z",
+      "title": "Interac - Deposits and Withdrawals Degraded"
+    },
+    "coinbase:status:cdv950j6v7vg": {
+      "first_seen_utc": "2026-11-13T10:26:52Z",
+      "title": "Delayed Sends - XRP"
+    },
+    "coinbase:status:fhqztv3wv438": {
+      "first_seen_utc": "2026-11-13T10:26:52Z",
+      "title": "Degraded Performance - DEX Solana Transactions"
+    },
+    "coinbase:status:wrw9dc78yfcn": {
+      "first_seen_utc": "2026-11-13T10:26:52Z",
+      "title": "Delayed Receives - BCH, BTC, DASH, LTC, ZEC"
+    },
+    "coinbase:status:szm8b0v8x89y": {
+      "first_seen_utc": "2026-11-13T10:26:52Z",
+      "title": "Delayed Sends/Receives - Injective Network"
+    },
+    "coinbase:status:zpppj205c457": {
+      "first_seen_utc": "2026-11-13T10:26:52Z",
+      "title": "Delayed Sends - Avalanche C-Chain Network"
+    },
+    "coinbase:status:gfx8zxsl1050": {
+      "first_seen_utc": "2026-11-13T10:26:52Z",
+      "title": "Delayed Sends & Receives - ALEO"
+    },
+    "coinbase:status:xkxjrqfw5vcn": {
+      "first_seen_utc": "2026-11-13T10:26:52Z",
+      "title": "Delayed Sends & Receives - INJ"
+    },
+    "coinbase:status:yzvxyrzfssq5": {
+      "first_seen_utc": "2026-11-13T10:26:52Z",
+      "title": "Delayed Sends/Receives - SUI"
+    },
+    "coinbase:status:dfkgxkwg6v77": {
+      "first_seen_utc": "2026-11-13T10:26:52Z",
+      "title": "Delayed Sends/Receives - VeChain (VET)"
+    },
+    "coinbase:status:jt1rxcy33c5l": {
+      "first_seen_utc": "2026-11-13T10:26:52Z",
+      "title": "Delayed Sends - SUIWAL"
+    },
+    "coinbase:status:d5jlny31tgk1": {
+      "first_seen_utc": "2026-11-13T10:26:52Z",
+      "title": "WMTX-USD to Limit Only"
+    },
+    "binance:290168": {
+      "first_seen_utc": "2026-11-13T11:09:24Z",
+      "title": "Binance Alpha Trading Competition: Trade Collect on Fanable (COLLECT) and Share $200K Worth of Rewards (2026-11-13)"
+    },
+    "binance:290177": {
+      "first_seen_utc": "2026-11-13T14:06:20Z",
+      "title": "Notice on Share Count Basis of USDⓈ-Margined ANTHROPICUSDT Pre-IPO Perp"
+    },
+    "upbit:2979": {
+      "first_seen_utc": "2026-11-13T14:06:21Z",
+      "title": "Scheduled Maintenance of SGD Deposit/Withdrawal"
+    },
+    "upbit:2978": {
+      "first_seen_utc": "2026-11-13T14:06:21Z",
+      "title": "USD Trading Support on USDT Market"
+    },
+    "upbit:2977": {
+      "first_seen_utc": "2026-11-13T14:06:21Z",
+      "title": "Scheduled Server Maintenance (Completed)"
+    },
+    "upbit:2976": {
+      "first_seen_utc": "2026-11-13T14:06:21Z",
+      "title": "Temporary Suspension of USDT(Tron Network) Deposits and Withdrawals (Completed)"
+    },
+    "upbit:2975": {
+      "first_seen_utc": "2026-11-13T14:06:21Z",
+      "title": "Temporary Suspension of BTC, XRP, ETH, SOL Deposits and Withdrawals (Completed)"
+    },
+    "upbit:2974": {
+      "first_seen_utc": "2026-11-13T14:06:21Z",
+      "title": "Temporary Suspension of SOL, USDG Deposits and Withdrawals (Completed)"
+    },
+    "upbit:2973": {
+      "first_seen_utc": "2026-11-13T14:06:21Z",
+      "title": "Scheduled Server Maintenance (Completed)"
+    },
+    "upbit:2972": {
+      "first_seen_utc": "2026-11-13T14:06:21Z",
+      "title": "Digital Asset Deposit and Withdrawal Service Maintenance (Completed)"
+    },
+    "upbit:2971": {
+      "first_seen_utc": "2026-11-13T14:06:21Z",
+      "title": "Notice on USD Deposit and Withdrawal Support (Updated)"
+    },
+    "upbit:2970": {
+      "first_seen_utc": "2026-11-13T14:06:21Z",
+      "title": "USDG Listing on USDT Market"
+    },
+    "upbit:2969": {
+      "first_seen_utc": "2026-11-13T14:06:21Z",
+      "title": "Scheduled Maintenance of SGD Deposit/Withdrawal (Completed)"
+    },
+    "upbit:2968": {
+      "first_seen_utc": "2026-11-13T14:06:21Z",
+      "title": "Temporary Suspension of BTC, XRP, ETH, SOL Deposits and Withdrawals (Completed)"
+    },
+    "upbit:2967": {
+      "first_seen_utc": "2026-11-13T14:06:21Z",
+      "title": "Updates to Approved VASPs"
+    },
+    "upbit:2966": {
+      "first_seen_utc": "2026-11-13T14:06:21Z",
+      "title": "Temporary Suspension of BTC, XRP, ETH, SOL Deposits and Withdrawals (Completed)"
+    },
+    "upbit:2965": {
+      "first_seen_utc": "2026-11-13T14:06:21Z",
+      "title": "Security Advisory: Protect Yourself from Phishing and Scams"
+    },
+    "upbit:2964": {
+      "first_seen_utc": "2026-11-13T14:06:21Z",
+      "title": "KAIA Listing on USDT Market"
+    },
+    "upbit:2963": {
+      "first_seen_utc": "2026-11-13T14:06:21Z",
+      "title": "Scheduled Server Maintenance (Completed)"
+    },
+    "upbit:2962": {
+      "first_seen_utc": "2026-11-13T14:06:21Z",
+      "title": "Digital Asset Deposit and Withdrawal Service Maintenance (Completed)"
+    },
+    "upbit:2961": {
+      "first_seen_utc": "2026-11-13T14:06:21Z",
+      "title": "Scheduled Server Maintenance (Completed)"
+    },
+    "upbit:2960": {
+      "first_seen_utc": "2026-11-13T14:06:21Z",
+      "title": "Updates to approved VASPs"
+    },
+    "upbit:2907": {
+      "first_seen_utc": "2026-11-13T14:06:21Z",
+      "title": "Action Required - Risk Awareness Assessment"
+    },
+    "upbit:2900": {
+      "first_seen_utc": "2026-11-13T14:06:21Z",
+      "title": "Say No to Account Misuse"
+    },
+    "upbit:2820": {
+      "first_seen_utc": "2026-11-13T14:06:21Z",
+      "title": "RISK WARNING ON DIGITAL PAYMENT TOKEN SERVICES"
+    },
+    "upbit:2793": {
+      "first_seen_utc": "2026-11-13T14:06:21Z",
+      "title": "Upbit Singapore is now officially licensed by the MAS!"
+    },
+    "upbit:2506": {
+      "first_seen_utc": "2026-11-13T14:06:21Z",
+      "title": "Beware of Listing Scams"
+    },
+    "binance:290202": {
+      "first_seen_utc": "2026-11-14T06:42:19Z",
+      "title": "Recovery Update: Withdrawals Reopened for More Networks (2026-11-14)"
+    },
+    "upbit:6777": {
+      "first_seen_utc": "2026-11-14T19:01:37Z",
+      "title": "카바(KAVA) 유의 촉구 안내"
+    },
+    "upbit:6776": {
+      "first_seen_utc": "2026-11-14T19:01:37Z",
+      "title": "카바(KAVA) 입출금 일시 중단 안내"
+    },
+    "bithumb:1655674": {
+      "first_seen_utc": "2026-11-14T19:01:37Z",
+      "title": "카바(KAVA) 유의촉구 안내"
+    },
+    "bithumb:1655673": {
+      "first_seen_utc": "2026-11-14T19:01:37Z",
+      "title": "카바(KAVA) 입출금 일시 중지 안내"
+    },
+    "bithumb:1655458": {
+      "first_seen_utc": "2026-11-14T19:01:37Z",
+      "title": "일부 고객, 임직원 개인정보 유출 안내 및 2차 피해 방지 안내 (개인정보 유출 조회 확인 포함)"
+    },
+    "bithumb:1655648": {
+      "first_seen_utc": "2026-11-14T19:01:37Z",
+      "title": "맵프로토콜(MAPO) 거래유의종목 지정"
+    },
+    "coinbase:status:https://status.coinbase.com/incidents/g80d60rr9my7": {
+      "first_seen_utc": "2026-11-14T19:01:38Z",
+      "title": "Scheduled System Maintenance — November 14"
+    },
+    "coinbase:status:https://status.coinbase.com/incidents/vvcvx7fq295v": {
+      "first_seen_utc": "2026-11-15T03:25:30Z",
+      "title": "Site Performance - Converts"
+    },
+    "binance:290223": {
+      "first_seen_utc": "2026-11-15T15:18:38Z",
+      "title": "Binance Futures Will Adjust The Contract Size of USDⓈ-Margined ANTHROPICUSDT Pre-IPO Perp and Rename The Ticker to USDⓈ-Margined ANTUSDT Pre-IPO Perp (2026-11-17)"
+    },
+    "binance:290238": {
+      "first_seen_utc": "2026-11-16T03:22:07Z",
+      "title": "Binance Will Support the Microsoft Corporation (MSFT) and Applied Materials, Inc. (AMAT) Cash Dividend Distribution via bStocks"
+    },
+    "binance:290261": {
+      "first_seen_utc": "2026-11-16T03:22:07Z",
+      "title": "Word of the Day: Test Your Knowledge on “Stock Options Got Better” to Unlock BNB Rewards!"
+    },
+    "binance:290259": {
+      "first_seen_utc": "2026-11-16T03:22:07Z",
+      "title": "Africa Mobile Money Buy Crypto: Unlock a 20% Bonus Tiered APR on USDC Simple Earn Flexible"
+    },
+    "bithumb:1655675": {
+      "first_seen_utc": "2026-11-16T03:22:08Z",
+      "title": "디와이디엑스(DYDX) 입출금 일시 중지 안내 (11/16 오후 6시~)"
+    },
+    "binance:290271": {
+      "first_seen_utc": "2026-11-16T07:21:37Z",
+      "title": "Binance x Pick n Pay: From Black Friday to New Year, Earn 20% Cashback in USDC!"
+    },
+    "upbit:6781": {
+      "first_seen_utc": "2026-11-16T07:21:38Z",
+      "title": "Temporary Suspension of Polygon Network Digital Assets Deposits and Withdrawals (11/19 20:00 ~)"
+    },
+    "upbit:6780": {
+      "first_seen_utc": "2026-11-16T07:21:38Z",
+      "title": "카바(KAVA) 거래 유의 종목 지정 안내"
+    },
+    "upbit:6779": {
+      "first_seen_utc": "2026-11-16T07:21:38Z",
+      "title": "11월 2주차 GAS 에어드랍 지급 안내"
+    },
+    "bithumb:1655676": {
+      "first_seen_utc": "2026-11-16T07:21:38Z",
+      "title": "카바(KAVA) 거래유의종목 지정"
+    },
+    "binance:290171": {
+      "first_seen_utc": "2026-11-16T10:00:58Z",
+      "title": "Trade Futures & Win: Complete Tasks to Share 200 BNB in Rewards!"
+    },
+    "upbit:6751": {
+      "first_seen_utc": "2026-11-16T10:00:58Z",
+      "title": "Temporary Suspension of XEC Deposits and Withdrawals (Completed)"
+    },
+    "bithumb:1655677": {
+      "first_seen_utc": "2026-11-16T10:00:58Z",
+      "title": "11월 2주차 가스(GAS) 에어드랍 지급 안내"
+    },
+    "upbit:6782": {
+      "first_seen_utc": "2026-11-16T11:11:28Z",
+      "title": "라이터(LIT) 입출금 일시 중단 안내"
+    },
+    "bithumb:1655678": {
+      "first_seen_utc": "2026-11-16T11:23:45Z",
+      "title": "라이터(LIT) 입출금 일시 중지 안내"
+    },
+    "upbit:6783": {
+      "first_seen_utc": "2026-11-16T11:33:24Z",
+      "title": "라이터(LIT) 유의 촉구 안내"
+    },
+    "bithumb:1655679": {
+      "first_seen_utc": "2026-11-16T12:31:10Z",
+      "title": "라이터(LIT) 유의촉구 안내"
+    },
+    "binance:290273": {
+      "first_seen_utc": "2026-11-16T15:21:57Z",
+      "title": "Introducing Binance Pay Later: Spend Without Selling Your Crypto and Enjoy 0% Interest Until the First of Next Month"
+    },
+    "binance:290281": {
+      "first_seen_utc": "2026-11-17T03:23:10Z",
+      "title": "Binance Earn Launches BTC Yield APR Boost Promotion with Up to an Additional 2% APR for VIP Users"
+    },
+    "binance:290279": {
+      "first_seen_utc": "2026-11-17T03:23:10Z",
+      "title": "Binance Lifestyle Black Friday New User & Referral Campaign: Earn Up to 26 USDT!"
+    },
+    "bithumb:1655680": {
+      "first_seen_utc": "2026-11-17T03:23:10Z",
+      "title": "개인정보처리방침 개정 안내"
+    },
+    "coinbase:status:https://status.coinbase.com/incidents/3nlxfkfbhjgx": {
+      "first_seen_utc": "2026-11-17T03:23:11Z",
+      "title": "Delayed Sends - Hedera"
+    },
+    "binance:290297": {
+      "first_seen_utc": "2026-11-17T07:19:08Z",
+      "title": "Updates on Tick Size for Multiple USDⓈ-M Perpetual Futures Contracts (2026-11-18)"
+    },
+    "binance:290291": {
+      "first_seen_utc": "2026-11-17T07:19:08Z",
+      "title": "Binance P2P LATAM Exclusive: Earn Up to 25% APR on USDC!"
+    },
+    "bithumb:1655695": {
+      "first_seen_utc": "2026-11-17T07:19:08Z",
+      "title": "빗썸, 2026 국가고객만족도(NCSI) 디지털자산거래소 부문 업계 최초 1위…고객만족·브랜드 평가 석권"
+    },
+    "upbit:6784": {
+      "first_seen_utc": "2026-11-17T07:21:18Z",
+      "title": "실물 주민등록증 진위 여부 확인 일시 중단 안내 (11/20 20:00 ~)"
+    },
+    "upbit:6786": {
+      "first_seen_utc": "2026-11-17T08:53:14Z",
+      "title": "Stellar Network 네트워크 계열 디지털 자산 입출금 일시 중단 안내 (11/24 00:00 ~)"
+    },
+    "bithumb:1655693": {
+      "first_seen_utc": "2026-11-17T08:53:14Z",
+      "title": "헤데라(HBAR) 입출금 일시 중지 안내 (11/18 오후 8시~)"
+    }
+  },
+  "backoff": {
+    "binance": {
+      "fail_count": 0,
+      "next_try_utc": null,
+      "last_error": null,
+      "last_ok_utc": "2026-11-17T08:53:14Z"
+    },
+    "upbit": {
+      "fail_count": 0,
+      "next_try_utc": null,
+      "last_error": null,
+      "last_ok_utc": "2026-11-17T08:53:14Z"
+    },
+    "bithumb": {
+      "fail_count": 0,
+      "next_try_utc": null,
+      "last_error": null,
+      "last_ok_utc": "2026-11-17T08:53:14Z"
+    },
+    "coinbase": {
+      "fail_count": 0,
+      "next_try_utc": null,
+      "last_error": null,
+      "last_ok_utc": "2026-11-17T08:53:14Z"
+    }
+  },
+  "webhook": {
+    "last_post_utc": null,
+    "pending": []
+  },
+  "seeded_utc": "2026-11-13T00:24:56Z",
+  "seeded_sources": {
+    "binance": {
+      "seeded_utc": "2026-11-13T00:24:56Z",
+      "count": 140,
+      "migrated": true
+    },
+    "coinbase": {
+      "seeded_utc": "2026-11-13T00:24:56Z",
+      "count": 53,
+      "migrated": true
+    },
+    "upbit": {
+      "seeded_utc": "2026-11-13T08:06:40Z",
+      "count": 22
+    },
+    "bithumb": {
+      "seeded_utc": "2026-11-13T08:06:40Z",
+      "count": 20
+    }
+  }
+}
